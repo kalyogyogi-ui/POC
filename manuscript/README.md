@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part III editorial polish complete (June 2026); ~8,000 words/chapter parity with Parts I–II  
+**Status:** Part IV draft complete (June 2026); ~8,000 words/chapter parity  
 **Architecture approved:** June 2026
 
 ## Structure
