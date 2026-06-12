@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part IV draft complete (June 2026); ~8,000 words/chapter parity  
+**Status:** Part V draft complete (June 2026); ~8,000 words/chapter parity  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -11,7 +11,7 @@
 | II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Editorial revision complete |
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Draft complete |
 | IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Draft complete |
-| V — Running the Migration Programme | `part-05-programme/` | 15–18 | Planned |
+| V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Draft complete |
 | VI — Sector Playbooks and Proof | `part-06-sector/` | 19–22 | Planned |
 | Appendices | `appendices/` | A (draft); B–E planned | Appendix A drafted |
 
@@ -61,6 +61,18 @@
 | `chapter-14-key-management-hsm-cloud.md` | 7,889 | HSM/KMS, ceremonies, multi-cloud custody |
 
 **Part IV total (chapters + intro):** ~41,315 words
+
+## Part V Files
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `part-05-introduction.md` | 1,095 | Synchronize phase, PQ-ADAPT L4, Governance Stack operating model |
+| `chapter-15-programme-governance-operating-model.md` | 8,048 | Charter, RACI, KPIs, steering rhythm, board reporting |
+| `chapter-16-procurement-contracts-third-party-risk.md` | 8,031 | Contract clauses, DORA ICT risk, vendor assessment |
+| `chapter-17-software-supply-chain-embedded-cryptography.md` | 7,900 | SBOM/CBOM CI/CD gates, SSDF alignment |
+| `chapter-18-fips-validation-testing-assurance.md` | 7,904 | FIPS 140-3, CMMC evidence, test matrix |
+
+**Part V total (chapters + intro):** ~32,978 words
 
 ## Editorial Revisions — Part IV (June 2026)
 
