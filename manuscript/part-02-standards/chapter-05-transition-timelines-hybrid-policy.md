@@ -34,7 +34,7 @@ Part I established that migration timelines extend 5–15+ years for most enterp
 
 ## 5.2 NIST IR 8547: Deprecation and Disallowance
 
-NIST's Initial Public Draft of IR 8547 (November 2024) articulates the expected transition for quantum-vulnerable public-key algorithms at the 112-bit security level — the category encompassing RSA-2048, finite-field DH-2048, and ECC P-256.
+NIST's Initial Public Draft of IR 8547 (November 2024; **subject to revision before final publication**) articulates the expected transition for quantum-vulnerable public-key algorithms at the 112-bit security level — the category encompassing RSA-2048, finite-field DH-2048, and ECC P-256. Enterprise policies should reference IR 8547 as a **planning anchor**, monitor NIST for final text, and avoid embedding draft language verbatim in contractual instruments without legal review.
 
 ### Key definitions
 
@@ -54,9 +54,9 @@ These dates inform revisions to SP 800-131A and related NIST transition document
 
 > **Migration Moment**
 >
-> *"2035 is thirteen years away. We have plenty of time."*
+> *"2035 is nine years away. We have plenty of time."*
 >
-> Thirteen years is the **disallowance anchor** for the final quantum-vulnerable algorithm retirement — not the time available before programme start. Inventory, dependency resolution, vendor validation, partner coordination, and hybrid interim deployment consume most of the horizon. Enterprises beginning discovery in 2030 will not achieve disallowance compliance by 2035.
+> Nine years is the **disallowance anchor** for final quantum-vulnerable algorithm retirement — not the time available before programme work completes. Inventory, dependency resolution, vendor validation, partner coordination, and hybrid interim deployment consume most of the horizon. Campbell's 2025 analysis estimates 8–15+ years for large-enterprise migration under baseline assumptions. Enterprises beginning discovery in 2030 will not achieve disallowance compliance by 2035.
 
 ### Risk acceptance under deprecation
 
@@ -98,6 +98,8 @@ Commercial IT within defence enterprises follows NIST IR 8547 unless contract fl
 Enterprises operating outside the US federal context still encounter NIST-influenced timelines through auditors, customers, and international alignment. National agencies publish complementary guidance:
 
 **Table 5.2 — National Timeline Comparison (Planning Reference)**
+
+*Extends Chapter 3 Table 3.4 with enterprise planning columns. Regulatory instrument detail remains in Chapter 3; this table supports timeline policy derivation.*
 
 | Authority | Discovery/planning | Deprecation posture | Disallowance/target |
 |-----------|-------------------|---------------------|---------------------|
@@ -159,6 +161,8 @@ Map derived waves to external policy anchors. If TRADE analysis requires TES 5 s
           2030 firmware/networking -+             |
 ```
 
+**Production brief — Figure 5.1:** Swim-lane diagram with programme waves (internal schedule) overlaid on policy anchors (NIST, CNSA, NCSC). Distinguish solid lines (anchors) from dashed lines (derived waves). Include legend for jurisdiction annotations used by multinational enterprises.
+
 ---
 
 ## 5.6 The Hybrid Lifecycle Model (HLM)
@@ -212,6 +216,35 @@ H3 is the target state: quantum-vulnerable PKC removed from the estate per disal
 >
 > **Do not deploy H1 hybrids without a documented H2 trigger.** The trigger may be ecosystem metrics (90% client support), a calendar date (aligned to 2030 deprecation), or a vendor milestone (HSM PQC module GA). Hybrids without triggers become permanent dual-algorithm architectures — the SHA-1 equivalent failure mode for PQC.
 
+### HLM failure modes by phase
+
+| Phase | Typical failure | Programme symptom | Recovery |
+|-------|----------------|-------------------|----------|
+| **H1** | No H2 trigger defined | Hybrid deployed indefinitely | Policy committee assigns trigger retroactively; audit finding likely |
+| **H1** | Ecosystem threshold never met | Stuck at 70–85% client support for years | Segment traffic; tiered endpoints; tenant outreach programme |
+| **H2** | Classical component not deprecated in policy | New systems still ship classical-only | Policy update; SDLC gate enforcement |
+| **H2** | Exception register grows without sunset | Hundreds of "temporary" classical systems | Steering committee cap on exceptions; executive escalation |
+| **H3** | CBOM scan false negatives | Quantum-vulnerable PKC in shadow IT | Expand discovery; automated scanning in CI/CD |
+| **H3** | Partner lag | Enterprise H3 but partner classical-only | Partner programme; contractual upgrade clauses |
+
+Apex Defense documented HLM failure modes in programme risk register — NSS programmes hitting H2 before commercial IT completed H1 created engineering confusion until matrix rows clarified independent phase tracking per workload class.
+
+### CBOM attributes for HLM tracking
+
+Part III develops full CBOM methodology. Part II defines minimum attributes for hybrid governance:
+
+| Attribute | Values | Purpose |
+|-----------|--------|---------|
+| `hlm_phase` | H1, H2, H3 | Current lifecycle phase |
+| `h2_trigger_type` | ecosystem, calendar, vendor, dependency | Trigger category |
+| `h2_trigger_value` | e.g. `90%_client_support`, `2030-01-01`, `vendor_module_GA` | Measurable exit condition |
+| `classical_component` | e.g. `ECDSA_P256`, `RSA_2048` | Algorithm to sunset |
+| `pqc_component` | e.g. `ML-KEM-768`, `ML-DSA-65` | Target algorithm |
+| `hybrid_construction_ref` | IETF RFC/draft ID or vendor profile ID | Standards traceability |
+| `exception_id` | Link to risk acceptance register | Audit trail |
+
+GlobalSync automated `hlm_phase` assignment in its CBOM pipeline — systems without `h2_trigger_value` failed change-management approval for hybrid deployments.
+
 ---
 
 ## 5.7 Enterprise Hybrid Policy Requirements
@@ -230,6 +263,20 @@ List permitted combinations by use case:
 | Email (S/MIME) | Classical + ML-DSA | IETF/CMS profile when available |
 
 Prohibited: ad hoc hybrid combinations without cryptanalysis-backed construction proofs; hybrids using deprecated classical algorithms (RSA-1024, ECDSA with weak curves); permanent hybrid deployment without H2 trigger.
+
+### Sample hybrid policy language
+
+The following excerpt illustrates Policy-layer tone — organisation-specific legal review required:
+
+> **Hybrid Cryptography Standard (excerpt)**
+>
+> 1. Near-term production deployments of quantum-vulnerable protocols shall implement Protective Hybrid (H1) constructions listed in Annex B unless Ecosystem readiness assessment (TRADE dimension E ≥ 4) supports PQC-native deployment.
+> 2. Every H1 deployment shall record `h2_trigger_type` and `h2_trigger_value` in the Cryptographic Bill of Materials before production approval.
+> 3. Classical components in approved hybrid constructions are deprecated for new deployments effective 1 January 2030, aligned to NIST IR 8547 planning anchors. Continued classical use requires entry in the Risk Acceptance Register (Annex C).
+> 4. Transitional Hybrid (H2) begins when H1 exit criteria are met for a defined scope (service tier, business unit, or estate segment). H2 scopes shall not regress to classical-only new deployments without CISO exception.
+> 5. PQC-Native (H3) is the target state for all in-scope systems by 31 December 2035 unless disallowance policy is revised following NIST final guidance.
+
+Meridian adopted language closely matching this structure — enabling Thomas Bergström's team to demonstrate policy-to-CBOM traceability in supervisory dialogue.
 
 ### Phase assignment rules
 
@@ -358,7 +405,38 @@ Enterprises self-assessing at Level 3 after writing hybrid policy on paper — w
 
 ---
 
-## 5.13 Hybrid TLS: Operational Deep Dive
+## 5.13 Apex Defense: NSS Timeline Floors
+
+Apex Defense Technologies maps CNSA 2.0 milestones as **non-negotiable floors** for NSS workloads while applying NIST IR 8547 anchors to corporate IT. Priya Nair's programme office maintains a timeline overlay with separate swim lanes:
+
+| Milestone | NSS track | Corporate IT track | Conflict resolution |
+|-----------|-----------|-------------------|---------------------|
+| 2027 new acquisitions | CNSA 2.0 required | NIST-aligned planning | Contract review flags NSS flow-down |
+| 2030 firmware signing | ML-DSA-87 / LMS | Hybrid code signing H1 | Shared PKI team prioritises NSS queue |
+| 2030 deprecation | NSS largely PQC-native | Deprecation with risk acceptance | Board reports separate RAG status per track |
+| 2035 disallowance | Full NSS migration | Disallowance target | Single programme; dual evidence packages |
+
+When NSS programmes required H2 entry before corporate IT completed H1, Apex's steering committee approved **parallel phase tracking** — not forced synchronisation across classification boundaries. Corporate IT did not delay NSS compliance; NSS did not relax corporate IT ecosystem gates.
+
+---
+
+## 5.14 Northfield Energy: Wave 1 Capital and Timeline Anchors
+
+Northfield's TRADE analysis (Chapter 2) elevated VPN concentrators and firmware signing to Wave 1 — linking threat urgency to capital planning before 2030 deprecation anchors.
+
+| Wave 1 asset | TRADE driver | Capital estimate (*illustrative*) | Anchor alignment |
+|--------------|-------------|----------------------------------|------------------|
+| WAN VPN concentrators (2 models) | TES 5; HNDL on SCADA archives | $2.8M hardware refresh | Pre-2030 deprecation |
+| Compressor firmware LMS programme | TES 5; firmware forgery | $1.1M vendor + signing appliance | CISA PQC initiative alignment |
+| RTU dual-sign programme | TES 4–5 | $0.4M vendor engineering | 2028 pilot / 2030 deprecation |
+
+James Whitfield presented Wave 1 to the board as **threat-driven capital** — not as a response to a single regulatory date. Regulatory anchors (CISA, NERC CIP evidence) provided secondary justification. The distinction mattered: Northfield's board approved threat-driven spend more readily than compliance-driven spend with ambiguous ROI.
+
+Northfield's internal schedule targets 2028 completion for Wave 1 — **ahead of** NIST 2030 deprecation — because OT refresh cycles and vendor lead times require early commitment, not because regulation mandated 2028.
+
+---
+
+## 5.15 Hybrid TLS: Operational Deep Dive
 
 TLS is the most common H1 deployment target — and the most common source of false programme confidence. Operational depth beyond pilot success separates production-ready hybrid policy from slide-deck compliance.
 
@@ -374,6 +452,10 @@ Measure compatibility from **production traffic**, not synthetic scans. GlobalSy
 | B — Classical only, updatable | Legacy client; vendor patch available | Tenant notification; sunset date |
 | C — Classical only, fixed | Embedded integration; no update path | Risk acceptance; compensating controls |
 | D — Unknown | Insufficient handshake logging | Instrument before migration |
+
+> **Dependency Alert**
+>
+> **TLS hybrid pilots succeed on unconstrained endpoints; production fails at middleboxes.** Load balancers, IDS/IPS platforms, SSL inspection proxies, and mobile carrier gateways enforce buffer limits invisible to application-team pilots. Assess infrastructure **before** board approval of H1 production dates — not after pilot demonstration.
 
 ### Middlebox and infrastructure assessment
 
@@ -400,7 +482,7 @@ Hybrid TLS requires certificates signed with ML-DSA (or transitional classical c
 
 ---
 
-## 5.14 Board and Executive Reporting on Timelines
+## 5.16 Board and Executive Reporting on Timelines
 
 Executives require timeline communication without algorithm detail. Effective board reporting structure:
 
@@ -420,7 +502,7 @@ Marcus Chen's board deck never mentioned lattice cryptography. It reported that 
 
 ---
 
-## 5.15 Integration with Zero Trust and Identity Programmes
+## 5.17 Integration with Zero Trust and Identity Programmes
 
 Enterprises running Zero Trust architecture programmes alongside PQC migration must integrate timeline policy — not sequence blindly.
 
@@ -446,7 +528,7 @@ Chapter 1's Dependency Alert recommended embedding PQC agility in Zero Trust sta
 
 ---
 
-## 5.16 Conducting a Timeline Alignment Workshop
+## 5.18 Conducting a Timeline Alignment Workshop
 
 Before publishing enterprise timeline policy, run a alignment workshop connecting standards anchors to estate reality.
 
@@ -469,7 +551,7 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.17 Common Hybrid Policy Failures
+## 5.19 Common Hybrid Policy Failures
 
 **Permanent hybrid.** H1 deployed without H2 trigger; classical component never sunset. Dual attack surface indefinitely.
 
@@ -483,7 +565,7 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.18 Apply in Your Organisation
+## 5.20 Apply in Your Organisation
 
 1. **Publish a timeline overlay** mapping NIST, CNSA, and applicable national anchors to your programme waves — distinguish anchors from internal schedules.
 2. **Adopt the HLM** with mandatory H2 triggers on every H1 deployment — no permanent hybrids.
@@ -493,9 +575,25 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.19 Chapter Summary
+## 5.21 HLM Governance Cadence
 
-- NIST IR 8547 provides deprecation (post-2030) and disallowance (post-2035) anchors for quantum-vulnerable PKC — not enterprise migration schedules.
+Sustaining HLM across a decade requires operational rhythm — not one-time policy publication.
+
+| Cadence | Activity | Owner |
+|---------|----------|-------|
+| Weekly | Change approvals verify `h2_trigger` populated for hybrid deployments | Change management |
+| Monthly | CBOM `hlm_phase` distribution report to programme office | Crypto engineering |
+| Quarterly | Exception register review; ecosystem readiness remeasurement | PQC steering committee |
+| Annually | Hybrid policy review; anchor date alignment with NIST/NSA updates | Policy committee |
+| Per release | SDLC gate: no classical-only new deployments in H2 scope | Application security |
+
+Meridian added HLM phase distribution to the board dashboard introduced in Chapter 1 — replacing misleading "PQC pilot complete" counts with percentage of estate in H1/H2/H3 by criticality tier.
+
+---
+
+## 5.22 Chapter Summary
+
+- NIST IR 8547 (IPD) provides deprecation (post-2030) and disallowance (post-2035) anchors for quantum-vulnerable PKC — not enterprise migration schedules.
 - CNSA 2.0 imposes more aggressive milestones for NSS and defence industrial base workloads.
 - Internal timelines derive from CBOM, TRADE, CDG, and ecosystem readiness — aligned to, not copied from, external anchors.
 - The Hybrid Lifecycle Model (H1 Protective → H2 Transitional → H3 PQC-Native) governs interim hybrids with explicit exit criteria.
@@ -509,8 +607,12 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 *Chapter 5 — References*
 
+- Campbell, R. (2025). Enterprise migration to post-quantum cryptography: Timeline analysis and strategic frameworks. *Computers*, 15(1), 9. https://doi.org/10.3390/computers15010009
+- Commission Delegated Regulation (EU) 2024/1532 of 19 October 2024 supplementing Regulation (EU) 2022/2554 (DORA RTS). *Official Journal of the European Union*, L 2024/1532.
+- European Union Agency for Cybersecurity. (2025). *NIS2 implementation guidance*. https://www.enisa.europa.eu/
+- National Institute of Standards and Technology. (2020). NIST SP 800-131A: Transitioning the use of cryptographic algorithms and key lengths. https://doi.org/10.6028/NIST.SP.800-131A
 - National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
+- National Security Memorandum 10 (2022). The White House.
 - National Cyber Security Centre. (2024). *Quantum-safe cryptography: Migration planning guidance*. UK Government.
 - Australian Signals Directorate. (2024). *Post-quantum cryptography guidance*. Australian Government.
-- Campbell, R. (2025). Enterprise migration to post-quantum cryptography: Timeline analysis and strategic frameworks. *Computers*, 15(1), 9. https://doi.org/10.3390/computers15010009

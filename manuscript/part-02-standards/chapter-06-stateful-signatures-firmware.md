@@ -72,7 +72,9 @@ CNSA 2.0 specifies post-quantum requirements for National Security Systems inclu
 
 Commercial critical infrastructure operators like Northfield are not NSS — but **vendor supply chains** increasingly intersect NSS requirements. A compressor manufacturer serving both utility and defence customers may prioritise CNSA-aligned signing infrastructure. Northfield benefits indirectly from NSS-driven vendor investment while retaining flexibility in commercial algorithm choice.
 
-**Architect's Decision:** For OT firmware signing where ML-DSA chains exceed device constraints and SLH-DSA verification exceeds device CPU budgets, **evaluate LMS under SP 800-208** with a dedicated state management architecture — do not default to ECDSA extension without documented risk acceptance and hardware refresh linkage. For new NSS-adjacent programmes, align with CNSA 2.0 firmware signing requirements from programme inception.
+> **Architect's Decision**
+>
+> For OT firmware signing where ML-DSA chains exceed device constraints and SLH-DSA verification exceeds device CPU budgets, **evaluate LMS under SP 800-208** with a dedicated state management architecture — do not default to ECDSA extension without documented risk acceptance and hardware refresh linkage. For new NSS-adjacent programmes, align with CNSA 2.0 firmware signing requirements from programme inception.
 
 ---
 
@@ -88,7 +90,9 @@ Enterprises need a decision matrix — not per-device ad hoc choices. The follow
 | Root CA / long-trust anchor | ML-DSA-87 | SLH-DSA | ML-DSA-44 (insufficient margin) |
 | NSS firmware signing | ML-DSA-87, LMS per CNSA | SLH-DSA | Classical beyond policy sunset |
 | OT device with fixed cert store (<8 KB) | LMS/XMSS (SP 800-208) | Hardware refresh + ML-DSA | ML-DSA forcing into undersized store |
-| OT device with moderate store | ML-DSA-65 after profile redesign | LMS/XMSS | SLH-DSA (verification cost) |
+| OT device with moderate store | ML-DSA-65 after profile redesign* | LMS/XMSS | SLH-DSA (verification cost) |
+
+*Profile compression — single intermediate CA, shortened validity — sometimes enables ML-DSA on 8 KB stores. Benchmark on target hardware before assuming fit.
 | High-volume API signing | ML-DSA-65 | — | SLH-DSA (latency) |
 | Air-gapped release signing | LMS with offline state ceremony | ML-DSA if HSM supports | Stateful scheme without state audit trail |
 | Immutable infrastructure (containers) | ML-DSA-65 dual signature (H1) | — | Classical-only post-deprecation |
@@ -213,6 +217,28 @@ Workstation-class hardware supported ML-DSA without special-case schemes. Migrat
 
 All three vendors fed Northfield's **single CBOM** with `firmware_signing_scheme` attributes. James Whitfield's OT security team met monthly with enterprise PKI (Chapter 12 coordination) and procurement (Chapter 17) — firmware signing is not an OT-only workstream.
 
+### Vendor negotiation patterns
+
+Northfield's three vendors responded differently to PQC signing requirements — a pattern repeated across critical infrastructure programmes:
+
+**Compressor manufacturer (LMS path).** Initial response: hardware refresh required, **$4.2 million** (*illustrative*), 48-month lead time. Counter-proposal: LMS with firmware verification update only — **$1.1 million**, 18-month delivery. Vendor had parallel NSS programme funding LMS tooling; marginal cost to Northfield was engineering integration, not greenfield cryptography development. Contract amendment included LMS state audit rights and Northfield observer access during DR tests.
+
+**RTU supplier (dual-sign path).** Proposed ECDSA-only extension through 2032. Northfield rejected without risk acceptance documentation. Agreed dual-sign H1 with ML-DSA-only new units from 2028 production lot. Vendor required six-month test window — staged rollout pattern in §6.16 applied.
+
+**Engineering workstation vendor (ML-DSA path).** Fastest path — workstation-class HSM already in air-gapped facility. Migration cost was ceremony redesign and staff training, not cryptography development. Bottleneck was air-gap state transfer policy, not algorithm choice.
+
+The negotiation lesson: **vendor responses are not technical facts.** They reflect vendor roadmap priorities, NSS contract pressure, and customer negotiation posture. Programmes that accept first vendor "impossible" assessments without benchmarking alternatives overpay for hardware refresh.
+
+### IEC 62443 and OT security lifecycle
+
+IEC 62443 defines security lifecycles for industrial automation and control systems. PQC firmware signing intersects:
+
+- **Security patch management (62443-2-3)** — signed firmware delivery processes
+- **Component security (62443-4-2)** — embedded device secure boot and certificate stores
+- **System integration (62443-3-3)** — verification of signed updates in operational context
+
+Northfield mapped LMS and ML-DSA migration evidence to existing 62443 documentation slots — avoiding parallel OT security frameworks. OT security assessors received algorithm migration as **integrity control evolution**, not a new security programme.
+
 > **Migration Moment**
 >
 > *"We'll upgrade OT hardware when PQC is ready."*
@@ -248,6 +274,21 @@ Air-gapped PQC signing requires updated standard operating procedures:
 4. Independent witness for state-changing ceremonies (two-person rule)
 
 Treat air-gap workflow redesign as a **programme workstream** with OT operations ownership — not a cryptographic engineering side task.
+
+### Worked example: air-gap manifest (Northfield)
+
+Northfield's engineering workstation vendor adopted a tamper-evident manifest accompanying each signed firmware image crossing the air gap:
+
+| Manifest field | Example value | Purpose |
+|----------------|---------------|---------|
+| Image hash | SHA-256 of firmware binary | Integrity verification |
+| Signature scheme | LMS (SP 800-208) set identifier | Algorithm traceability |
+| LMS index | 0x00001A2F | State monotonicity verification |
+| Signing timestamp | ISO 8601 UTC | Audit trail |
+| Signer identity | HSM certificate DN | Non-repudiation |
+| Previous index | 0x00001A2E | Continuity check on receipt |
+
+Operations staff verify index continuity before loading media to the operations network. A gap in index sequence triggers incident response — treated as seriously as a failed signature verification, because index gaps may indicate state desynchronisation or signing appliance compromise.
 
 ---
 
@@ -294,7 +335,31 @@ Readers should not implement firmware signing changes without cross-referencing 
 
 ---
 
-## 6.13 Apex Defense: Classified and Unclassified Boundaries
+## 6.13 Meridian Mutual Bank: Payment HSM Firmware Signing
+
+Meridian's Chapter 1 blocking dependency — payment HSM firmware signing — belongs in the firmware special-case analysis even though the device is a financial-grade HSM, not an OT field controller. The constraints differ; the signature strategy question is the same: **can the device accept the enterprise's chosen PQC scheme?**
+
+Meridian's assessment:
+
+| Factor | Meridian payment HSM | Programme response |
+|--------|---------------------|-------------------|
+| Cert/signature store | HSM firmware-limited | Vendor-dependent ML-DSA support |
+| Validation | FIPS 140-3 Level 3 payment | Procurement mandate; no software bypass |
+| Signing frequency | Low (firmware releases) | Aligned with vendor release cadence |
+| Blocking impact | Twelve downstream databases | CDG blocking node; MPI 4.39 |
+| Timeline | Vendor GA estimated 18+ months | Parallel key ceremony redesign |
+
+Meridian did not route payment HSM to LMS — the HSM vendor committed to ML-DSA-87 in FIPS-validated firmware, satisfying PCI and DORA evidence requirements without stateful signature operational complexity. The programme lesson: **special-case analysis is per device class**, not per sector label. Financial HSMs may follow standard ML-DSA paths while adjacent OT devices on the same estate require LMS.
+
+Elena Vasquez's team linked the HSM firmware row in the algorithm standards matrix (Chapter 4, Table 4.6) directly to the firmware signing row in Chapter 6's selection matrix — one asset, two chapter perspectives, single CBOM entry.
+
+> **Regulatory Lens**
+>
+> **DORA and PCI expect firmware integrity for payment systems** — not merely TLS on channels. Supervisory reviewers examining Meridian's encryption policy asked for firmware signing migration evidence alongside certificate register entries. Payment HSM firmware is a regulatory surface, not only a vendor dependency.
+
+---
+
+## 6.14 Apex Defense: Classified and Unclassified Boundaries
 
 Apex Defense Technologies encounters firmware signing across classified and unclassified boundaries. NSS programmes follow CNSA 2.0 without scheme flexibility. Unclassified OT-adjacent systems may use commercial patterns from this chapter.
 
@@ -308,7 +373,7 @@ Priya Nair's architecture board reviews firmware signing proposals against both 
 
 ---
 
-## 6.14 LMS and XMSS Parameter Selection
+## 6.15 LMS and XMSS Parameter Selection
 
 Selecting LMS or XMSS parameters is a capacity planning exercise — not a security dial turned to maximum.
 
@@ -320,7 +385,9 @@ LMS uses hierarchical trees. Key parameters include:
 - Winternitz parameter — trades signature size against hash operations
 - Number of levels — multi-level trees extend signature capacity
 
-**Architect's Decision:** Size LMS parameters to **planned firmware release count over key lifetime plus margin** — typically 30–50% headroom. Oversized trees waste storage; undersized trees force emergency key rotation mid-programme.
+> **Architect's Decision**
+>
+> Size LMS parameters to **planned firmware release count over key lifetime plus margin** — typically 30–50% headroom. Oversized trees waste storage; undersized trees force emergency key rotation mid-programme.
 
 ### XMSS parameters
 
@@ -338,7 +405,7 @@ Northfield's compressor vendor benchmarked three XMSS parameter sets on field ha
 
 ---
 
-## 6.15 Testing and Validation for Firmware Signing
+## 6.16 Testing and Validation for Firmware Signing
 
 Firmware signing migration fails catastrophically when validation is inadequate. OT programmes require test regimes beyond cryptographic unit tests.
 
@@ -367,9 +434,27 @@ Northfield required compressor vendor to complete stages 1–3 before Northfield
 
 NERC CIP and TSA reporting expect evidence that firmware integrity controls maintain effectiveness after cryptographic changes. Test reports, signed approval records, and rollback procedures form the Assurance layer evidence package (Chapter 3) for OT firmware migration.
 
+> **Regulatory Lens**
+>
+> **NERC CIP-010 and TSA Security Directives** do not name ML-DSA or LMS. They require demonstrable firmware integrity and change control. Northfield's evidence package maps PQC migration test results to existing CIP documentation structures — substituting algorithm names in test reports while preserving control objective language. Regulators and auditors review **control effectiveness**, not lattice parameters.
+
+**Production brief — Figure 6.1:** Layered diagram from Enterprise CA through signing HSM/LMS state store to device flash. Highlight five insertion points with numbered callouts matching §6.4 text. Include optional dual-signature H1 branch.
+
+### LMS parameter worked example (Northfield compressor)
+
+Northfield and the compressor vendor sized LMS parameters for:
+
+- Planned firmware releases: 2 per year × 15 years = 30 releases
+- Headroom: 50% → 45 signature capacity minimum
+- Selected tree height: h = 6 (64 leaves); Winternitz parameter w = 8 per SP 800-208 approved set
+- Verification benchmark: 340 ms on field hardware (budget 500 ms)
+- State store: dedicated appliance with geographic replication; quarterly DR test including index monotonicity check
+
+Document parameter rationale in the cryptography policy annex — auditors asking "why this LMS configuration?" receive capacity planning evidence, not ad hoc vendor defaults.
+
 ---
 
-## 6.16 GlobalSync: Container Image Signing
+## 6.17 GlobalSync: Container Image Signing
 
 Not all firmware is OT. GlobalSync Logistics signs container images for its SaaS platform — a software supply chain context with different constraints than Northfield's field controllers.
 
@@ -381,11 +466,23 @@ GlobalSync's container signing programme:
 - **Constraint:** Container registry size limits — marginal increase accommodated without redesign
 - **Tenant visibility:** Security whitepaper updated with ML-DSA container signing statement
 
-GlobalSync's OT lesson equivalent: **registry clients** were the ecosystem gate — not the signing service. Three legacy deployment agents required updates before ML-DSA verification propagated. CDG analysis (preview, Chapter 8) identified registry clients as blocking nodes for 200+ microservices — the same synchronization pattern as Northfield's vendors in a cloud-native guise.
+GlobalSync's OT lesson equivalent: **registry clients** were the ecosystem gate — not the signing service. Three legacy deployment agents required updates before ML-DSA verification propagated. CDG analysis (preview, Chapter 8) identified registry clients as blocking nodes for 200+ microservices — the same synchronisation pattern as Northfield's vendors in a cloud-native guise.
+
+### Container signing HLM assignment
+
+GlobalSync assigned container image signing to HLM phases per deployment tier:
+
+| Tier | HLM phase (2026) | H2 trigger | Notes |
+|------|------------------|------------|-------|
+| Internal CI/CD images | H1 dual-sign | 90% pipeline agents verify ML-DSA | Measured from build logs |
+| Customer-facing SaaS releases | H1 dual-sign | Same + tenant notification complete | Contractual notice period |
+| Legacy on-prem agent bundles | H1 classical + risk acceptance | Agent EOL 2028 | Exception register |
+
+Marcus Chen's team rejected a programme proposal to declare container signing "PQC complete" after the cloud HSM supported ML-DSA — ecosystem readiness (deployment agents) gated H1 exit, matching the synchronisation thesis from Part I.
 
 ---
 
-## 6.17 Smart Cards, Tokens, and Physical Form Factors
+## 6.18 Smart Cards, Tokens, and Physical Form Factors
 
 Physical authentication tokens and smart cards amplify ML-DSA size constraints:
 
@@ -397,16 +494,29 @@ Enterprises with smart card authentication programmes should inventory token mod
 
 Meridian's physical token programme added **€1.4 million** (*illustrative*) token refresh to the PQC programme budget when ML-DSA chain sizing exceeded current secure element capacity — discovered during algorithm standards workshop certificate profile exercise (Chapter 4), not during TLS pilot.
 
+### Token refresh sequencing
+
+Physical token migration cannot occur atomically across thousands of employees. Meridian sequenced:
+
+1. **Pilot** — 200 users; ML-DSA-capable token model; helpdesk playbook
+2. **High-privilege cohort** — administrators and payment operations; Q2 2027
+3. **General rollout** — branch staff; aligned with natural token renewal cycles
+4. **Decommission** — classical-only tokens prohibited after cohort migration
+
+PKI certificate profiles for ML-DSA were published **before** token hardware procurement — avoiding the reverse sequencing that produced Northfield's early certificate-store surprises in OT.
+
+Apex Defence faced a parallel challenge with CAC/PIV-adjacent form factors for NSS personnel — CNSA 2.0 parameter requirements elevated to ML-DSA-87, tightening size constraints further. Apex's matrix row for physical tokens explicitly referenced secure element capacity tests as a procurement gate.
+
 ---
 
-## 6.18 Compensating Controls When Migration Is Gated
+## 6.19 Compensating Controls When Migration Is Gated
 
 When firmware or embedded migration cannot complete before deprecation anchors, compensating controls reduce risk without pretending migration is complete:
 
 | Control | Risk reduced | Limitation |
 |---------|--------------|------------|
 | Network segmentation | HNDL collection paths | Does not prevent forgery |
-| Firmware integrity monitoring | Unauthorized image detection | Requires baseline after legitimate signing |
+| Firmware integrity monitoring | Unauthorised image detection | Requires baseline after legitimate signing |
 | Accelerated hardware refresh | Shortens classical exposure window | Capital cost |
 | Air-gapped signing ceremony | Supply chain compromise | Operational burden |
 | Reduced firmware release frequency | Fewer signing events | Security patch velocity |
@@ -415,7 +525,24 @@ Compensating controls require **risk acceptance documentation** with supervisory
 
 ---
 
-## 6.19 Apply in Your Organisation
+## 6.20 Firmware Signing Programme Charter Elements
+
+Enterprises consolidating firmware signing under the PQC programme should charter explicitly — not assume OT will "handle devices." Minimum charter elements:
+
+1. **Scope boundary** — OT, embedded, payment HSM firmware, container images, engineering workstations
+2. **Signature scheme authority** — who approves LMS vs ML-DSA per device class (architecture board)
+3. **Vendor engagement model** — contractual algorithm obligations, audit rights, test hardware
+4. **State management owner** (if LMS/XMSS) — named team, DR responsibility, training plan
+5. **Validation test bed** — representative hardware; staged rollout gates (§6.16)
+6. **Regulatory evidence map** — NERC CIP, TSA, PCI, DORA artefacts per asset class
+7. **Integration with enterprise PKI** — certificate profile dependencies (Chapter 12)
+8. **Budget line** — hardware refresh, vendor engineering, signing appliance, token refresh
+
+Northfield's charter named James Whitfield as accountable owner with dotted-line authority to enterprise PKI — resolving six months of prior confusion about whether firmware signing was "OT" or "security."
+
+---
+
+## 6.21 Apply in Your Organisation
 
 1. **Classify firmware assets in CBOM** with cert store size, verification CPU, and signing vendor — flag special-case candidates before defaulting to ML-DSA.
 2. **Apply Table 6.1** consistently — document scheme per device class in cryptography policy.
@@ -425,7 +552,7 @@ Compensating controls require **risk acceptance documentation** with supervisory
 
 ---
 
-## 6.20 Chapter Summary
+## 6.22 Chapter Summary
 
 - Firmware and embedded systems require special-case signature strategy — ML-DSA defaults do not always fit fixed stores and CPU budgets.
 - SP 800-208 stateful schemes (LMS, XMSS) offer compact signatures with mandatory state management — index reuse is catastrophic.
@@ -434,6 +561,8 @@ Compensating controls require **risk acceptance documentation** with supervisory
 - H1 dual-signature bridges field devices through refresh cycles; H2 triggers mandatory.
 - Northfield's three-vendor case demonstrates unified strategy with vendor-specific execution.
 - Firmware signing is a supply chain, PKI, and validation programme — not an OT-only upgrade.
+- Meridian payment HSM firmware demonstrates financial-sector special-case analysis — ML-DSA via validated module, not LMS by default.
+- LMS parameter selection requires capacity planning evidence — releases × lifetime × headroom.
 
 **Next:** Part III shifts from standards literacy to estate knowledge — cryptographic discovery, the Cryptographic Bill of Materials, and the Cryptographic Dependency Graph.
 
@@ -441,9 +570,13 @@ Compensating controls require **risk acceptance documentation** with supervisory
 
 *Chapter 6 — References*
 
+- Basescu, C., Hemsley, G., Khosla, N., Machado, L., Quach, W., Ravichandran, R., Tromer, E., & Wong, D. (2024). Deployment considerations for secure post-quantum cryptography in practice. *Proceedings of the USENIX Security Symposium*. https://www.usenix.org/conference/usenixsecurity24/presentation/basescu
+- Cybersecurity and Infrastructure Security Agency. (2024). Post-quantum cryptography initiative. https://www.cisa.gov/quantum
+- IEC 62443 (all parts). Security for industrial automation and control systems. International Electrotechnical Commission.
 - National Institute of Standards and Technology. (2020). NIST SP 800-208: Recommendation for stateful hash-based signature schemes. https://doi.org/10.6028/NIST.SP.800-208
 - National Institute of Standards and Technology. (2024). FIPS 204: Module-lattice-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.204
 - National Institute of Standards and Technology. (2024). FIPS 205: Stateless hash-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.205
+- North American Electric Reliability Corporation. (2024). *Critical Infrastructure Protection (CIP) standards*. https://www.nerc.com/pa/Stand/
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
-- IEC 62443 (all parts). Security for industrial automation and control systems. International Electrotechnical Commission.
-- Cybersecurity and Infrastructure Security Agency. (2024). Post-quantum cryptography initiative. https://www.cisa.gov/quantum
+- PCI Security Standards Council. (2022). *Payment Card Industry Data Security Standard v4.0*. https://www.pcisecuritystandards.org/
+- Transportation Security Administration. (2021–2024). Security directives for pipeline cybersecurity (series). U.S. Department of Homeland Security.

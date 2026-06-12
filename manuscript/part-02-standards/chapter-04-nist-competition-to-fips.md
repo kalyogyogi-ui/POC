@@ -13,7 +13,7 @@ Apex's lesson generalises beyond defence contracting. Enterprise architects need
 
 ## 4.1 The Standards-as-Inputs Principle
 
-Part I argued that post-quantum migration is a synchronization problem, not an algorithm selection exercise. Part II begins from that premise and adds a constraint: **the algorithm suite is largely decided.**
+Part I argued that post-quantum migration is a synchronisation problem, not an algorithm selection exercise. Part II begins from that premise and adds a constraint: **the algorithm suite is largely decided.**
 
 NIST's Post-Quantum Cryptography Standardization Project, launched in 2016, completed its primary selection phase in August 2024 with the publication of FIPS 203, 204, and 205. Enterprises planning migration in 2026 should treat these three standards as the deployment baseline. International standards bodies — ISO/IEC JTC 1 SC 27, ETSI, IETF — are aligning normative references with NIST's selections. Regulatory guidance referencing "state of the art" increasingly points at ML-KEM, ML-DSA, and SLH-DSA as the algorithms that demonstrate serious migration planning.
 
@@ -42,21 +42,21 @@ Understanding how NIST reached its selections helps architects explain *why* the
 
 ### Timeline and process
 
-NIST announced the PQC standardization project in December 2016, soliciting submissions across public-key encryption/key establishment and digital signature categories. The process was deliberately public: multiple analysis rounds, cryptanalytic feedback, and adjusted candidate pools when weaknesses emerged.
+NIST announced the Post-Quantum Cryptography Standardization Project in December 2016, soliciting submissions across public-key encryption/key establishment and digital signature categories. The process was deliberately public: multiple analysis rounds, cryptanalytic feedback, and adjusted candidate pools when weaknesses emerged.
 
 | Phase | Period | Outcome |
 |-------|--------|---------|
 | Round 1 | 2017–2018 | 69 submissions accepted; 26 advanced |
 | Round 2 | 2019–2020 | 15 finalists and alternates |
 | Round 3 | 2020–2022 | Primary selections announced: CRYSTALS-Kyber, CRYSTALS-Dilithium, SPHINCS+ |
-| Standardization | 2022–2024 | FIPS 203 (ML-KEM), FIPS 204 (ML-DSA), FIPS 205 (SLH-DSA) published |
-| Ongoing | 2024+ | FN-DSA (formerly Falcon) and HQC standardization; additional signatures |
+| Standardisation | 2022–2024 | FIPS 203 (ML-KEM), FIPS 204 (ML-DSA), FIPS 205 (SLH-DSA) published |
+| Ongoing | 2024+ | FN-DSA (formerly Falcon) and HQC standardisation; additional signatures |
 
 The process filtered for security, performance, implementation characteristics, and intellectual property considerations. Schemes that showed structural weaknesses in public analysis were eliminated. Schemes with unfavourable key or signature sizes remained viable but influenced use-case fit — a factor enterprises experience directly in protocol and storage design.
 
 ### From candidate names to FIPS names
 
-NIST renamed algorithms upon standardization to reflect their mathematical structure and disambiguate from pre-standard implementations:
+NIST renamed algorithms upon standardisation to reflect their mathematical structure and disambiguate from pre-standard implementations:
 
 | Pre-standard name | FIPS name | FIPS document | Primary use |
 |-------------------|-----------|---------------|-------------|
@@ -114,7 +114,9 @@ FIPS 203 defines three parameter sets, historically corresponding to Kyber-512, 
 | ML-KEM-768 | Category 3 | ~AES-192 | **Default enterprise choice** for general-purpose key establishment |
 | ML-KEM-1024 | Category 5 | ~AES-256 | Regulated long-life data; NSS; defence; high-value key wrapping |
 
-**Architect's Decision:** For new enterprise deployments absent specific NSS or contractual requirements mandating ML-KEM-1024, **standardise on ML-KEM-768** as the default key establishment algorithm. Reserve ML-KEM-1024 for NSS-aligned systems, long-confidentiality key wrapping, and contracts explicitly requiring Category 5. Do not deploy ML-KEM-512 for new enterprise systems — the performance benefit rarely justifies reduced margin against future cryptanalytic advances.
+> **Architect's Decision**
+>
+> For new enterprise deployments absent specific NSS or contractual requirements mandating ML-KEM-1024, **standardise on ML-KEM-768** as the default key establishment algorithm. Reserve ML-KEM-1024 for NSS-aligned systems, long-confidentiality key wrapping, and contracts explicitly requiring Category 5. Do not deploy ML-KEM-512 for new enterprise systems — the performance benefit rarely justifies reduced margin against future cryptanalytic advances.
 
 CNSA 2.0 mandates ML-KEM-1024 for National Security Systems. Apex Defence maps NSS workloads to ML-KEM-1024 and corporate IT to ML-KEM-768 unless contract flow-down elevates the requirement — a dual-track pattern common in defence industrial base enterprises (Chapter 3).
 
@@ -152,7 +154,9 @@ ML-DSA replaces quantum-vulnerable digital signature algorithms — RSA, DSA, EC
 
 ML-DSA signatures and public keys are substantially larger than ECDSA. A certificate chain that previously fit within smart card storage may not accommodate ML-DSA without hardware redesign. PDF signing containers, log aggregation systems, and blockchain anchoring constructions sized for ECDSA may require schema updates.
 
-**Architect's Decision:** Standardise on **ML-DSA-65** for general enterprise signing — certificates, code signing where size permits, document signing. Use **ML-DSA-87** where CNSA 2.0, contractual flow-down, or root CA long-trust requirements mandate Category 5. Evaluate size constraints in firmware, smart cards, and OT devices before committing — Chapter 6 addresses cases where ML-DSA does not fit.
+> **Architect's Decision**
+>
+> Standardise on **ML-DSA-65** for general enterprise signing — certificates, code signing where size permits, document signing. Use **ML-DSA-87** where CNSA 2.0, contractual flow-down, or root CA long-trust requirements mandate Category 5. Evaluate size constraints in firmware, smart cards, and OT devices before committing — Chapter 6 addresses cases where ML-DSA does not fit.
 
 ### Where ML-DSA applies in the enterprise
 
@@ -204,6 +208,8 @@ NIST organises post-quantum algorithms into security categories linked to the ha
 | Category 3 | **Enterprise default** | Standard business data; general TLS and signing |
 | Category 5 | High | NSS; classified; long-life national security data; contractual mandate |
 
+NIST security categories describe hardness against known classical and quantum attacks on the underlying problem — they are **not** literal mappings to AES key lengths. The informal "Classical equivalent" column in Table 4.1 is a communication aid for executives, not a specification for parameter selection.
+
 The mapping connects to Part I's threat analysis: systems with TES 4–5 and long confidentiality horizons justify Category 5 parameters for key establishment and signing. Systems with shorter horizons still benefit from Category 3 as the enterprise default — over-provisioning Category 5 everywhere increases bandwidth, storage, and validation cost without proportional risk reduction.
 
 > **Regulatory Lens**
@@ -214,17 +220,17 @@ The mapping connects to Part I's threat analysis: systems with TES 4–5 and lon
 
 ## 4.7 Contingency Algorithms: FN-DSA and HQC
 
-NIST continues standardization work on FN-DSA (compact lattice signatures) and HQC-KEM (code-based key establishment). Enterprise architects must understand their status: **contingency and diversification, not blocking dependencies.**
+NIST continues standardisation work on FN-DSA (compact lattice signatures) and HQC-KEM (code-based key establishment). Enterprise architects must understand their status: **contingency and diversification, not blocking dependencies.**
 
 ### FN-DSA
 
-FN-DSA (formerly Falcon) offers smaller signatures than ML-DSA — attractive for bandwidth-constrained protocols and size-limited embedded systems. It remains in the NIST standardization process at time of writing. Implementation complexity, constant-time execution requirements, and validation availability are more immature than ML-DSA.
+FN-DSA (formerly Falcon) offers smaller signatures than ML-DSA — attractive for bandwidth-constrained protocols and size-limited embedded systems. It remains in the NIST standardisation process at time of writing. Implementation complexity, constant-time execution requirements, and validation availability are more immature than ML-DSA.
 
 **Enterprise posture:** Monitor FN-DSA progress. Do not build production migration plans assuming FN-DSA availability on a specific date. Do not reject ML-DSA deployments pending FN-DSA. Include FN-DSA in cryptography policy as a **future approved algorithm** subject to FIPS publication and validation availability.
 
 ### HQC-KEM
 
-HQC provides an alternative code-based KEM — algorithmically distinct from ML-KEM's lattice construction. NIST selected ML-KEM as the primary KEM and continues HQC standardization for diversification.
+HQC provides an alternative code-based KEM — algorithmically distinct from ML-KEM's lattice construction. NIST selected ML-KEM as the primary KEM and continues HQC standardisation for diversification.
 
 **Enterprise posture:** Treat HQC as contingency against future cryptanalytic developments affecting lattice schemes — a scenario requiring governance review, not automatic migration. Commercial enterprises should not delay ML-KEM deployment for HQC availability.
 
@@ -274,7 +280,26 @@ The decision tree produces **policy defaults**, not per-engineer discretion. Ind
 
 ---
 
-## 4.9 Performance, Size, and Protocol Interdependencies
+## 4.9 Northfield Energy: Parameter Size Constraints in OT
+
+Northfield Energy Systems illustrates why algorithm policy must precede device-level migration planning. During Phase 1 architecture assessment, Northfield's OT security team catalogued certificate stores across four device classes. Three of four could not accommodate ML-DSA-65 certificate chains without profile redesign or hardware refresh.
+
+| Device class | Cert store | ML-DSA-65 chain (default profile) | Programme implication |
+|--------------|-----------|-------------------------------------|----------------------|
+| Compressor controller | 4 KB | Does not fit | LMS/XMSS evaluation (Chapter 6) |
+| Remote terminal unit | 8 KB | Fits with compressed profile | Dual-sign H1 bridge |
+| VPN concentrator | Software | Fits | ML-KEM hybrid IKE — Wave 1 capital |
+| Engineering workstation | Workstation | Fits | ML-DSA signing service upgrade |
+
+Northfield's programme did not debate whether to "use PQC." It debated **which PQC signature family fit each device class** — a question Chapter 4's parameter tables alone do not answer. James Whitfield's team flagged fourteen compressor sites for LMS evaluation in the algorithm standards matrix before procurement issued a single RFP. That sequencing prevented a programme collision where PKI issued ML-DSA certificates that field devices could not store.
+
+> **Dependency Alert**
+>
+> **Default parameter sets assume default certificate profiles.** ML-KEM-768 and ML-DSA-65 are correct enterprise defaults for unconstrained IT. OT and embedded estates require a **device-class column** in the algorithm standards matrix — not an estate-wide algorithm mandate applied uniformly.
+
+---
+
+## 4.10 Performance, Size, and Protocol Interdependencies
 
 Algorithm selection cannot be separated from protocol and infrastructure design. The following interdependencies appear repeatedly in enterprise assessments:
 
@@ -307,7 +332,7 @@ Applications using RSA for key wrapping or encrypted field storage must accommod
 
 ---
 
-## 4.10 International Alignment: ISO, ETSI, and IETF
+## 4.11 International Alignment: ISO, ETSI, and IETF
 
 NIST FIPS 203–205 are the practical deployment baseline. International bodies provide normative references and protocol specifications that enterprises need for multi-jurisdiction operations.
 
@@ -327,7 +352,7 @@ GlobalSync Logistics maintains a protocol standards watchlist across IETF, ETSI,
 
 ---
 
-## 4.11 Apex Defense: CNSA 2.0 vs. Commercial Availability
+## 4.12 Apex Defense: CNSA 2.0 vs. Commercial Availability
 
 Apex Defense Technologies operates dual cryptographic tracks: NSS workloads under CNSA 2.0 mandates and commercial IT under NIST IR 8547 guidance. Priya Nair's architecture team documented the mapping in a single **algorithm standards matrix** — the Policy layer artefact regulators and customers expect.
 
@@ -352,7 +377,7 @@ Apex's commercial subsidiaries without NSS obligations followed the corporate IT
 
 ---
 
-## 4.12 Meridian and GlobalSync: Standards in Policy Documents
+## 4.13 Meridian and GlobalSync: Standards in Policy Documents
 
 Meridian Mutual Bank translated FIPS references into its **Cryptographic Control Policy** — the DORA-linked document Thomas Bergström's regulatory team defended in supervisory dialogue. The policy did not reproduce FIPS content. It stated:
 
@@ -365,7 +390,7 @@ GlobalSync Logistics faced a different challenge: **tenant-visible cryptography 
 
 ---
 
-## 4.13 FIPS 140-3 Validation and the Implementation Gap
+## 4.14 FIPS 140-3 Validation and the Implementation Gap
 
 Algorithm standards mean little without validated implementations. FIPS 140-3 defines security requirements for cryptographic modules — hardware and software — that process sensitive data in regulated environments.
 
@@ -399,11 +424,13 @@ The uneven landscape explains TRADE's Ecosystem readiness dimension (Chapter 2).
 
 Software libraries may implement FIPS-approved algorithms without full FIPS 140-3 validation. For development, interoperability testing, and non-regulated workloads, software implementations accelerate programme progress. For regulated production — payment, federal, FIPS-mandated — validated modules are required.
 
-**Architect's Decision:** Maintain a **validation coverage matrix** in the Operational layer of the Governance Stack: system class × required validation level × available modules × gap status. Update quarterly from vendor correspondence and CMVP certificate lists. Do not schedule production migration for regulated workloads until the matrix shows validated coverage — plan H1 hybrids in software labs meanwhile.
+> **Architect's Decision**
+>
+> Maintain a **validation coverage matrix** in the Operational layer of the Governance Stack: system class × required validation level × available modules × gap status. Update quarterly from vendor correspondence and CMVP certificate lists. Do not schedule production migration for regulated workloads until the matrix shows validated coverage — plan H1 hybrids in software labs meanwhile.
 
 ---
 
-## 4.14 Protocol and Library Readiness
+## 4.15 Protocol and Library Readiness
 
 Algorithms deploy through protocols and libraries. Architects track three readiness layers:
 
@@ -444,7 +471,7 @@ Applications inherit cryptography from container base images, language runtimes,
 
 ---
 
-## 4.15 Conducting an Algorithm Standards Workshop
+## 4.16 Conducting an Algorithm Standards Workshop
 
 Algorithm policy should not be written by a single architect in isolation. A half-day standards workshop produces defensible policy inputs:
 
@@ -467,7 +494,7 @@ Apex ran this workshop twice — once for NSS programmes, once for commercial IT
 
 ---
 
-## 4.16 Meridian Deep Dive: Payment HSM as Ecosystem Gate
+## 4.17 Meridian Deep Dive: Payment HSM as Ecosystem Gate
 
 Meridian's Chapter 1 blocking dependency — payment HSM firmware signing — illustrates standards-to-operations gap. The algorithm standard (ML-DSA-65 or ML-DSA-87) was clear by August 2024. The validated module was not.
 
@@ -483,7 +510,29 @@ The sequence demonstrates standards literacy enabling **parallel programme progr
 
 ---
 
-## 4.17 What This Chapter Deliberately Omits
+## 4.18 Worked Example: Meridian Algorithm Standards Matrix
+
+The following excerpt illustrates how Meridian translated Chapter 4 content into Policy-layer documentation — not a template, but a representative structure supervisors recognise.
+
+**Table 4.6 — Meridian Mutual Bank Algorithm Standards Matrix (Excerpt)**
+
+| Workload class | Key establishment | Signatures | Elevation trigger | Validation required |
+|----------------|-------------------|------------|-------------------|---------------------|
+| Retail banking IT | ML-KEM-768 | ML-DSA-65 | — | FIPS 140-3 Level 3 |
+| Customer PII KMS | ML-KEM-1024 | ML-DSA-65 | TES 5 + DORA Art. 6 | FIPS 140-3 Level 3 payment HSM |
+| Payment HSM firmware | — | ML-DSA-87 | PCI + long trust chain | FIPS 140-3 Level 3 payment HSM |
+| Physical access tokens | — | ML-DSA-65 | Token refresh programme | Token secure element capacity |
+| OT-adjacent WAN (Northfield JV)* | ML-KEM-768 | ML-DSA-65 | JV contractual | Per JV agreement |
+
+*Joint venture infrastructure — illustrates multinational enterprises carrying multiple matrix rows.
+
+Thomas Bergström's regulatory team attached this matrix to Meridian's Cryptographic Control Policy as Annex A. Supervisory reviewers could trace each row to TRADE scores and risk assessments without reading FIPS documents. Procurement embedded matrix rows into HSM and token RFPs as mandatory compliance columns.
+
+**Production brief — Figure 4.2:** Render as vertical decision flowchart with diamond gates (NSS? / operation type? / size constraint? / validated module?). Colour-code terminal nodes: green = proceed to HLM planning; amber = vendor escalation; red = Chapter 6 special-case path.
+
+---
+
+## 4.19 What This Chapter Deliberately Omits
 
 This chapter does not teach:
 
@@ -496,7 +545,7 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 ---
 
-## 4.18 Apply in Your Organisation
+## 4.20 Apply in Your Organisation
 
 1. **Publish an algorithm standards matrix** with default parameter sets (ML-KEM-768, ML-DSA-65) and Category 5 elevation criteria — do not leave selection to individual project teams.
 2. **Normalise CBOM algorithm names** to FIPS terminology — map Kyber/Dilithium/SPHINCS+ legacy labels in discovery output.
@@ -506,7 +555,23 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 ---
 
-## 4.19 Chapter Summary
+## 4.21 Validation Coverage Matrix Example
+
+Meridian maintained the following Operational-layer matrix — updated quarterly from CMVP listings and vendor correspondence:
+
+| System class | Validation required | Module available | Algorithm listed | Gap status | Programme action |
+|--------------|--------------------|--------------------|------------------|------------|------------------|
+| Payment HSM | FIPS 140-3 L3 | Vendor module v4.2 (roadmap) | ML-DSA-87 (Q3 2026) | **Open** | Procurement escalation |
+| General HSM | FIPS 140-3 L3 | Vendor module v3.9 | ML-KEM-768, ML-DSA-65 | Closed | Pilot authorised |
+| Cloud KMS (EU) | FIPS 140-3 L3 | Cloud provider module | ML-KEM-768 | Closed | Production H1 TLS |
+| Smart card | FIPS 140-2 L3 token | No PQC module | — | **Open** | Token refresh RFP |
+| Application library (dev) | None (non-prod) | OpenSSL 3.5 | ML-KEM-768 | N/A | Lab only |
+
+The matrix prevented a common failure mode: engineering teams deploying software library PQC in paths that production policy required validated modules for — producing demos that could not reach regulated production.
+
+---
+
+## 4.22 Chapter Summary
 
 - FIPS 203 (ML-KEM), 204 (ML-DSA), and 205 (SLH-DSA) are final standards — the enterprise deployment baseline as of August 2024.
 - The standards-as-inputs principle: reference FIPS in policy; implement migration through programme frameworks — not by reproducing standards in internal documents.
@@ -522,9 +587,13 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 *Chapter 4 — References*
 
+- Basescu, C., Hemsley, G., Khosla, N., Machado, L., Quach, W., Ravichandran, R., Tromer, E., & Wong, D. (2024). Deployment considerations for secure post-quantum cryptography in practice. *Proceedings of the USENIX Security Symposium*. https://www.usenix.org/conference/usenixsecurity24/presentation/basescu
+- National Institute of Standards and Technology. (2019). *Status report on the second round of the NIST post-quantum cryptography standardization process*. NIST IR 8309. https://doi.org/10.6028/NIST.IR.8309
 - National Institute of Standards and Technology. (2024). FIPS 203: Module-lattice-based key-encapsulation mechanism standard. https://doi.org/10.6028/NIST.FIPS.203
 - National Institute of Standards and Technology. (2024). FIPS 204: Module-lattice-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.204
 - National Institute of Standards and Technology. (2024). FIPS 205: Stateless hash-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.205
+- National Institute of Standards and Technology. (2020). NIST SP 800-131A: Transitioning the use of cryptographic algorithms and key lengths. https://doi.org/10.6028/NIST.SP.800-131A
 - National Institute of Standards and Technology. (2024). *Post-quantum cryptography: NIST standards and ongoing projects*. https://csrc.nist.gov/projects/post-quantum-cryptography
+- National Institute of Standards and Technology. (2024). *Cryptographic module validation program (CMVP)*. https://csrc.nist.gov/projects/cmvp
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - Internet Engineering Task Force. CFRG and TLS working group post-quantum specifications (standards-track documents at time of deployment).
