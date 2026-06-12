@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Appendices A–E draft complete (June 2026); full manuscript Chapters 1–22 + appendices  
+**Status:** Full manuscript editorial review complete (June 2026); Chapters 1–22 + Appendices A–E  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -9,8 +9,8 @@
 |------|-----------|----------|--------|
 | I — The Migration Imperative | `part-01-imperative/` | Intro + 1–3 | Editorial revision complete |
 | II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Editorial revision complete |
-| III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Draft complete |
-| IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Draft complete |
+| III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Editorial revision complete |
+| IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Editorial revision complete |
 | V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Draft complete |
 | VI — Sector Playbooks and Proof | `part-06-sector/` | Intro + 19–22 | Draft complete |
 | Appendices | `appendices/` | A–E | Draft complete |
