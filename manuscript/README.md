@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part I editorial revision complete (June 2026)  
+**Status:** Part II draft complete; Part III next (June 2026)  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -8,7 +8,7 @@
 | Part | Directory | Chapters | Status |
 |------|-----------|----------|--------|
 | I — The Migration Imperative | `part-01-imperative/` | Intro + 1–3 | Editorial revision complete |
-| II — Standards as Inputs | `part-02-standards/` | 4–6 | Planned |
+| II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Draft complete |
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | 7–9 | Planned |
 | IV — Architecting for Transition | `part-04-architecture/` | 10–14 | Planned |
 | V — Running the Migration Programme | `part-05-programme/` | 15–18 | Planned |
@@ -26,6 +26,17 @@
 | `appendices/appendix-a-regulatory-supplements.md` | 718 | ISO/ETSI/IETF, insurance, contractual risk |
 
 **Part I total (chapters + intro):** ~24,470 words
+
+## Part II Files
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `part-02-introduction.md` | 619 | Standards-as-inputs principle, HLM preview |
+| `chapter-04-nist-competition-to-fips.md` | 5,065 | FIPS 203–205, algorithm matrix, validation gap |
+| `chapter-05-transition-timelines-hybrid-policy.md` | 4,408 | IR 8547, CNSA 2.0, Hybrid Lifecycle Model |
+| `chapter-06-stateful-signatures-firmware.md` | 4,052 | SP 800-208, LMS/XMSS, Northfield OT case |
+
+**Part II total (chapters + intro):** ~14,144 words
 
 ## Editorial Revisions (June 2026)
 
