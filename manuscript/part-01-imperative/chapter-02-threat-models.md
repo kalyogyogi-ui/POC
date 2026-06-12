@@ -5,7 +5,7 @@
 
 The security operations centre at Northfield Energy Systems recorded the anomaly at 02:14 on a Tuesday in October: a scheduled backup of SCADA historian archives — ten years of operational telemetry from three gas transmission compressor stations — transited a WAN link to a geographically separated disaster recovery site. The traffic was encrypted with IPsec using IKEv2 and ECDH-P256 key exchange. The encryption was correctly implemented. The certificates were valid. The cipher suite met Northfield's written policy.
 
-It also represented approximately 4.2 terabytes of operational data whose confidentiality horizon extended well beyond any reasonable estimate for quantum-safe protection on that link. Northfield's threat model, like most utilities, prioritized availability and integrity of real-time control systems. Confidentiality of historical archives ranked lower. The quantum threat reframed that ranking entirely.
+It also represented approximately 4.2 terabytes of operational data whose confidentiality horizon extended well beyond any reasonable estimate for quantum-safe protection on that link. Northfield's threat model, like most utilities, prioritised availability and integrity of real-time control systems. Confidentiality of historical archives ranked lower. The quantum threat reframed that ranking entirely.
 
 The adversary capable of exploiting a future cryptographically relevant quantum computer does not need to compromise Northfield's control network today. Recording encrypted historian traffic requires passive collection — a capability well within the means of sophisticated threat actors operating against critical infrastructure. The decryption can wait. The collection cannot.
 
@@ -17,7 +17,7 @@ This chapter replaces quantum threat hype with the decision-grade threat analysi
 
 ## 2.1 Separating Threat Categories
 
-Enterprise security teams encounter three distinct quantum-related threat narratives. Conflating them produces either panic or paralysis. Treating them as a single undifferentiated "quantum threat" produces misprioritized migration plans that either over-invest in low-urgency systems or under-invest in systems protecting decades-long confidentiality requirements.
+Enterprise security teams encounter three distinct quantum-related threat narratives. Conflating them produces either panic or paralysis. Treating them as a single undifferentiated "quantum threat" produces misprioritised migration plans that either over-invest in low-urgency systems or under-invest in systems protecting decades-long confidentiality requirements.
 
 ### Category 1: Cryptographically relevant quantum computers (CRQCs)
 
@@ -31,9 +31,9 @@ CRQC threat analysis matters for **long-term programme planning** and **regulato
 
 HNDL — also called store-now-decrypt-later — describes an attack in which an adversary records encrypted data today and retains it until quantum decryption becomes feasible. The attack requires no quantum capability at collection time. It requires only access to ciphertext and patience.
 
-The attack model is not theoretical. Intelligence community reporting and sector ISAC advisories document passive collection programmes against government, defense, financial, energy, and telecommunications targets. The collection infrastructure exists. The quantum computer does not. The adversary's investment thesis is that the data will remain valuable longer than the quantum computer will take to arrive.
+The attack model is not theoretical. CISA's Post-Quantum Cryptography Initiative, ENISA threat landscape reporting, and sector ISAC advisories document passive collection as a credible risk against government, defence, financial, energy, and telecommunications targets. The collection infrastructure exists. The quantum computer does not. The adversary's investment thesis is that the data will remain valuable longer than the quantum computer will take to arrive.
 
-HNDL threat analysis matters for **prioritization**. It converts a future quantum threat into a present-tense collection incentive. The urgency of HNDL is determined not by quantum computer timelines but by **data confidentiality lifetime** — how long the protected data must remain secret.
+HNDL threat analysis matters for **prioritisation**. It converts a future quantum threat into a present-tense collection incentive. The urgency of HNDL is determined not by quantum computer timelines but by **data confidentiality lifetime** — how long the protected data must remain secret.
 
 ### Category 3: Pre-quantum cryptanalytic advances
 
@@ -49,7 +49,30 @@ This category matters for **algorithm agility** and **validation discipline**. I
 | HNDL | Yes — establishes urgency | **Yes — primary driver** | Indirectly — via data class |
 | Classical PQC breaks | Yes — establishes agility need | No — affects agility design | Yes — contingency planning |
 
-The remainder of this chapter focuses on HNDL and confidentiality horizon analysis, because these are the threat dimensions most frequently mishandled in enterprise prioritization.
+**Figure 2.2 — Threat-to-Control Mapping**
+
+```
+THREAT CATEGORY          PRIMARY CONTROL RESPONSE              PART I/BOOK REF
+─────────────────────────────────────────────────────────────────────────────
+CRQC arrival             Programme charter; ERM registration  Ch. 1, Ch. 15
+                         Multi-year budget; timeline anchors
+
+HNDL (confidentiality)   Confidentiality horizon assignment   §2.3
+                         TES scoring; Wave 1 migration        Ch. 9
+                         HNDL pathway encryption upgrade
+
+HNDL (integrity/forgery) Integrity horizon analysis           §2.4
+                         Firmware/code-signing priority       Ch. 6
+
+Classical PQC breaks     Crypto-agility architecture          Ch. 10
+                         Algorithm contingency planning       Ch. 4, Ch. 22
+                         Validation discipline                Ch. 18
+
+All categories           CBOM maintenance; threat re-score    Ch. 7
+                         Documented risk acceptance           Ch. 3, Ch. 5
+```
+
+The remainder of this chapter focuses on HNDL and confidentiality horizon analysis, because these are the threat dimensions most frequently mishandled in enterprise prioritisation.
 
 ---
 
@@ -63,7 +86,7 @@ Enterprise leaders do not need to understand lattice reduction or hash-based sig
 
 **Fact 3:** Post-quantum algorithms are designed around mathematical problems that are not known to be solvable efficiently by quantum computers. Their security is subject to classical cryptanalysis, as all cryptographic algorithms are. NIST selected algorithms with conservative parameter sets.
 
-**Fact 4:** The time to migrate an enterprise estate exceeds the uncertainty range of CRQC arrival projections for large organizations. This is the operational consequence of Facts 1–3 combined with estate complexity.
+**Fact 4:** The time to migrate an enterprise estate exceeds the uncertainty range of CRQC arrival projections for large organisations. This is the operational consequence of Facts 1–3 combined with estate complexity.
 
 These four facts justify programme investment. They do not determine migration sequence. Sequence is determined by confidentiality horizons, dependency topology, and ecosystem readiness — the subjects of this chapter and those that follow.
 
@@ -132,7 +155,7 @@ Ephemeral key exchange does not eliminate HNDL risk. It limits HNDL risk to the 
 
 ## 2.4 Authentication and Integrity Horizons
 
-Confidentiality dominates PQC threat discourse because Shor's algorithm breaks the key establishment and encryption functions of public-key cryptography. Migration prioritization that considers only confidentiality is incomplete.
+Confidentiality dominates PQC threat discourse because Shor's algorithm breaks the key establishment and encryption functions of public-key cryptography. Migration prioritisation that considers only confidentiality is incomplete.
 
 ### Digital signatures and authentication
 
@@ -169,7 +192,7 @@ NIST IR 8547's treatment of authentication systems acknowledges nuance: some aut
 
 ## 2.5 The TRADE Threat Dimension
 
-Chapter 1 introduced the TRADE Decision Engine — a prioritization framework scoring systems across five dimensions: **T**hreat exposure, **R**egulatory obligation, **A**rchitectural dependency, **D**ata longevity, and **E**cosystem readiness. This section develops the Threat dimension in detail. Subsequent chapters develop the remaining dimensions.
+Chapter 1 introduced the TRADE Decision Engine — a prioritisation framework scoring systems across five dimensions: **T**hreat exposure, **R**egulatory obligation, **A**rchitectural dependency, **D**ata longevity, and **E**cosystem readiness. This section develops the Threat dimension in detail. Subsequent chapters develop the remaining dimensions.
 
 ### Threat exposure scoring
 
@@ -185,7 +208,7 @@ Each system receives a Threat Exposure Score (TES) from 1 (minimal) to 5 (critic
 - Protects data with confidentiality horizon of five to fifteen years
 - Processes regulated personal data (GDPR special categories, financial records, health records)
 - Code signing or firmware validation chains for production systems
-- Cross-organizational trust anchors (federated identity, partner PKI)
+- Cross-organisational trust anchors (federated identity, partner PKI)
 
 **TES 3 — Moderate exposure**
 - Protects data with confidentiality horizon of one to five years
@@ -204,7 +227,7 @@ Each system receives a Threat Exposure Score (TES) from 1 (minimal) to 5 (critic
 
 ### Worked example: Meridian Mutual Bank
 
-Meridian applied TES scoring to four systems during Phase 1 prioritization:
+Meridian applied TES scoring to four systems during Phase 1 prioritisation:
 
 | System | Data/asset | Horizon | Adversary model | TES |
 |--------|-----------|---------|-----------------|-----|
@@ -213,7 +236,7 @@ Meridian applied TES scoring to four systems during Phase 1 prioritization:
 | Public website TLS | Session data, minimal logging | Minutes | Opportunistic | 2 |
 | Payment HSM firmware signing | Code integrity | 15+ year device life | Supply chain | 5 |
 
-The public website TLS — the system Meridian's predecessor had scoped for "the PQC project" — scored TES 2. The customer PII key wrapping system scored TES 5. Threat analysis alone would prioritize the database encryption key management infrastructure and the HSM firmware chain over external TLS.
+The public website TLS — the system Meridian's predecessor had scoped for "the PQC project" — scored TES 2. The customer PII key wrapping system scored TES 5. Threat analysis alone would prioritise the database encryption key management infrastructure and the HSM firmware chain over external TLS.
 
 ### Threat actor capability alignment
 
@@ -273,13 +296,13 @@ TRADE modification: increase Data longevity weight for OT archives; treat firmwa
 
 Northfield's historian archive case exemplifies the OT confidentiality reclassification that quantum threat forces. Data that was "operational, not sensitive" under classical threat models becomes sensitive under HNDL analysis because its confidentiality horizon extends beyond CRQC arrival.
 
-### Defense and government
+### Defence and government
 
 Threat drivers: classified and controlled unclassified information with indefinite confidentiality requirements; CNSA 2.0 compliance as binding mandate; adversary collection assumed as baseline capability. Threat analysis is less speculative and more policy-driven.
 
 TRADE modification: Regulatory obligation weight effectively overrides other dimensions for NSS-aligned systems; consult CNSA 2.0 timelines as floor, not ceiling.
 
-Apex Defense Technologies treats CNSA 2.0 milestones as non-negotiable programme gates. Threat analysis confirms what policy already requires. The analytical value is prioritization within the mandated timeline, not debate about whether migration is necessary.
+Apex Defense Technologies treats CNSA 2.0 milestones as non-negotiable programme gates. Threat analysis confirms what policy already requires. The analytical value is prioritisation within the mandated timeline, not debate about whether migration is necessary.
 
 ### Multinational SaaS and technology
 
@@ -363,7 +386,7 @@ Return to the SCADA historian archive. Northfield's security team, after the SOC
 
 ### Extended Northfield assessment: three migration waves by threat
 
-Northfield's TRADE analysis produced three threat-prioritized waves independent of dependency resolution (dependency sequencing came later):
+Northfield's TRADE analysis produced three threat-prioritised waves independent of dependency resolution (dependency sequencing came later):
 
 **Wave 1 (Threat-immediate):** Historian archives, pipeline SCADA configuration backups, safety system documentation stores, WAN links carrying operational data between compressor stations and regional control centres.
 
@@ -381,9 +404,9 @@ Northfield's experience illustrates the chapter's central lesson: **threat analy
 
 ### Apex Defense Technologies
 
-Apex processes controlled unclassified information (CUI) and classified data under contract to defense agencies. Its threat model does not debate HNDL probability. Collection by foreign intelligence services is the baseline planning assumption for CUI. Classified data handling follows mandatory controls that presuppose adversary collection capability.
+Apex processes controlled unclassified information (CUI) and classified data under contract to defence agencies. Its threat model does not debate HNDL probability. Collection by foreign intelligence services is the baseline planning assumption for CUI. Classified data handling follows mandatory controls that presuppose adversary collection capability.
 
-Apex's threat analysis value is **prioritization within mandatory timelines**, not justification for migration. CNSA 2.0 establishes the floor. TRADE analysis sequences work within that floor: firmware signing before external TLS, key management infrastructure before application-layer migration, classified enclave boundaries before unclassified corporate systems.
+Apex's threat analysis value is **prioritisation within mandatory timelines**, not justification for migration. CNSA 2.0 establishes the floor. TRADE analysis sequences work within that floor: firmware signing before external TLS, key management infrastructure before application-layer migration, classified enclave boundaries before unclassified corporate systems. For NSS-aligned workloads, Regulatory dimension weight increases to 2.0 in the MPI formula — policy mandates override ecosystem readiness arguments.
 
 Apex also illustrates **dual-track threat management**: systems processing classified data follow NSS timelines; corporate IT systems follow NIST IR 8547 commercial guidance; international subsidiaries follow host-nation requirements. One threat model does not govern the entire enterprise.
 
@@ -399,7 +422,7 @@ GlobalSync's threat analysis also identified **cross-tenant authentication** as 
 
 ## 2.11 From Threat Analysis to Programme Justification
 
-Threat models serve two audiences: the security team, which needs prioritization logic, and the board, which needs a credible case for multi-year investment.
+Threat models serve two audiences: the security team, which needs prioritisation logic, and the board, which needs a credible case for multi-year investment.
 
 Board-level threat narrative should emphasize three points:
 
@@ -409,7 +432,7 @@ Board-level threat narrative should emphasize three points:
 
 3. **The cost of inaction is asymmetric.** Quantum-vulnerable cryptography fails catastrophically when CRQCs arrive — not gradually, not with warning signs in the ciphertext. The enterprise either migrates on its timeline or on the adversary's.
 
-The board does not need to understand lattice cryptography. It needs to understand that confidentiality horizons, not quantum computer press releases, determine whether the organization is already late.
+The board does not need to understand lattice cryptography. It needs to understand that confidentiality horizons, not quantum computer press releases, determine whether the organisation is already late.
 
 ### Connecting threat analysis to regulatory evidence
 
@@ -421,7 +444,7 @@ Meridian's DORA compliance workstream used Northfield-style TES scoring as the r
 
 ## 2.12 Conducting a Threat Assessment Workshop
 
-Threat exposure scoring should be produced through a structured workshop, not assigned by a single analyst. The workshop methodology below has been designed for the TRADE framework and tested against the estate complexity of the four teaching organizations in this book.
+Threat exposure scoring should be produced through a structured workshop, not assigned by a single analyst. The workshop methodology below has been designed for the TRADE framework for the estate complexity represented by the four teaching organisations in this book.
 
 ### Participants
 
@@ -473,23 +496,47 @@ Annual re-scoring is the minimum cadence. Quarterly re-scoring is appropriate fo
 
 ## 2.13 Composite TRADE Scoring: A Worked Example
 
-Threat exposure is one dimension of TRADE. This section provides a preview of composite scoring using a single system — Meridian's customer PII database encryption key management — to illustrate how Threat interacts with other dimensions developed in later chapters.
+Threat exposure is one dimension of TRADE. This section provides a preview of composite scoring using a single system — Meridian's customer PII database encryption key management (no payment card data co-located; PCI scope excluded) — to illustrate how Threat interacts with other dimensions developed in later chapters.
 
-| Dimension | Score (1–5) | Rationale |
-|-----------|------------|-----------|
-| **T**hreat | 5 | 10+ year confidentiality horizon; GDPR Art. 9 data; HNDL credible |
-| **R**egulatory | 5 | DORA RTS Art. 6; GDPR Art. 32; PCI if payment data co-located |
+### Default enterprise weights
+
+The Migration Priority Index (MPI) is a weighted mean of five dimension scores (each 1–5):
+
+**MPI = (wT×T + wR×R + wA×A + wD×D + wE×E) / (wT + wR + wA + wD + wE)**
+
+| Dimension | Symbol | Default weight | Rationale |
+|-----------|--------|---------------|-----------|
+| Threat | wT | 1.5 | Primary driver for long-horizon data |
+| Regulatory | wR | 1.25 | Compliance forcing function |
+| Architectural dependency | wA | 1.25 | Blocking nodes amplify priority |
+| Data longevity | wD | 1.0 | Reinforces HNDL analysis |
+| Ecosystem readiness | wE | 0.75 | Gates execution timing, not urgency |
+
+Sector overlays (Part VI) modify weights — e.g. defence increases wR; SaaS increases wE. Weights must be documented in the threat assessment methodology section.
+
+### Meridian PII KMS scoring
+
+| Dimension | Score | Rationale |
+|-----------|-------|-----------|
+| **T**hreat | 5 | 10+ year confidentiality horizon; GDPR Art. 9 categories; HNDL credible |
+| **R**egulatory | 5 | DORA RTS Art. 6; GDPR Art. 32 |
 | **A**rchitectural dependency | 4 | Blocking node — twelve application databases depend on this KMS |
 | **D**ata longevity | 5 | Legal hold possible; retention indefinite for litigation |
 | **E**cosystem readiness | 2 | HSM vendor PQC module fourteen months away |
 
-**Migration Priority Index (MPI):** Weighted composite = 4.4 (High-Immediate boundary)
+**MPI calculation:**
 
-The high Threat, Regulatory, and Data longevity scores argue for immediate priority. The low Ecosystem readiness score argues for delay. The high Architectural dependency score argues that this system's migration enables twelve downstream systems — making it a blocking node whose resolution accelerates the broader programme.
+MPI = (1.5×5 + 1.25×5 + 1.25×4 + 1.0×5 + 0.75×2) / (1.5 + 1.25 + 1.25 + 1.0 + 0.75)
 
-**Decision:** Prioritize for migration planning and vendor escalation immediately. Production migration gated on HSM vendor delivery. Use waiting period to resolve downstream application dependencies and define key ceremony adaptations for ML-KEM key sizes.
+MPI = (7.5 + 6.25 + 5.0 + 5.0 + 1.5) / 5.75 = **25.25 / 5.75 = 4.39**
 
-This is the TRADE engine's value: it prevents the binary thinking that produces either "migrate now" or "wait for vendor" without analyzing the interaction of dimensions.
+Interpretation: **High–Immediate boundary** (MPI ≥ 4.0 = immediate planning priority; production gating assessed separately via Ecosystem readiness).
+
+The high Threat, Regulatory, and Data longevity scores argue for immediate priority. The low Ecosystem readiness score gates production deployment, not planning. The high Architectural dependency score argues that this system's migration enables twelve downstream systems — making it a blocking node whose resolution accelerates the broader programme.
+
+**Decision:** Prioritise for migration planning and vendor escalation immediately. Production migration gated on HSM vendor delivery. Use waiting period to resolve downstream application dependencies and define key ceremony adaptations for ML-KEM key sizes (Chapter 14).
+
+This is the TRADE engine's value: it prevents binary thinking that produces either "migrate now" or "wait for vendor" without analysing the interaction of dimensions.
 
 ---
 
@@ -509,27 +556,15 @@ Each template connects threat analysis to governance artefacts regulators and ex
 
 ---
 
-## 2.15 Threat Analysis for Mergers, Acquisitions, and Divestitures
+## 2.15 M&A and Estate Changes
 
-Enterprise cryptographic estates change through M&A activity. Threat analysis must be integrated into due diligence — not deferred to post-acquisition integration.
+Cryptographic estates change through mergers, acquisitions, and divestitures. TES scoring and CBOM scope must be updated when estate boundaries change. Acquisition due diligence should assess CBOM completeness, TES 5 exposure, blocking dependencies, and regulatory obligations — before integration, not after. Divestiture requires separating shared PKI, KMS, and federated identity dependencies. Full M&A cryptographic due diligence methodology is developed in Chapters 9 and 16.
 
-### Acquisition due diligence
-
-When acquiring a company, the acquirer's PQC programme inherits the target's cryptographic estate. Due diligence should assess:
-
-- **CBOM or equivalent inventory** — does the target know what cryptography it uses?
-- **TES 5 systems** — does the target protect long-horizon data with quantum-vulnerable PKC?
-- **Blocking dependencies** — will the target's PKI or HSM infrastructure block integration?
-- **Regulatory exposure** — is the target subject to DORA, NIS2, PCI, or CNSA 2.0 obligations?
-- **Vendor contracts** — do critical supplier agreements include PQC provisions?
-
-A target with no PQC programme and significant TES 5 exposure represents a **liability** that should be reflected in valuation, integration budget, and risk acceptance decisions. A target with a mature programme may represent an asset — acquired CBOM data, tested migration playbooks, and vendor relationships that accelerate the combined entity's programme.
-
-### Divestiture and carve-out
-
-Divesting a business unit requires separating cryptographic dependencies. Shared PKI hierarchies, corporate KMS instances, and federated identity systems create carve-out complexity. Threat analysis for divestiture identifies which cryptographic assets must be replicated, re-issued, or re-negotiated before separation — and which confidentiality horizons for shared data must be maintained across the separation boundary.
-
-Meridian's acquisition of a regional payment processor in Year 2 of its PQC programme added 3,200 cryptographic assets to the CBOM — 94% quantum-vulnerable, with no PQC programme. The acquisition due diligence had not assessed cryptographic posture. Integration cost was estimated at €2.1 million additional programme spend, absorbed into the combined entity's Phase 3 budget.
+> **Migration Moment**
+>
+> *"We'll add the acquired company to our PQC plan later."*
+>
+> Meridian's acquisition of a regional payment processor added 3,200 cryptographic assets — 94% quantum-vulnerable, with no PQC programme — and an estimated **€2.1 million** (*illustrative*) in additional integration spend because due diligence omitted cryptographic posture.
 
 ---
 
@@ -551,7 +586,7 @@ The enterprise threat model should allocate primary migration resources to **qua
 
 ## 2.17 Threat-Informed Control Selection
 
-Threat analysis does not end at prioritization. It informs **which controls** to implement during each migration phase. The following mapping connects threat tiers to control investments, helping security leaders allocate limited budgets across the programme horizon.
+Threat analysis does not end at prioritisation. It informs **which controls** to implement during each migration phase. The following mapping connects threat tiers to control investments, helping security leaders allocate limited budgets across the programme horizon.
 
 **Table 2.6 — Threat Tier × Control Investment Matrix**
 
@@ -578,81 +613,34 @@ Exercise design:
 
 Northfield conducted an HNDL-focused exercise six months after the historian SOC anomaly. The red team successfully collected ciphertext from four of five target systems. Two collection paths had not appeared in the original threat assessment. Both were added to Wave 1 with elevated TES scores.
 
-The exercise cost less than a standard penetration test. It produced more actionable PQC prioritization data than any algorithm benchmark.
+The exercise cost less than a standard penetration test. It produced more actionable PQC prioritisation data than any algorithm benchmark.
 
 ---
 
-## 2.18 Documenting Threat Analysis for Audit
+## 2.18 Documentation, ERM, and Cloud (Cross-References)
 
-Threat analysis that is not documented does not exist for regulatory or audit purposes. The following documentation structure satisfies DORA ICT risk assessment requirements, GDPR Article 32 proportionality analysis, and NIST IR 8547 risk acceptance processes.
-
-**Threat Assessment Document — Required Sections:**
-
-1. **Scope** — systems, data classes, and time period covered
-2. **Methodology** — reference to TRADE framework and TES scoring criteria
-3. **Threat actor assumptions** — sector threat model, intelligence sources consulted
-4. **Confidentiality horizon assignments** — per system, with governing artefact citation
-5. **TES scores** — per system, with rationale
-6. **Priority tier assignments** — Immediate through Minimal
-7. **Integrity horizon analysis** — for systems where integrity concern equals or exceeds confidentiality
-8. **Limitations** — systems not yet inventoried, incomplete CBOM coverage, assumed data
-9. **Review schedule** — next re-scoring date and trigger events
-10. **Approval** — CISO or designated risk owner sign-off
-
-Meridian's threat assessment document, first approved in Month 8 of the programme, became the risk assessment input referenced by the updated encryption policy submitted to supervisory review. The document was forty-seven pages including appendices — primarily tables of system scores and horizon assignments. The methodology section was four pages. Auditors and supervisors care about methodology rigour and coverage completeness, not document length.
-
-Northfield's threat assessment document included an appendix mapping TES 5 systems to CISA critical infrastructure sector guidance — demonstrating alignment between enterprise scoring and government threat framing. This alignment is not required but strengthens supervisory credibility for critical infrastructure operators.
-
-### Common documentation deficiencies
-
-- **Scores without rationale** — TES 4 assigned with no documented basis
-- **Horizons without governing artefact** — "ten years" stated without citing retention schedule or contract
-- **Stale assessments** — document dated eighteen months ago with no review record
-- **Scope gaps** — OT systems excluded without documented justification
-- **Methodology absent** — scores present but framework not referenced
-
-Each deficiency is an audit finding. Each is preventable with the structure above.
-
-### Integrating threat analysis with enterprise risk management
-
-PQC threat analysis should not exist in isolation from the enterprise risk management (ERM) framework. Quantum risk — encompassing CRQC threat, HNDL exposure, and migration programme execution risk — belongs in the corporate risk register alongside cyber, operational, and regulatory risks.
-
-**Risk register entry structure:**
-
-- **Risk description:** Quantum-vulnerable cryptography protects [data classes] with confidentiality horizons exceeding CRQC arrival timeline; HNDL collection is credible for [sectors/systems]
-- **Risk category:** Technology / Cybersecurity / Regulatory (as applicable)
-- **Inherent risk rating:** Derived from highest TES score in estate
-- **Residual risk rating:** After programme controls (inventory, migration plan, agility requirements)
-- **Risk owner:** CISO or designated cryptographic governance lead
-- **Treatment strategy:** Mitigate through PQC migration programme
-- **Target residual risk:** PQ-ADAPT Level 4 (Transitioning) by [date]
-
-Board risk committees review quantum risk annually as part of the ERM cycle. The review consumes the threat assessment document, programme progress against PQ-ADAPT maturity, and regulatory alignment status. This integration prevents PQC from being treated as a technical special project outside the governance structures that boards understand and oversee.
-
-Apex Defense Technologies reports quantum risk to its board quarterly — a higher cadence than most commercial enterprises — because CNSA 2.0 milestones create binding dates that the board must monitor for contract compliance. Meridian reports annually, with interim updates when supervisory engagement or material programme changes occur.
-
-### Threat analysis for cloud and shared responsibility models
-
-Cloud deployments complicate threat analysis because cryptographic control is distributed between provider and customer under the shared responsibility model. The TRADE framework applies to **customer-controlled cryptographic decisions** — key management policies, TLS configuration choices, certificate management, application-layer encryption — not to provider-internal cryptography the customer cannot observe or modify.
-
-For IaaS: customer controls operating system and application cryptography. Threat analysis covers customer-managed keys, certificates, and protocol configurations. Provider-managed hypervisor and hardware cryptography is assessed through provider compliance attestations (SOC 2, FedRAMP) rather than direct TES scoring.
-
-For PaaS: customer controls application-layer cryptography and platform configuration options. Provider controls platform cryptography. Threat analysis must identify which layer protects which data and score accordingly.
-
-For SaaS: customer controls are limited to configuration options the provider exposes. Threat analysis depends heavily on provider PQC roadmap and contractual commitments. GlobalSync, as both a SaaS provider and a cloud consumer, maintains threat assessments for both roles — provider obligations to tenants and consumer obligations for its own corporate IT.
-
-The common error is scoring SaaS applications as TES 2 because "the provider handles security." If the provider handles security with quantum-vulnerable cryptography and the data has a twenty-year confidentiality horizon, the customer's TES is determined by data sensitivity, not by contractual delegation.
+Threat analysis must be documented to exist for regulatory and audit purposes. Required document structure, ERM integration, and board reporting cadence are specified in Chapter 3 (§3.7–3.8) and Chapter 15 (§15.3). Cloud shared responsibility and tenant-variable TES assignment for SaaS providers are developed in Chapter 14.
 
 ---
 
-## 2.19 Chapter Summary
+## 2.19 Apply in Your Organisation
 
-- Three threat categories — CRQC arrival, HNDL, and classical PQC cryptanalysis — serve different decision functions. Conflating them produces misprioritization.
+1. **Separate threat categories.** Ensure programme materials distinguish CRQC horizon, HNDL urgency, and agility requirements — not a single "quantum threat" score.
+2. **Assign confidentiality horizons from governance artefacts.** Cite retention schedules, contracts, or classification policy for every TES 4–5 system.
+3. **Run a four-hour threat workshop** using §2.12 methodology before finalising migration wave sequence.
+4. **Calculate MPI with documented weights.** Use default weights in §2.13 unless sector overlay modifies them.
+5. **Schedule annual re-scoring** (quarterly for TES 5 systems in regulated or critical infrastructure sectors).
+
+---
+
+## 2.20 Chapter Summary
+
+- Three threat categories — CRQC arrival, HNDL, and classical PQC cryptanalysis — serve different decision functions. Conflating them produces misprioritisation.
 - HNDL is the primary driver of migration priority. It is determined by data confidentiality horizon, not by quantum computer timelines.
 - Confidentiality horizons derive from data governance artefacts: classification, retention, contractual obligations, and legal holds.
 - Authentication and integrity require separate horizon analysis: how long must signatures made today remain trustworthy?
-- The TRADE Threat dimension converts threat model outputs into scored, auditable prioritization inputs.
-- Sector context modifies threat weights: financial services, critical infrastructure, defense, SaaS, and healthcare each carry distinct threat profiles.
+- The TRADE Threat dimension converts threat model outputs into scored, auditable prioritisation inputs.
+- Sector context modifies threat weights: financial services, critical infrastructure, defence, SaaS, and healthcare each carry distinct threat profiles.
 - Threat intelligence, red team findings, and DLP monitoring provide empirical inputs to TES scoring.
 - Threat analysis identifies what to protect. Dependency analysis (Chapter 8) identifies what to migrate first. Both are necessary.
 
@@ -662,10 +650,11 @@ The common error is scoring SaaS applications as TES 2 because "the provider han
 
 *Chapter 2 — References*
 
-- Basescu, C., et al. (2024). Deployment considerations for secure post-quantum cryptography in practice. USENIX Security Symposium.
-- Campbell, R. (2025). Enterprise Migration to Post-Quantum Cryptography: Timeline Analysis and Strategic Frameworks. *Computers*, 15(1), 9.
-- Cybersecurity and Infrastructure Security Agency. (2024). Post-Quantum Cryptography Initiative.
-- European Union Agency for Cybersecurity. (2025). NIS2 Implementation Guidance (cryptographic recommendations).
-- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to Post-Quantum Cryptography Standards.
-- National Security Memorandum 10 (2022).
-- World Economic Forum. (2024). Quantum Security: Preparing for the Post-Quantum Era.
+- Basescu, C., Hemsley, G., Khosla, N., Machado, L., Quach, W., Ravichandran, R., Tromer, E., & Wong, D. (2024). Deployment considerations for secure post-quantum cryptography in practice. *Proceedings of the USENIX Security Symposium*. https://www.usenix.org/conference/usenixsecurity24/presentation/basescu
+- Campbell, R. (2025). Enterprise migration to post-quantum cryptography: Timeline analysis and strategic frameworks. *Computers*, 15(1), 9. https://doi.org/10.3390/computers15010009
+- Cybersecurity and Infrastructure Security Agency. (2024). Post-quantum cryptography initiative. https://www.cisa.gov/quantum
+- European Union Agency for Cybersecurity. (2025). *NIS2 implementation guidance* (cryptographic recommendations). https://www.enisa.europa.eu/
+- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
+- National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
+- National Security Memorandum 10 (2022). The White House.
+- World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*. https://www.weforum.org/publications/quantum-security/

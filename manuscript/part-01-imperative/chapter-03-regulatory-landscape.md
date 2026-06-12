@@ -61,11 +61,11 @@ NSM-10, issued in May 2022, established U.S. policy for quantum computing and cr
 
 NSM-10 is policy, not regulation. Its binding force for federal agencies derives from implementation through OMB guidance, NIST standards, and agency-specific requirements. Its influence on commercial enterprises is indirect but substantial: federal procurement requirements, supply chain standards, and the de facto authority of NIST FIPS create market pressure that commercial CISOs cannot ignore.
 
-For defense contractors and technology providers serving federal customers, NSM-10's 2035 target functions as a **commercial planning anchor** even where not contractually binding. Federal acquisition regulations increasingly reference NIST cryptographic standards. A commercial product that cannot demonstrate PQC migration alignment by 2030 will be non-competitive in federal procurement by 2033.
+For defence contractors and technology providers serving federal customers, NSM-10's 2035 target functions as a **commercial planning anchor** even where not contractually binding. Federal acquisition regulations increasingly reference NIST cryptographic standards. A commercial product that cannot demonstrate PQC migration alignment by 2030 will be non-competitive in federal procurement by 2033.
 
-### Executive Order 14144 and federal TLS requirements
+### Executive Order 14144 and federal cybersecurity modernisation
 
-Executive Order 14144 (2024) strengthens federal cybersecurity requirements, including references to modern cryptographic standards for federal systems. While not exclusively a PQC instrument, it reinforces the federal direction toward TLS 1.3 adoption and cryptographic modernization on timelines that intersect with NIST IR 8547's 2030 deprecation anchor. Federal contractors should monitor OMB and agency-specific implementation guidance for contractual flow-down.
+Executive Order 14144 (2024) strengthens federal cybersecurity requirements across agency systems, with emphasis on modernising defensive capabilities and critical infrastructure protection. It is not a dedicated PQC mandate, but it reinforces agency obligations to adopt current NIST guidance — which, after August 2024, includes post-quantum standards. Federal contractors should monitor OMB implementation memoranda and agency-specific procurement clauses for cryptographic modernisation flow-down, rather than treating EO 14144 as a standalone algorithm specification.
 
 ### NIST IR 8547 transition timelines
 
@@ -94,7 +94,7 @@ The Commercial National Security Algorithm Suite 2.0, published by NSA in 2022 a
 | 2033 | Most NSS platforms migrated |
 | 2035 | All NSS, including custom and legacy, fully migrated |
 
-CNSA 2.0 specifies ML-KEM-1024, ML-DSA-87, and SLH-DSA as the approved suite, with hybrid key establishment required during transition. Defense contractors, FedRAMP-authorized cloud providers, and enterprises serving the defense industrial base encounter CNSA 2.0 as a **contractual and certification requirement**, not advisory guidance.
+CNSA 2.0 specifies ML-KEM-1024, ML-DSA-87, and SLH-DSA as the approved suite, with hybrid key establishment required during transition. Defence contractors, FedRAMP-authorized cloud providers, and enterprises serving the defense industrial base encounter CNSA 2.0 as a **contractual and certification requirement**, not advisory guidance.
 
 Apex Defense Technologies, examined throughout this book, maps its programme milestones directly to CNSA 2.0 dates. Commercial subsidiaries without NSS obligations follow NIST IR 8547 timelines — creating the dual-track regulatory overlay common in defense industrial base enterprises.
 
@@ -102,7 +102,7 @@ Apex Defense Technologies, examined throughout this book, maps its programme mil
 
 **FedRAMP** authorization requires compliance with NIST SP 800-53 controls, including cryptographic protections for federal cloud services. As NIST updates SP 800-53 and related control baselines to reference PQC standards, FedRAMP-authorized providers will face authorization revision requirements tied to cryptographic migration.
 
-**CMMC (Cybersecurity Maturity Model Certification)** for defense contractors references NIST SP 800-171 and 800-172 controls including cryptographic protections for CUI. CMMC assessors will increasingly evaluate whether contractors' encryption controls reflect state-of-the-art practice — which, after 2024, includes PQC planning evidence.
+**CMMC (Cybersecurity Maturity Model Certification)** for defence contractors references NIST SP 800-171 and 800-172 controls including cryptographic protections for CUI. CMMC assessors will increasingly evaluate whether contractors' encryption controls reflect state-of-the-art practice — which, after 2024, includes PQC planning evidence.
 
 These certification frameworks do not yet mandate PQC deployment on specific dates for all authorized systems. They create **assessment surfaces** where quantum-vulnerable cryptography will be questioned and where absence of migration planning will be treated as a control deficiency.
 
@@ -171,13 +171,13 @@ Meridian prepared a supervisory examination readiness package addressing these f
 
 ### NIS2 Directive
 
-Directive (EU) 2022/2555 (NIS2) requires essential and important entities across energy, transport, health, digital infrastructure, financial market infrastructure, and other sectors to implement appropriate and proportionate technical and organizational measures — including encryption — based on an all-hazards risk assessment.
+Directive (EU) 2022/2555 (NIS2) requires essential and important entities across energy, transport, health, digital infrastructure, financial market infrastructure, and other sectors to implement appropriate and proportionate technical and organisational measures — including encryption — based on an all-hazards risk assessment.
 
 NIS2 does not explicitly reference quantum computing. It requires measures **consistent with the state of the art**. ENISA's implementation guidance, published in 2025, recommends that entities adopt quantum-resistant algorithms to protect sensitive data against harvest-now-decrypt-later attacks.
 
 For financial entities, DORA is **lex specialis** — it prevails over NIS2 where both apply to the same obligation. For energy companies like Northfield Energy, NIS2 (as transposed into national law) is the primary cryptographic compliance vehicle. Northfield's PQC programme must satisfy NIS2 Article 21 risk management measures and produce evidence that encryption controls reflect state-of-the-art practice.
 
-**NIS2 transposition variation** matters for multinational enterprises. Member States transposed NIS2 by October 2024 with national variations in scope, enforcement authority, and penalty structures. Germany's BSIG amendment, France's Loi de Programmation Militaire cybersecurity provisions, and the Netherlands' implementation through the Cyberbeveiligingswet create jurisdiction-specific enforcement contexts for the same EU directive. Programme regulatory overlays should annotate national transposition differences where they affect evidence requirements or timelines.
+**NIS2 transposition variation** matters for multinational enterprises. Member States transposed NIS2 by October 2024 with national variations in scope, enforcement authority, and penalty structures. Germany's BSIG amendment, France's *loi relative à la sécurité des systèmes d'information* transposition measures, and the Netherlands' *Cyberbeveiligingswet* create jurisdiction-specific enforcement contexts for the same EU directive. Programme regulatory overlays should annotate national transposition differences where they affect evidence requirements or timelines.
 
 **Table 3.1 — Regulatory Mapping Matrix (Selected Frameworks)**
 
@@ -194,11 +194,44 @@ For financial entities, DORA is **lex specialis** — it prevails over NIS2 wher
 | ASD guidance | Australia | Yes — cease traditional PKC by 2030 | Australian government | Crypto transition plan |
 | NERC CIP | US/Canada (energy) | No — implicit via NIST | BES Cyber System operators | CIP compliance evidence |
 
+**Figure 3.2 — Global Regulatory Convergence Map**
+
+```
+                    ┌──────────────────────────────────────────┐
+                    │     STATE OF THE ART (post-Aug 2024)      │
+                    │  NIST FIPS 203–205 · NIST IR 8547 · ENISA │
+                    └────────────────────┬─────────────────────┘
+                                         │
+         ┌───────────────────────────────┼───────────────────────────────┐
+         │                               │                               │
+         ▼                               ▼                               ▼
+┌─────────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│  US FEDERAL     │           │  EU FRAMEWORK   │           │  NATIONAL       │
+│  NSM-10 · IR    │           │  DORA · NIS2    │           │  UK NCSC · ASD  │
+│  8547 · CNSA    │           │  GDPR Art. 32   │           │  · FINMA · CSA  │
+│  2.0 · CISA     │           │                 │           │                 │
+└────────┬────────┘           └────────┬────────┘           └────────┬────────┘
+         │                               │                               │
+         └───────────────────────────────┼───────────────────────────────┘
+                                         ▼
+                    ┌──────────────────────────────────────────┐
+                    │   COMMON EVIDENCE STANDARD (5 elements)   │
+                    │  Documented · Risk-based · Current ·       │
+                    │  Operational · Honest gaps documented    │
+                    └────────────────────┬─────────────────────┘
+                                         ▼
+                    ┌──────────────────────────────────────────┐
+                    │        PQC GOVERNANCE STACK               │
+                    │  Strategic → Programme → Policy →        │
+                    │  Operational → Assurance                 │
+                    └──────────────────────────────────────────┘
+```
+
 ---
 
 ## 3.4 GDPR and Data Protection Law
 
-The General Data Protection Regulation does not mention quantum computing. Article 32 requires controllers and processors to implement **appropriate technical and organizational measures** ensuring a level of security appropriate to the risk, taking into account the state of the art.
+The General Data Protection Regulation does not mention quantum computing. Article 32 requires controllers and processors to implement **appropriate technical and organisational measures** ensuring a level of security appropriate to the risk, taking into account the state of the art.
 
 Data protection authorities have not, as of this writing, issued binding enforcement decisions specifically requiring PQC migration. The compliance logic is anticipatory:
 
@@ -224,7 +257,7 @@ GDPR compliance officers should coordinate with security teams to ensure that:
 
 European Data Protection Board guidance on security measures emphasizes proportionality and state of the art without prescribing algorithms. National data protection authorities — CNIL (France), ICO (UK, pre/post-Brexit relevance for UK GDPR), BfDI (Germany) — are expected to converge on supervisory expectations aligned with ENISA's NIS2 implementation guidance as quantum threat awareness increases in the supervisory community.
 
-Meridian's Data Protection Officer participated in the PQC steering committee from inception. The DPO's contribution was not cryptographic expertise. It was ensuring that programme artefacts satisfied GDPR documentation requirements and that migration prioritization aligned with data subject impact — highest sensitivity data first.
+Meridian's Data Protection Officer participated in the PQC steering committee from inception. The DPO's contribution was not cryptographic expertise. It was ensuring that programme artefacts satisfied GDPR documentation requirements and that migration prioritisation aligned with data subject impact — highest sensitivity data first.
 
 ---
 
@@ -253,7 +286,7 @@ Meridian's PCI re-certification cycle became a **binding constraint** on HSM fir
 
 ### United Kingdom
 
-NCSC guidance establishes that UK government organizations should complete PQC discovery and planning by 2028, with migration execution through 2035. The guidance applies to government directly and serves as supervisory reference for critical national infrastructure operators in the private sector.
+NCSC guidance establishes that UK government organisations should complete PQC discovery and planning by 2028, with migration execution through 2035. The guidance applies to government directly and serves as supervisory reference for critical national infrastructure operators in the private sector.
 
 Post-Brexit, UK regulatory alignment with EU DORA and NIS2 diverges. UK financial services are subject to Bank of England and PRA supervisory expectations that mirror DORA's direction on ICT risk without identical instruments. UK-headquartered multinationals like Meridian's hypothetical UK subsidiary must maintain regulatory overlays for both EU and UK supervisory regimes.
 
@@ -418,81 +451,30 @@ Meridian's mock examination identified Failure mode 5 before the real examinatio
 
 ## 3.11 Northfield Energy: Regulatory Context for Critical Infrastructure
 
-Northfield Energy operates primarily under NIS2 (as transposed in the United States through sector-specific frameworks) and NERC CIP. Unlike Meridian, Northfield does not have a single comprehensive financial regulation equivalent to DORA. Its regulatory landscape is **sector-fragmented**:
+Northfield Energy operates in the United States and is **not subject to NIS2** — an EU directive. Its regulatory landscape is sector-fragmented but converges on state-of-the-art cryptographic governance expectations:
 
 - **NERC CIP** for bulk electric system cyber systems
-- **TSA Security Directives** for pipeline operators (post-colonial pipeline)
+- **TSA Security Directives** for pipeline operators
 - **State public utility commission** cybersecurity reporting requirements
-- **NIS2-equivalent** expectations through CISA critical infrastructure guidance
+- **CISA Post-Quantum Cryptography Initiative** and sector ISAC guidance establishing NIST-aligned expectations for critical infrastructure
+
+Unlike Meridian, Northfield does not have a single comprehensive financial regulation equivalent to DORA. Supervisory expectations nonetheless require documented encryption policies, risk assessments, and evidence of migration planning — the same five-element evidence standard as EU frameworks, delivered through different instruments.
 
 Northfield's regulatory overlay mapped the same Governance Stack artefacts to each instrument. The CBOM satisfied NERC CIP evidence requirements for electronic access controls. The threat assessment (Chapter 2) satisfied TSA reporting on cyber risk. The migration plan aligned with CISA PQC initiative timelines.
 
-The regulatory diversity did not require regulatory diversity in programme structure. It required **annotation** — the same artefact, tagged with the regulatory instruments it satisfies.
+The regulatory diversity did not require programme diversity. It required **annotation** — the same artefact, tagged with the regulatory instruments it satisfies.
 
 ---
 
-## 3.12 International Standards: ISO, ETSI, and Industry Bodies
+## 3.12 International Standards, Insurance, and Contractual Risk
 
-Regulatory instruments reference "leading practices and standards" without always naming specific bodies. Enterprise compliance officers need a map of the international standards landscape and its relationship to NIST FIPS 203–205.
+Regulatory instruments reference "leading practices and standards" (ISO/IEC, ETSI, IETF) and create obligations beyond primary legislation — including cyber insurance questionnaires, contractual security exhibits, and litigation exposure for undocumented migration planning. **Appendix A** provides reference depth on these supplements. Enterprise compliance officers should ensure the regulatory overlay matrix (Appendix C) includes industry body publications and insurance renewal cycles where they create quasi-binding obligations.
 
-### ISO/IEC JTC 1 SC 27
-
-ISO/IEC JTC 1 Subcommittee 27 develops information security standards including cryptographic mechanisms. Work items are underway to incorporate ML-KEM and ML-DSA into ISO/IEC standards, aligning international normative references with NIST selections. Enterprises whose policies reference ISO/IEC 18033 (encryption algorithms) or ISO/IEC 14888 (digital signatures) should monitor SC 27 publications for PQC updates.
-
-ISO/IEC 27001:2022 Annex A control 8.24 (Use of cryptography) requires cryptographic controls consistent with organizational policies. An ISO 27001-certified organization whose cryptography policy does not address PQC migration faces a surveillance audit gap after FIPS finalization.
-
-### ETSI
-
-The European Telecommunications Standards Institute develops standards for telecommunications and PKI that EU regulators reference. ETSI TR 103 619 and related work items address quantum-safe cryptography for telecommunications infrastructure. Financial entities operating private telecommunications infrastructure (MPLS networks, dedicated WAN) should monitor ETSI guidance for protocol-level PQC requirements that may precede broader NIST IR 8547 timelines.
-
-### IETF
-
-The Internet Engineering Task Force specifies protocol-level PQC deployment through working groups including CFRG (Cryptographic Forum Research Group) and TLS working group extensions. Hybrid TLS constructions specified in IETF documents are the operational deployment format for ML-KEM in web and API contexts. Enterprise policies should reference IETF standards-track specifications for hybrid deployment, not proprietary implementations.
-
-### Industry-specific bodies
-
-**Payment Card Industry SSC** — evolving cryptographic requirements for card data environments.
-
-**SWIFT** — customer security programme requirements for financial messaging.
-
-**GSMA** — mobile network operator security requirements affecting IoT and SIM-based authentication.
-
-**IEC 62443** — industrial automation and control system security, relevant to Northfield Energy's OT environment.
-
-Each body publishes on independent timelines. The regulatory overlay (Section 3.9) should include industry body publications where they create binding or quasi-binding obligations for the enterprise's sector.
+Apex Defense Technologies encountered contractual flow-down early: a 2026 DoD subcontract amendment required CNSA 2.0 alignment evidence before option-year exercise — eighteen months before the enterprise's internal corporate IT migration plan would have produced equivalent documentation. Apex's regulatory overlay now tags **contractual instruments** alongside statutory ones, with equal weight in horizon monitoring.
 
 ---
 
-## 3.13 Insurance, Contractual, and Litigation Risk
-
-Regulatory compliance is not the only driver for documented PQC programmes. Insurance, contractual, and litigation contexts create additional incentives.
-
-### Cyber insurance
-
-Cyber insurance underwriters are beginning to include cryptography and quantum readiness questions in renewal applications. Questions typically ask whether the organization has conducted cryptographic inventory, whether a PQC migration plan exists, and whether long-retention data is protected by quantum-vulnerable algorithms. Organizations that cannot answer affirmatively may face premium increases, coverage exclusions for quantum-related losses, or renewal denial.
-
-The insurance market's treatment of quantum risk is evolving. Documented PQC programmes — even incomplete ones — demonstrate risk management maturity that underwriters reward. Absence of any programme demonstrates the opposite.
-
-### Contractual obligations
-
-Enterprise contracts increasingly include:
-
-- **Security exhibit requirements** referencing NIST standards
-- **Data processing agreements** requiring state-of-the-art encryption
-- **Supply chain security clauses** requiring cryptographic inventory (CBOM/SBOM)
-- **Government contract flow-downs** referencing CNSA 2.0 or FedRAMP requirements
-
-Meridian's review of its top fifty vendor contracts identified twelve with encryption language that would be difficult to satisfy after NIST IR 8547 disallowance without migration. Three contracts required immediate renegotiation. Procurement integration (Chapter 16) addresses this systematically.
-
-### Litigation and duty of care
-
-While no major litigation establishing quantum-related duty of care had been decided at the time of this writing, the legal theory is straightforward: organizations that knew or should have known of quantum threat to long-retention data, and that failed to take reasonable migration steps, may face negligence claims when breaches occur. Documented threat assessment and migration planning establish the reasonable care defence. Absence of documentation does not.
-
-General Counsel Thomas Bergström's contribution to Meridian's programme was not limited to DORA compliance. It included a litigation risk memo recommending programme chartering as a duty-of-care measure — independent of regulatory deadline pressure.
-
----
-
-## 3.14 Regulatory Timeline Overlay
+## 3.13 Regulatory Timeline Overlay
 
 Enterprises operating across jurisdictions benefit from a single visual overlay of regulatory milestones. The following table consolidates the instruments discussed in this chapter into a planning reference. Dates are policy anchors subject to revision; monitor authoritative sources for updates.
 
@@ -516,7 +498,7 @@ Programme planning should position the enterprise to meet the **most aggressive 
 
 ---
 
-## 3.15 Regulatory Engagement Strategy
+## 3.14 Regulatory Engagement Strategy
 
 Compliance is not passive. Enterprises can shape supervisory expectations through structured regulatory engagement — within the bounds of appropriate regulatory relations practice.
 
@@ -536,7 +518,7 @@ Meridian's Head of Regulatory Affairs conducted a non-examination briefing with 
 
 ### Industry association participation
 
-Sector trade associations — banking federations, energy ISACs, defense industry groups — increasingly develop collective responses to PQC regulatory questions. Participation provides:
+Sector trade associations — banking federations, energy ISACs, defence industry groups — increasingly develop collective responses to PQC regulatory questions. Participation provides:
 
 - Visibility into peer supervisory experiences
 - Collective advocacy for reasonable transition timelines
@@ -549,13 +531,13 @@ NIST IR 8547 and similar instruments accept public comment. Enterprises with spe
 
 ---
 
-## 3.16 GlobalSync Logistics: Multinational Regulatory Complexity
+## 3.15 GlobalSync Logistics: Multinational Regulatory Complexity
 
-GlobalSync Logistics operates in forty countries with varying data protection, cybersecurity, and sector-specific requirements. Its regulatory overlay is the most complex of the four teaching organizations.
+GlobalSync Logistics operates in forty countries with varying data protection, cybersecurity, and sector-specific requirements. Its regulatory overlay is the most complex of the four teaching organisations.
 
 **EU operations:** GDPR Article 32, NIS2 (as transposed in markets where GlobalSync qualifies as important entity), and customer contractual requirements referencing EU data protection standards.
 
-**United States:** State privacy laws (CCPA/CPRA and successors), federal contractor requirements for logistics providers serving defense customers, and SOC 2 Type II examination expectations from enterprise customers.
+**United States:** State privacy laws (CCPA/CPRA and successors), federal contractor requirements for logistics providers serving defence customers, and SOC 2 Type II examination expectations from enterprise customers.
 
 **Asia-Pacific:** Singapore CSA guidance, Japan APPI requirements, Australia's Privacy Act and ASD guidance for government-connected tenants.
 
@@ -567,7 +549,7 @@ This approach scales. The alternative — separate compliance programmes per jur
 
 ---
 
-## 3.17 Auditor and Assessor Engagement
+## 3.16 Auditor and Assessor Engagement
 
 External auditors — financial statement auditors reviewing IT controls, PCI Qualified Security Assessors, ISO 27001 certification bodies, SOC 2 examination firms — are beginning to include cryptographic governance in assessment scope. Internal programmes should prepare for external assessment by understanding what each assessor type evaluates.
 
@@ -575,7 +557,7 @@ External auditors — financial statement auditors reviewing IT controls, PCI Qu
 
 **PCI QSA:** Evaluate cardholder data environment cryptographic configurations against PCI DSS Requirements 3 and 4. Expect architecture diagrams and algorithm inventories. Quantum-vulnerable PKC in the CDE will attract scrutiny even before PCI SSC mandates PQC.
 
-**ISO 27001 certification bodies:** Evaluate Annex A 8.24 implementation against the organization's stated cryptography policy. A policy referencing only pre-2024 algorithms is a nonconformity.
+**ISO 27001 certification bodies:** Evaluate Annex A 8.24 implementation against the organisation's stated cryptography policy. A policy referencing only pre-2024 algorithms is a nonconformity.
 
 **SOC 2 examination firms:** Evaluate Trust Services Criteria CC6 (Logical and Physical Access) and CC7 (System Operations) including encryption controls described in system description documents.
 
@@ -593,23 +575,7 @@ Meridian shared its Governance Stack artefacts with its external financial audit
 
 ---
 
-## 3.18 The Relationship Between Part I and the Remainder of This Book
-
-Part I has established three foundations:
-
-**Chapter 1 — The synchronization problem.** Migration is an enterprise programme requiring cross-functional governance, not a security project. The ARCS Framework and PQ-ADAPT maturity model provide the organizational structure.
-
-**Chapter 2 — Threat models.** HNDL and confidentiality horizons drive migration priority. The TRADE Threat dimension converts threat analysis into scored, auditable inputs. Sector calibration modifies weights.
-
-**Chapter 3 — Regulatory landscape.** Compliance requires documented governance artefacts, not algorithm deployment alone. The PQC Governance Stack structures the evidence package. One programme serves multiple regulatory overlays.
-
-Part II translates NIST standards into architect-level literacy. Part III builds the Register — CBOM and Cryptographic Dependency Graph. Part IV builds Capability — agility, hybrids, protocols, PKI, keys. Part V builds Synchronize — governance, procurement, supply chain, validation. Part VI proves the programme through sector playbooks and case study resolution.
-
-Each part depends on Part I's foundations. An enterprise that begins Part II's standards analysis without Part I's programme framing will select algorithms before understanding dependencies. An enterprise that begins Part III's inventory without Part II's standards literacy will inventory without knowing what to inventory for. The learning progression is deliberate.
-
----
-
-## 3.19 DORA Deep Dive: Article-by-Article PQC Relevance
+## 3.17 DORA Deep Dive: Article-by-Article PQC Relevance
 
 For financial entities building regulatory overlays, a granular mapping of DORA articles to PQC programme activities prevents gaps in compliance coverage.
 
@@ -631,15 +597,15 @@ Meridian's compliance team maintained this article-level mapping as a living doc
 
 ### Penalties, enforcement, and proportionality
 
-Regulatory frameworks carry enforcement mechanisms that compliance officers must understand when prioritizing programme investment.
+Regulatory frameworks carry enforcement mechanisms that compliance officers must understand when prioritising programme investment. **Penalty ceilings vary by violation category, entity type, and national transposition.** Legal counsel should verify applicable maxima for the entity's jurisdiction and supervisory authority. The following summaries are planning anchors, not legal advice.
 
-**DORA:** Competent authorities may impose administrative penalties up to 1% of average daily worldwide turnover for certain ICT risk management failures. Critical ICT third-party provider penalties may reach €10 million or 5% of daily worldwide turnover. Cryptographic control deficiencies contributing to broader ICT risk management failures fall within this enforcement scope.
+**DORA (Regulation (EU) 2022/2554, Articles 99–101):** Competent authorities may impose administrative penalties for ICT risk management failures. Maximum penalties differ between financial entities and critical ICT third-party service providers, and between violation categories. Cryptographic control deficiencies that contribute to broader ICT risk management failures may fall within enforcement scope when supervisory review identifies systemic governance gaps — not merely the absence of production PQC deployment during the transition period.
 
-**NIS2:** Member States set maximum penalties — essential entities face minimum maximums of €10 million or 2% of global annual turnover; important entities face €7 million or 1.4%. National transposition varies.
+**NIS2 (Directive (EU) 2022/2555, Article 34):** Member States set maximum penalties within EU minimum floors — essential entities face higher ceilings than important entities. National transposition varies. Consult national implementing legislation.
 
-**GDPR:** Article 83 permits fines up to €20 million or 4% of global annual turnover. Quantum-vulnerable encryption for long-retention personal data is unlikely to be the primary enforcement trigger before a breach occurs, but inadequate Article 32 measures may aggravate penalties following a quantum-enabled disclosure event.
+**GDPR (Article 83):** Fines are proportionate to infringement severity. Quantum-vulnerable encryption for long-retention personal data is unlikely to be the primary enforcement trigger before a breach occurs, but inadequate Article 32 measures may aggravate penalties following a disclosure event.
 
-Enforcement for PQC non-compliance before CRQC arrival is expected to be **progressive** — supervisory engagement, remediation orders, and penalty only for sustained non-compliance after reasonable transition periods. This does not justify deferral. It defines the enforcement trajectory that documented programmes navigate successfully and undocumented programmes do not.
+Enforcement for PQC readiness before CRQC arrival is expected to be **progressive** — supervisory engagement, remediation orders, and penalties typically following sustained non-compliance after reasonable transition periods, not the mere absence of completed migration. This does not justify deferral. It defines the enforcement trajectory that documented programmes navigate successfully.
 
 Proportionality is the compliance officer's ally. A financial entity that demonstrates documented threat assessment, current encryption policy, complete certificate register, credible migration plan, and honest gap reporting is exercising the "flexible approach based on risk mitigation" that DORA Recital 9 describes. An entity with none of these artefacts is not.
 
@@ -667,7 +633,23 @@ Meridian assigned regulatory horizon monitoring to Thomas Bergström's team with
 
 ---
 
-## 3.20 Chapter Summary
+> **Dependency Alert**
+>
+> **NIS2 is an EU instrument.** US critical infrastructure operators — including Northfield Energy — are not subject to NIS2 regardless of sector parallels. Map US obligations through NERC CIP, TSA directives, state utility commissions, and CISA sector guidance. Multinational enterprises need jurisdiction-specific overlays, not a single regulation assumed globally.
+
+---
+
+## 3.18 Apply in Your Organisation
+
+1. **Build one programme with a regulatory overlay matrix** — not parallel compliance silos per jurisdiction.
+2. **Map Governance Stack artefacts to your top five regulatory instruments** using Table 3.3 as a template.
+3. **Rehearse six supervisory questions** from §3.7 before your first DORA- or NIS2-focused examination.
+4. **Assign regulatory horizon monitoring** with quarterly steering committee reporting.
+5. **Document honest gaps** between policy target state and CBOM current state — supervisors respond better to credible remediation plans than to overclaimed compliance.
+
+---
+
+## 3.19 Chapter Summary
 
 - Most regulations do not name PQC algorithms. They require state-of-the-art cryptographic governance that, after August 2024, necessarily includes a documented PQC trajectory.
 - U.S. federal framework: NSM-10 (2035 target), NIST IR 8547 (2030/2035 deprecation/disallowance), CNSA 2.0 (binding for NSS and defense industrial base), FedRAMP/CMMC assessment surfaces.
@@ -684,12 +666,12 @@ Meridian assigned regulatory horizon monitoring to Thomas Bergström's team with
 
 *Chapter 3 — References*
 
-- Commission Delegated Regulation (EU) 2024/1532 (DORA RTS on ICT risk management).
-- European Union Agency for Cybersecurity. (2025). NIS2 Implementation Guidance.
-- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to Post-Quantum Cryptography Standards.
-- National Security Agency. (2022–2023). Commercial National Security Algorithm Suite 2.0.
-- National Security Memorandum 10 (2022).
-- Regulation (EU) 2022/2554 (DORA).
-- Directive (EU) 2022/2555 (NIS2).
-- Regulation (EU) 2016/679 (GDPR).
-- PCI Security Standards Council. (2022). PCI DSS v4.0.
+- Commission Delegated Regulation (EU) 2024/1532 of 19 October 2024 supplementing Regulation (EU) 2022/2554 with regard to regulatory technical standards for ICT risk management. *Official Journal of the European Union*, L 2024/1532.
+- Directive (EU) 2022/2555 of the European Parliament and of the Council on measures for a high common level of cybersecurity across the Union (NIS2). *Official Journal of the European Union*, L 333.
+- European Union Agency for Cybersecurity. (2025). *NIS2 implementation guidance*. https://www.enisa.europa.eu/
+- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
+- National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
+- National Security Memorandum 10 (2022). The White House.
+- PCI Security Standards Council. (2022). *Payment Card Industry Data Security Standard v4.0*. https://www.pcisecuritystandards.org/
+- Regulation (EU) 2016/679 of the European Parliament and of the Council on the protection of natural persons with regard to the processing of personal data (GDPR). *Official Journal of the European Union*, L 119.
+- Regulation (EU) 2022/2554 of the European Parliament and of the Council on digital operational resilience for the financial sector (DORA). *Official Journal of the European Union*, L 333.

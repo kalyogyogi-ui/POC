@@ -17,7 +17,7 @@ The meeting's most contentious moment came when payment operations asked whether
 
 Elena left the meeting with a whiteboard photograph and no budget approval. She had, however, the material for a board conversation that would not mention algorithms at all. It would describe a synchronization problem — and request authority to solve it as a programme.
 
-This chapter establishes why that conclusion generalizes to every enterprise confronting post-quantum cryptography — and why the organizational response must be a programme, not a project.
+This chapter establishes why that conclusion generalizes to every enterprise confronting post-quantum cryptography — and why the organisational response must be a programme, not a project.
 
 ---
 
@@ -33,9 +33,9 @@ That posture became untenable on 13 August 2024, when the U.S. Secretary of Comm
 - **FIPS 204** — Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
 - **FIPS 205** — Stateless Hash-Based Digital Signature Algorithm (SLH-DSA)
 
-These are not draft candidates. They are final standards specifying algorithms derived from the CRYSTALS-Kyber, CRYSTALS-Dilithium, and SPHINCS+ submissions respectively. NIST's guidance is explicit: organizations should begin migrating now. Cybersecurity products, services, and protocols that depend on quantum-vulnerable public-key cryptography — RSA, finite-field and elliptic-curve Diffie-Hellman, ECDSA, EdDSA — require identification, planning, and replacement.
+These are not draft candidates. They are final standards specifying algorithms derived from the CRYSTALS-Kyber (now ML-KEM), CRYSTALS-Dilithium (now ML-DSA), and SPHINCS+ (now SLH-DSA) submissions respectively. NIST's guidance is explicit: organisations should begin migrating now. Cybersecurity products, services, and protocols that depend on quantum-vulnerable public-key cryptography — RSA, finite-field and elliptic-curve Diffie-Hellman, ECDSA, EdDSA — require identification, planning, and replacement.
 
-The finalization matters for reasons beyond algorithm selection. **Procurement language changes.** Federal agencies and their contractors must reference approved standards, not candidate algorithms. **Vendor liability shifts.** Products marketed as "PQC-ready" using non-standard implementations face increasing scrutiny from enterprise buyers and assessors. **Regulatory interpretation hardens.** Supervisory guidance that previously treated quantum threat as forward-looking now references finalized standards as the definition of state-of-the-art practice. **Insurance and contractual risk allocation adjusts.** Cyber insurance questionnaires and supply-chain security clauses increasingly ask whether organizations have migration programmes aligned with NIST transition guidance.
+The finalization matters for reasons beyond algorithm selection. **Procurement language changes.** Federal agencies and their contractors must reference approved standards, not candidate algorithms. **Vendor liability shifts.** Products marketed as "PQC-ready" using non-standard implementations face increasing scrutiny from enterprise buyers and assessors. **Regulatory interpretation hardens.** Supervisory guidance that previously treated quantum threat as forward-looking now references finalized standards as the definition of state-of-the-art practice. **Insurance and contractual risk allocation adjusts.** Cyber insurance questionnaires and supply-chain security clauses increasingly ask whether organisations have migration programmes aligned with NIST transition guidance.
 
 The standards answer a question the industry had deferred: *which algorithms*. They do not answer the questions enterprises actually face:
 
@@ -58,7 +58,7 @@ Enterprises operating in multiple jurisdictions should not wait for perfect inte
 
 Enterprise security leaders have navigated cryptographic transitions before. SHA-1 deprecation. SSL and early TLS retirement. 1024-bit RSA phase-out. TLS 1.3 adoption. Each followed a recognizable pattern: a standards body declares an algorithm weak or deprecated; vendors release updates; security teams schedule upgrades within maintenance windows; compliance frameworks adjust audit checklists.
 
-Post-quantum migration resembles none of these closely enough to reuse their playbooks. Understanding where the analogies hold — and where they fail — prevents the most common category of migration planning error: applying a timeline and organizational model from a structurally simpler transition.
+Post-quantum migration resembles none of these closely enough to reuse their playbooks. Understanding where the analogies hold — and where they fail — prevents the most common category of migration planning error: applying a timeline and organisational model from a structurally simpler transition.
 
 **Table 1.1 — Cryptographic Transition Comparison Matrix**
 
@@ -115,7 +115,7 @@ This asymmetry means migration urgency is driven as much by **data longevity** a
 >
 > *"We completed TLS 1.3 migration in eighteen months. PQC should be similar."*
 >
-> TLS 1.3 migration replaced one protocol version with another within a bounded client-server negotiation framework. The cryptographic algorithms within TLS 1.3 remained classical. PQC migration replaces the mathematical foundations of asymmetric cryptography across the entire estate, with larger parameters, hybrid interim requirements, and dependencies that extend into firmware, HSMs, and partner ecosystems. The organizational model that succeeded for TLS 1.3 — a network engineering project with security oversight — will fail for PQC.
+> TLS 1.3 migration replaced one protocol version with another within a bounded client-server negotiation framework. The cryptographic algorithms within TLS 1.3 remained classical. PQC migration replaces the mathematical foundations of asymmetric cryptography across the entire estate, with larger parameters, hybrid interim requirements, and dependencies that extend into firmware, HSMs, and partner ecosystems. The organisational model that succeeded for TLS 1.3 — a network engineering project with security oversight — will fail for PQC.
 
 ---
 
@@ -127,7 +127,7 @@ The central argument of this book is stated plainly:
 
 A cryptographic upgrade replaces one algorithm with a better one within a bounded system. The security team controls the system. The vendor provides the patch. The change window is scheduled. Success is measured by deployment completion within the system boundary.
 
-A synchronization problem arises when the value of a change depends on coordinated action across systems, organizations, and time horizons that no single team controls. Success is measured by ecosystem alignment, not deployment completion in isolation.
+A synchronization problem arises when the value of a change depends on coordinated action across systems, organisations, and time horizons that no single team controls. Success is measured by ecosystem alignment, not deployment completion in isolation.
 
 ### Meridian's dependency chain
 
@@ -142,7 +142,7 @@ Consider Meridian's HSM finding in detail. Migrating to a post-quantum firmware 
 7. Internal change management to schedule firmware updates across 340 payment terminals without transaction disruption
 8. Operations staff to be trained on new certificate validation behaviour in monitoring systems
 
-Meridian can complete step 2 on its own schedule. It cannot complete step 1 without the vendor. It cannot complete steps 3–4 without partners. It cannot complete step 6 without a programme that predates the immediate technical finding. Steps 7–8 require organizational capacity that competes with every other operational priority.
+Meridian can complete step 2 on its own schedule. It cannot complete step 1 without the vendor. It cannot complete steps 3–4 without partners. It cannot complete step 6 without a programme that predates the immediate technical finding. Steps 7–8 require organisational capacity that competes with every other operational priority.
 
 Every item on that list is a **dependency**. Dependencies compose into **chains**. Chains have **blocking nodes** — assets whose delayed migration prevents all downstream transitions. The HSM firmware signing certificate was not the most visible cryptographic asset in Meridian's estate. It was the most blocking.
 
@@ -155,6 +155,12 @@ GlobalSync's platform team deployed hybrid TLS on its public API gateway in a we
 Production rollout stalled for eleven months. The stall had nothing to do with TLS. Three enterprise tenants connected to GlobalSync's API through mutual TLS authentication with certificate chains signed by a partner CA that had not published a post-quantum roadmap. Two tenants operated in jurisdictions where data residency requirements mandated encryption in transit using algorithms approved by national authorities who had not yet recognized ML-KEM. One tenant's security contract required thirty days' notice for any cryptographic parameter change — and treated key size increases as material contract amendments requiring legal review.
 
 GlobalSync's platform was ready. The ecosystem was not. The pilot measured technical feasibility. It did not measure synchronization feasibility.
+
+### Apex Defense Technologies: policy-driven synchronization
+
+Apex Defense Technologies encountered a different synchronization constraint: **mandate collision**. As a defence prime contractor, Apex operates under CNSA 2.0 milestones for National Security System workloads, NIST IR 8547 guidance for corporate IT, CMMC assessment requirements for controlled unclassified information, and customer flow-down clauses from multiple agencies — each with overlapping but non-identical cryptographic requirements.
+
+Apex's initial PQC programme attempted to satisfy each mandate through separate workstreams. CMMC compliance, Zero Trust implementation, and PQC migration converged on the PKI engineering team, which became the bottleneck for all three. Consolidation under a single cryptographic governance function — with CNSA 2.0 as the floor for classified-adjacent systems and NIST IR 8547 for commercial IT — reduced timeline overlap by an estimated eighteen months. Apex's lesson complements Meridian's and GlobalSync's: synchronization failures are not only vendor and partner problems. They are also **internal mandate fragmentation** problems.
 
 > **Migration Moment**
 >
@@ -221,7 +227,7 @@ PQC migration programmes that begin above the waterline — upgrading external T
 
 Part III of this book introduces the **Cryptographic Dependency Graph (CDG)** — a methodology for making the iceberg explicit, machine-readable where possible, and actionable in migration wave planning. The CDG assigns edge types — `implements`, `trusts`, `terminates`, `signs`, `inherits` — to relationships between cryptographic assets. Blocking nodes are identified by graph analysis: nodes with high out-degree whose migration status gates the largest subgraph of dependent systems.
 
-For now, the essential point is this: the iceberg's shape means that **discovery and dependency mapping precede prioritization**. Always.
+For now, the essential point is this: the iceberg's shape means that **discovery and dependency mapping precede prioritisation**. Always.
 
 > **Dependency Alert**
 >
@@ -231,7 +237,7 @@ For now, the essential point is this: the iceberg's shape means that **discovery
 
 ## 1.5 Programme Versus Project
 
-The distinction between programme and project is organizational, not semantic. Confusing the two is the single most common cause of PQC migration failure in enterprises that are otherwise technically competent.
+The distinction between programme and project is organisational, not semantic. Confusing the two is the single most common cause of PQC migration failure in enterprises that are otherwise technically competent.
 
 A **project** has a defined deliverable, a bounded scope, a budget, and an end date. Success is measured by on-time, on-budget delivery of the deliverable. A TLS hybrid pilot is a project. A PKI certificate profile update is a project. A library upgrade to OpenSSL 3.5 is a project.
 
@@ -250,7 +256,7 @@ A **programme** has a strategic objective, evolving scope, multi-year funding, a
 | Vendor engagement | Procurement at purchase | Continuous roadmap assessment |
 | Reporting | Project status to CISO | Programme dashboard to board risk committee |
 
-Enterprises that charter PQC as a project create an organizational antibody response when the project "completes" but the estate remains vulnerable. The project team disbands. The budget closes. The blocking dependencies remain. The board receives a completion report that is technically accurate and strategically misleading.
+Enterprises that charter PQC as a project create an organisational antibody response when the project "completes" but the estate remains vulnerable. The project team disbands. The budget closes. The blocking dependencies remain. The board receives a completion report that is technically accurate and strategically misleading.
 
 Programme chartering — developed in Chapter 15 — establishes a migration authority with decision rights, a multi-year funding envelope, and reporting obligations that survive individual project completions. Meridian's programme charter, approved eight months after Elena's HSM finding, defined a five-year initial phase with explicit maturity targets, not a single deliverable.
 
@@ -258,7 +264,7 @@ Programme chartering — developed in Chapter 15 — establishes a migration aut
 
 ## 1.6 Who Must Be in the Room
 
-PQC migration fails organizationally when it is owned exclusively by the security team. The synchronization problem crosses functional boundaries. The following stakeholder map defines the minimum coalition for a credible programme.
+PQC migration fails organisationally when it is owned exclusively by the security team. The synchronization problem crosses functional boundaries. The following stakeholder map defines the minimum coalition for a credible programme.
 
 **Table 1.4 — PQC Programme Stakeholder Map**
 
@@ -303,7 +309,7 @@ Enterprise security retains institutional memory of cryptographic transitions. T
 
 **ECC introduction (2005–2015)** taught enterprises that algorithm agility in libraries enables faster transition. The lesson applies strongly: crypto-agility is the most valuable architectural investment an enterprise can make before PQC migration begins. The limit: ECC was adopted because it was faster and smaller than RSA. PQC algorithms are larger and slower — agility must accommodate parameter growth, not just algorithm substitution.
 
-The meta-lesson: **prior migrations succeeded when the enterprise controlled the dependency graph.** PQC migration is the first enterprise cryptographic transition where the dependency graph extends comprehensively beyond organizational boundaries.
+The meta-lesson: **prior migrations succeeded when the enterprise controlled the dependency graph.** PQC migration is the first enterprise cryptographic transition where the dependency graph extends comprehensively beyond organisational boundaries.
 
 ---
 
@@ -311,7 +317,7 @@ The meta-lesson: **prior migrations succeeded when the enterprise controlled the
 
 This book organizes its guidance around four interlocking enterprise capabilities. Together they form the **ARCS Framework** — Awareness, Register, Capability, and Synchronize.
 
-**Awareness** is the organizational understanding that PQC migration is a programme with a decade-scale horizon, driven by threat asymmetry and regulatory forcing functions, not by vendor product announcements. Awareness produces the board narrative, the risk register entry, and the programme charter. Part I of this book establishes Awareness.
+**Awareness** is the organisational understanding that PQC migration is a programme with a decade-scale horizon, driven by threat asymmetry and regulatory forcing functions, not by vendor product announcements. Awareness produces the board narrative, the risk register entry, and the programme charter. Part I of this book establishes Awareness.
 
 **Register** is the maintained, authoritative inventory of cryptographic assets — algorithms, keys, protocols, libraries, certificates, and their deployment contexts — extended with dependency relationships. The Cryptographic Bill of Materials (CBOM), grounded in the CycloneDX specification, is the technical foundation of the Register. Part III builds the Register.
 
@@ -339,7 +345,7 @@ Meridian Mutual Bank reached Level 2 at the end of its twelve-month Phase 1. It 
 
 The board does not need to understand lattice cryptography. It needs to understand three propositions that justify programme investment:
 
-**Proposition 1: The threat timeline is asymmetric.** Adversaries can collect encrypted data today and decrypt it later. Data the organization must protect for decades is already at risk. This is not speculative. It is the operating model of sophisticated threat actors against high-value targets.
+**Proposition 1: The threat timeline is asymmetric.** Adversaries can collect encrypted data today and decrypt it later. Data the organisation must protect for decades is already at risk. This is not speculative. It is the operating model of sophisticated threat actors against high-value targets.
 
 **Proposition 2: Migration is a multi-year programme, not a project.** Industry analysis and historical precedent support 5–15+ year timelines for comprehensive migration. Starting now aligns with regulatory guidance. Starting in 2030 does not.
 
@@ -360,31 +366,17 @@ Elena's first board presentation on PQC migration did not mention ML-KEM. It pre
 
 ---
 
-## 1.10 What This Book Is and Is Not
-
-This book is a practitioner reference for security leaders, enterprise architects, cryptographic engineers, and compliance officers who must design, govern, and evidence a post-quantum cryptographic migration programme.
-
-It is **not** a mathematics textbook. FIPS 203, 204, and 205 are treated as inputs — authoritative algorithm specifications that inform architectural decisions — not as content to reproduce. Readers who need lattice reduction tutorials or security proof techniques should consult the academic literature, including Stinson's forthcoming *Primer on Post-Quantum Cryptography*.
-
-It is **not** a vendor guide. Product names appear only where necessary for interoperability illustration. No vendor roadmap is endorsed. The frameworks in this book are designed to evaluate vendor claims, not repeat them.
-
-It is **not** a quantum computing primer. The book assumes the reader accepts that cryptographically relevant quantum computers pose a credible long-term threat to RSA, DH, and ECC. It does not forecast quantum hardware timelines beyond what is necessary for migration planning.
-
-It **is** a source of original enterprise methodologies: the Cryptographic Dependency Graph, the TRADE prioritization engine, the Hybrid Lifecycle Model, the PQC Governance Stack, and the Sector Overlay Matrix. These frameworks are designed for this book. They are not adapted consulting methodologies or repackaged standards documents.
-
----
-
-## 1.11 The Programme Horizon
+## 1.10 The Programme Horizon
 
 Return to Meridian Mutual Bank. Elena's programme, chartered six months after the HSM finding, did not begin with algorithm selection. It began with a board-approved migration authority, a cross-functional steering committee, and a twelve-month Phase 1 scope limited to cryptographic discovery and dependency mapping across the card-processing and retail banking estates.
 
-By the end of Phase 1, Meridian had identified 14,200 cryptographic assets, of which 38% resided in third-party systems with incomplete visibility. The HSM firmware signing chain was one of forty-seven blocking nodes in the dependency graph. The external TLS upgrade that Elena's predecessor had scoped as "the PQC project" ranked fourteenth in the TRADE prioritization analysis.
+By the end of Phase 1, Meridian had identified 14,200 cryptographic assets, of which 38% resided in third-party systems with incomplete visibility. The HSM firmware signing chain was one of forty-seven blocking nodes in the dependency graph. The external TLS upgrade that Elena's predecessor had scoped as "the PQC project" ranked fourteenth in the TRADE prioritisation analysis.
 
-Phase 1 cost approximately €1.2 million — primarily staffing, tooling, and external consulting for CBOM establishment. Phase 2, scoped for algorithm standards definition and agility requirements in the systems development lifecycle, was budgeted at €2.4 million over eighteen months. Total five-year programme estimate: €11–14 million, presented to the board as comparable to a medium-scale regulatory compliance programme, not a security tool purchase.
+Phase 1 cost approximately **€1.2 million** (*illustrative programme economics modeled for a bank of Meridian's scale*) — primarily staffing, tooling, and external consulting for CBOM establishment. Phase 2 was budgeted at **€2.4 million** over eighteen months. Total five-year programme estimate: **€11–14 million**, presented to the board as comparable to a medium-scale regulatory compliance programme, not a security tool purchase. These figures are planning anchors for board discussion, not industry benchmarks.
 
-Meridian's story continues throughout this book. It is joined by three other fictional organizations — Northfield Energy Systems, Apex Defense Technologies, and GlobalSync Logistics — each illustrating different constraints, sectors, and failure modes. They are composites drawn from patterns observed across financial services, critical infrastructure, defense industrial base, and multinational SaaS environments. They are not case studies in the consulting sense. They are teaching instruments.
+Meridian's story continues throughout this book alongside Northfield Energy Systems, Apex Defense Technologies, and GlobalSync Logistics — introduced in the Part I Introduction.
 
-The programme horizon for organizations like Meridian is measured in years, not quarters. NIST's transition guidance, articulated in IR 8547, anchors deprecation of quantum-vulnerable algorithms after 2030 and disallowance after 2035. NSA's CNSA 2.0 suite imposes binding milestones for National Security Systems on a comparable timeline. The EU's Digital Operational Resilience Act requires financial entities to maintain encryption policies responsive to developments in cryptanalysis — language that regulators and auditors are increasingly interpreting as requiring a documented PQC trajectory.
+The programme horizon for organisations like Meridian is measured in years, not quarters. NIST's transition guidance, articulated in IR 8547, anchors deprecation of quantum-vulnerable algorithms after 2030 and disallowance after 2035. NSA's CNSA 2.0 suite imposes binding milestones for National Security Systems on a comparable timeline. The EU's Digital Operational Resilience Act requires financial entities to maintain encryption policies responsive to developments in cryptanalysis — language that regulators and auditors are increasingly interpreting as requiring a documented PQC trajectory.
 
 These timelines are not deadlines that permit inaction until 2029. They are policy anchors around which a programme must be structured. An enterprise that begins discovery in 2026, architectures agility requirements in 2027, and executes production migration from 2028 onward is aligned with the guidance. An enterprise that begins in 2030 is not.
 
@@ -406,27 +398,13 @@ Migration programme scale varies with estate complexity, not headcount alone. A 
 
 These indicators inform staffing and budget, not urgency. A small enterprise with thirty-year archival data faces the same HNDL threat as a large one. A large enterprise with mature PKI and crypto-agile development practices may migrate faster than a small one with embedded legacy dependencies.
 
-### The four teaching organizations
-
-This book follows four fictional organizations whose constraints span the enterprise landscape:
-
-**Meridian Mutual Bank** — 8,000 employees, retail and commercial banking, EU-headquartered, DORA-regulated. Teaches vendor dependency, payment HSM constraints, and regulatory evidence under financial supervision.
-
-**Northfield Energy Systems** — 12,000 employees, gas transmission and distribution, US critical infrastructure. Teaches OT/IT convergence, long certificate validity, nation-state threat models, and operational continuity requirements.
-
-**Apex Defense Technologies** — 25,000 employees, defense prime contractor, CMMC and FedRAMP obligations. Teaches CNSA 2.0 alignment, classified/unclassified boundary management, and programme consolidation under competing mandates.
-
-**GlobalSync Logistics** — 3,500 employees, multinational SaaS platform, forty-country operations. Teaches cloud-native agility, tenant contractual constraints, cross-border compliance, and ecosystem synchronization at scale.
-
-Each organization reappears in case study threads, sector playbooks (Part VI), and worked examples. Their problems are specific. The underlying synchronization dynamics are universal.
-
 ---
 
-## 1.12 Cryptography as Invisible Infrastructure
+## 1.11 Cryptography as Invisible Infrastructure
 
 A contributing factor to the synchronization problem is that cryptography is **invisible infrastructure**. Unlike network firewalls or endpoint protection platforms, cryptographic components rarely have dedicated operational teams, executive dashboards, or line-item budgets. Cryptography is embedded — in libraries, in protocols, in hardware, in vendor appliances — and discovered only when something breaks or an assessor asks.
 
-Basescu et al., in their 2024 USENIX Security Symposium analysis of post-quantum deployment considerations, identify "cryptographic inventory gap" as the most consistent barrier to migration readiness across organizations of varying size and sector. The gap is not a tooling failure. It is an organizational visibility failure. Enterprises know how many servers they operate. They rarely know how many distinct cryptographic implementations those servers depend on, including transitive dependencies through shared libraries and container base images.
+Basescu et al., in their 2024 USENIX Security Symposium analysis of post-quantum deployment considerations, identify "cryptographic inventory gap" as the most consistent barrier to migration readiness across organisations of varying size and sector. The gap is not a tooling failure. It is an organisational visibility failure. Enterprises know how many servers they operate. They rarely know how many distinct cryptographic implementations those servers depend on, including transitive dependencies through shared libraries and container base images.
 
 This invisibility creates a planning trap. Executives ask "are we PQC ready?" Security leaders answer with pilot status or vendor roadmap summaries because those are the visible artefacts. The invisible estate — embedded firmware, partner integrations, legacy mainframe cryptographic modules — remains unassessed. The honest answer to "are we PQC ready?" before inventory completion is: **we do not know.**
 
@@ -434,13 +412,13 @@ The Register phase of ARCS exists to make cryptography visible. It is not a prel
 
 ### The National Cybersecurity Center of Excellence
 
-NIST's National Cybersecurity Center of Excellence (NCCoE) launched the Migration to Post-Quantum Cryptography project to demonstrate tools and practices for enterprise migration. The project focuses on discovery, prioritization, and interoperable deployment — explicitly acknowledging that migration is an enterprise coordination challenge, not an algorithm implementation exercise.
+NIST's National Cybersecurity Center of Excellence (NCCoE) launched the Migration to Post-Quantum Cryptography project to demonstrate tools and practices for enterprise migration. The project focuses on discovery, prioritisation, and interoperable deployment — explicitly acknowledging that migration is an enterprise coordination challenge, not an algorithm implementation exercise.
 
 Enterprises should monitor NCCoE publications for reference architectures and tooling guidance. They should not wait for NCCoE deliverables before beginning inventory. The NCCoE's own framing treats discovery as the immediate action. This book's Register methodology (Part III) is aligned with NCCoE's direction while providing the governance and sector overlays that reference implementations typically omit.
 
 ---
 
-## 1.13 PQC Migration and Zero Trust Modernization
+## 1.12 PQC Migration and Zero Trust Modernization
 
 Many enterprises are simultaneously executing Zero Trust architecture programmes — identity-centric access, micro-segmentation, continuous verification. PQC migration intersects with Zero Trust in ways that create both opportunity and contention.
 
@@ -448,13 +426,17 @@ Many enterprises are simultaneously executing Zero Trust architecture programmes
 
 **Contention:** Zero Trust and PQC programmes compete for the same teams — PKI engineering, identity architecture, network security — and the same budget envelopes. Enterprises that treat them as independent programmes will experience timeline extension from resource contention. Campbell's timeline analysis explicitly identifies interaction with broader security modernization as a timeline-extending factor.
 
-**Architect's Decision:** Integrate PQC agility requirements into Zero Trust architecture standards where both programmes are active. Do not sequence them serially unless resource constraints require it. If serial sequencing is unavoidable, prioritize the programme whose blocking dependencies are more severe — typically PQC for long-confidentiality data, Zero Trust for access control gaps. For most regulated enterprises in 2026, PQC inventory and agility requirements should be embedded in Zero Trust standards documents, not deferred until Zero Trust is "complete."
+**Architect's Decision:** Integrate PQC agility requirements into Zero Trust architecture standards where both programmes are active. Do not sequence them serially unless resource constraints require it. If serial sequencing is unavoidable, prioritise the programme whose blocking dependencies are more severe — typically PQC for long-confidentiality data, Zero Trust for access control gaps. For most regulated enterprises in 2026, PQC inventory and agility requirements should be embedded in Zero Trust standards documents, not deferred until Zero Trust is "complete."
 
-Apex Defense Technologies, introduced in later chapters, attempted to run CMMC compliance, Zero Trust implementation, and PQC migration as three independent programmes. The programmes converged at the PKI team, which became the bottleneck for all three. Consolidation under a single cryptographic governance function reduced timeline overlap by an estimated eighteen months — not by working faster, but by eliminating contradictory priorities assigned to the same engineers.
+See §1.3 for Apex's mandate-consolidation lesson in the synchronization context.
+
+> **Dependency Alert**
+>
+> Zero Trust programmes that modernise identity and certificate infrastructure create PQC migration prerequisites — and compete for the same engineering teams. Treat PQC agility requirements as a non-negotiable input to Zero Trust architecture standards, not a follow-on project.
 
 ---
 
-## 1.14 Common Failure Patterns
+## 1.13 Common Failure Patterns
 
 Reviewing PQC migration programmes across sectors reveals recurring failure patterns. Naming them explicitly helps security leaders recognize early warning signs before programmes stall.
 
@@ -464,7 +446,7 @@ Reviewing PQC migration programmes across sectors reveals recurring failure patt
 
 **Pattern 3: Vendor roadmap substitution.** The programme consists of reviewing vendor PQC roadmaps and marking products "on track." No contractual requirements are added. No independent validation is performed. Vendor delays become enterprise delays without escalation mechanism. *Remediation: procurement integration with evidence requirements (Chapter 16).*
 
-**Pattern 4: Compliance theatre.** Policies reference NIST FIPS 203–205. The certificate register is empty. The gap between policy and practice is not documented. Supervisory examination or audit reveals the discrepancy. The organization is worse positioned than one with honest gap documentation and a remediation plan. *Remediation: document current state accurately; policies describe target state and transition plan.*
+**Pattern 4: Compliance theatre.** Policies reference NIST FIPS 203–205. The certificate register is empty. The gap between policy and practice is not documented. Supervisory examination or audit reveals the discrepancy. The organisation is worse positioned than one with honest gap documentation and a remediation plan. *Remediation: document current state accurately; policies describe target state and transition plan.*
 
 **Pattern 5: Perpetual pilot.** Hybrid TLS or PQC library integration is demonstrated annually without production deployment. Each demonstration resets the "progress" narrative. Budget is consumed. Estate is unchanged. *Remediation: define production deployment gates in programme charter; pilots require explicit exit criteria.*
 
@@ -482,7 +464,7 @@ Honest measurement requires defining metrics before migration begins and resisti
 
 Quantifying synchronization failure is difficult because the counterfactual — what happens when an enterprise treats PQC as a project rather than a programme — manifests as delayed production deployment, not as a single incident. The costs are nonetheless real and accumulate across several categories.
 
-**Rework cost.** Pilots that cannot reach production because blocking dependencies were not identified must be repeated after dependencies are resolved. Meridian's abandoned TLS-first pilot consumed approximately €180,000 in engineering time before the programme was restructured. The work was not wasted — it informed hybrid compatibility data — but it was not migration progress.
+**Rework cost.** Pilots that cannot reach production because blocking dependencies were not identified must be repeated after dependencies are resolved. Meridian's abandoned TLS-first pilot consumed approximately **€180,000** in engineering time (*illustrative*) before the programme was restructured. The work was not wasted — it informed hybrid compatibility data — but it was not migration progress.
 
 **Vendor leverage cost.** Enterprises that engage procurement after discovering vendor roadmap inadequacy negotiate from weakness. Contractual PQC requirements inserted at renewal, when the enterprise has no alternative supplier, carry premium pricing. Early procurement engagement — before roadmap gaps become urgent — produces better commercial terms.
 
@@ -490,31 +472,25 @@ Quantifying synchronization failure is difficult because the counterfactual — 
 
 **Opportunity cost.** Engineering teams assigned to repeated PQC pilots that do not reach production cannot be assigned to agility requirements in new systems — the investment that most efficiently reduces long-term migration cost.
 
-These costs are not arguments for panic. They are arguments for programme structure — the organizational response the synchronization problem demands.
+These costs are not arguments for panic. They are arguments for programme structure — the organisational response the synchronization problem demands.
 
-### Reading this book
+## 1.15 Apply in Your Organisation
 
-This book is structured for sequential reading and reference use. Part I establishes why migration is necessary and how to frame the organizational response. Parts II through VI assume Part I's foundations and develop progressively more operational guidance. Readers seeking immediate inventory methodology may be tempted to jump to Part III. Readers seeking hybrid TLS configuration may be tempted to jump to Part IV. Both will encounter dependencies on concepts — TRADE scoring, Governance Stack artefacts, blocking node analysis — introduced in Part I and developed in intervening chapters.
-
-The recommended reading paths:
-
-- **CISO / Security Leader:** Part I complete, then Chapters 15 (governance), 9 (wave planning), 19–22 (sector playbooks)
-- **Enterprise Architect:** Part I, Part II, Part III (CDG focus), Part IV complete
-- **Cryptographic Engineer:** Part II, Part IV, Chapter 18 (validation)
-- **Compliance Officer:** Part I Chapter 3, Chapter 16 (procurement), sector playbook for your industry
-- **Board / Executive:** Part I complete, Chapter 15 Section 15.2 (board reporting), annual review of PQ-ADAPT maturity
-
-Each chapter includes case study threads from the four teaching organizations. Following a single organization's thread through the book — Meridian for financial services, Northfield for critical infrastructure — provides narrative continuity for readers who prefer case-driven learning.
+1. **Charter a programme, not a project.** If your PQC initiative has a single deliverable and an end date, restructure it before the next budget cycle.
+2. **Map one blocking dependency this quarter.** Identify a single asset — HSM root, firmware signing chain, internal CA — whose migration gates downstream systems.
+3. **Convene the minimum coalition.** Confirm PKI, procurement, legal/compliance, and OT (if applicable) have named representatives with decision authority.
+4. **Report outcome metrics to the board.** Replace "pilot complete" with PQ-ADAPT maturity level and percentage of estate inventoried.
+5. **Document honest gaps.** Policies describing target state; CBOM describing current state; steering committee minutes connecting them.
 
 ---
 
-## 1.15 Chapter Summary
+## 1.16 Chapter Summary
 
 - NIST finalized FIPS 203, 204, and 205 in August 2024, ending the algorithm selection phase and beginning the enterprise deployment phase.
 - PQC migration differs fundamentally from prior cryptographic transitions in ecosystem scope, parameter implications, hybrid complexity, and threat timeline asymmetry.
 - The central thesis: migration is a **synchronization problem**, not a cryptographic upgrade. Dependency chains, not exposure alone, determine migration sequence.
 - The enterprise cryptographic estate resembles an iceberg: visible assets above the waterline, blocking dependencies below it.
-- Programmes, not projects, are the correct organizational model for migration governance.
+- Programmes, not projects, are the correct organisational model for migration governance.
 - Credible programmes require cross-functional stakeholder coalitions with defined engagement sequencing.
 - The ARCS Framework — Awareness, Register, Capability, Synchronize — organizes the book's guidance and the PQ-ADAPT maturity progression.
 - Board communication focuses on threat asymmetry, programme duration, and investment rationale — not algorithm details.
@@ -526,10 +502,12 @@ Each chapter includes case study threads from the four teaching organizations. F
 
 *Chapter 1 — References*
 
-- Campbell, R. (2025). Enterprise Migration to Post-Quantum Cryptography: Timeline Analysis and Strategic Frameworks. *Computers*, 15(1), 9.
-- National Institute of Standards and Technology. (2024). FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard.
-- National Institute of Standards and Technology. (2024). FIPS 204: Module-Lattice-Based Digital Signature Standard.
-- National Institute of Standards and Technology. (2024). FIPS 205: Stateless Hash-Based Digital Signature Standard.
-- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to Post-Quantum Cryptography Standards.
-- National Security Memorandum 10 on Promoting United States Leadership in Quantum Computing While Mitigating Risks to Vulnerable Cryptographic Systems (2022).
-- World Economic Forum. (2024). Quantum Security: Preparing for the Post-Quantum Era.
+- Basescu, C., Hemsley, G., Khosla, N., Machado, L., Quach, W., Ravichandran, R., Tromer, E., & Wong, D. (2024). Deployment considerations for secure post-quantum cryptography in practice. *Proceedings of the USENIX Security Symposium*. https://www.usenix.org/conference/usenixsecurity24/presentation/basescu
+- Campbell, R. (2025). Enterprise migration to post-quantum cryptography: Timeline analysis and strategic frameworks. *Computers*, 15(1), 9. https://doi.org/10.3390/computers15010009
+- Cybersecurity and Infrastructure Security Agency. (2024). Post-quantum cryptography initiative. U.S. Department of Homeland Security. https://www.cisa.gov/quantum
+- National Institute of Standards and Technology. (2024). FIPS 203: Module-lattice-based key-encapsulation mechanism standard. https://doi.org/10.6028/NIST.FIPS.203
+- National Institute of Standards and Technology. (2024). FIPS 204: Module-lattice-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.204
+- National Institute of Standards and Technology. (2024). FIPS 205: Stateless hash-based digital signature standard. https://doi.org/10.6028/NIST.FIPS.205
+- National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
+- National Security Memorandum 10 on Promoting United States Leadership in Quantum Computing While Mitigating Risks to Vulnerable Cryptographic Systems (2022). The White House.
+- World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*. https://www.weforum.org/publications/quantum-security/
