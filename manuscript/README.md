@@ -2,7 +2,8 @@
 
 **Status:** Full manuscript editorial review complete (June 2026); Chapters 1–22 + Appendices A–E  
 **Architecture approved:** June 2026  
-**Table of contents:** [`TABLE_OF_CONTENTS.md`](TABLE_OF_CONTENTS.md) — complete section-level listing (684 sections)
+**Table of contents:** [`TABLE_OF_CONTENTS.md`](TABLE_OF_CONTENTS.md) — complete section-level listing (684 sections)  
+**Word exports:** [`docx/`](docx/) — per-chapter `.docx` + combined handbook ([`MANIFEST.md`](docx/MANIFEST.md))
 
 ## Structure
 
