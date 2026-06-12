@@ -56,17 +56,17 @@ Applied to MPI calculation:
 
 **MPI = (wT×T + wR×R + wA×A + wD×D + wE×E) / (wT + wR + wA + wD + wE)**
 
-With default weights (wT=1.0, wR=1.50, wA=1.0, wD=1.25, wE=1.0), the denominator increases from 5.50 to 5.75 — modest in formula, significant in outcomes. Systems with R ≥ 4 (DORA-subject payment processing, cardholder data environments, financial market infrastructure interfaces) **rise in MPI rank** relative to systems with lower regulatory scores but similar threat exposure.
+With universal defaults (wT=1.5, wR=1.25, wA=1.25, wD=1.0, wE=0.75 — Chapter 9 §9.3), the denominator is 5.75. With financial SOM (wR=1.50, wD=1.10, wE=0.90), the denominator is 6.25 — modest in formula, significant in outcomes. Systems with R ≥ 4 (DORA-subject payment processing, cardholder data environments, financial market infrastructure interfaces) **rise in MPI rank** relative to systems with lower regulatory scores but similar threat exposure.
 
 **Table 19.1 — Sector Overlay — Financial Services**
 
 | SOM parameter | Universal default | Financial services overlay | Programme implication |
 |---------------|-------------------|---------------------------|----------------------|
 | wR (Regulatory) | 1.25 | **1.50** (+0.25) | DORA/PCI-scoped systems rank higher in wave planning |
-| wT (Threat) | 1.00 | 1.00 (unchanged) | HNDL remains material for retained transaction data |
-| wA (Agility) | 1.00 | 1.00 (unchanged) | Agility gates apply; payment HSM agility is vendor-gated |
-| wD (Dependency) | 1.25 | **1.35** (+0.10) | Scheme/SWIFT/CDG blocking edges weighted slightly higher |
-| wE (Ecosystem) | 1.00 | **1.15** (+0.15) | Third-party processor concentration gains scoring emphasis |
+| wT (Threat) | 1.50 | 1.50 (unchanged) | HNDL remains material for retained transaction data |
+| wA (Architectural dependency) | 1.25 | 1.25 (unchanged) | CDG blocking nodes; payment HSM fan-in |
+| wD (Data longevity) | 1.00 | **1.10** (+0.10) | Retained transaction and archive confidentiality |
+| wE (Ecosystem) | 0.75 | **0.90** (+0.15) | Third-party processor concentration gains scoring emphasis |
 | HLM timeline modifier | Standard | **Payment HSM: +12–24 months** | Authorisation paths behind corporate TLS |
 | Evidence overlay | Universal assurance pack | **DORA examination index** | Article-mapped artefact structure |
 | Procurement overlay | Chapter 16 clause library | **+ PCI PHSM flow-down** | Payment brand and scheme notification clauses |
@@ -344,7 +344,7 @@ Wave planning sequences internal work **up to** scheme notification gates — no
 
 NIS2 designates financial market infrastructures as essential entities. Institutions connecting to CCPs, CSDs, and trading venues face **bidirectional dependency**: you depend on their crypto; they depend on yours for settlement messages.
 
-Meridian mapped three CCP connectivity paths as CDG blocking nodes with `wD` SOM boost — dependency dimension elevated 0.10 in financial overlay increases MPI for settlement cryptography relative to universal scoring.
+Meridian mapped three CCP connectivity paths as CDG blocking nodes — the financial overlay's **wD (+0.10)** elevation increases MPI for settlement cryptography with long retention horizons relative to universal scoring, while architectural dependency scores reflect CDG fan-in directly.
 
 ### 19.6.4 PSD2, open banking, and API regulatory visibility
 
@@ -471,9 +471,9 @@ Chapter 9 established wave planning mechanics. Financial services SOM modifies i
 |-----------|-----------------|----------------------------|-------|
 | T (Threat) | 4 | Unchanged | Transaction data; HNDL relevant |
 | R (Regulatory) | 5 | **wR 1.50 amplifies** | DORA + PCI CDE |
-| A (Agility) | 2 | Unchanged | HSM-gated |
-| D (Dependency) | 5 | **wD 1.35 amplifies** | Payment HSM blocking |
-| E (Ecosystem) | 2 | **wE 1.15 amplifies** | Hosted processor |
+| A (Architectural dependency) | 5 | Unchanged weight | Payment HSM blocking fan-in |
+| D (Data longevity) | 4 | **wD 1.10 amplifies** | Transaction retention horizon |
+| E (Ecosystem) | 2 | **wE 0.90 amplifies** | Hosted processor |
 
 MPI with universal weights: ~4.1. MPI with financial SOM: ~4.3. Rank rises relative to corporate systems with R=2–3 — **Wave 1 prioritisation** even when agility score is low, because regulatory and dependency dimensions dominate.
 
@@ -778,9 +778,9 @@ Internal audit at Meridian scoped cryptographic control testing to Wave 0–1 pr
 - National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
 - Payment Card Industry Security Standards Council. (2024). *PCI DSS v4.0* and payment HSM security requirements. https://www.pcisecuritystandards.org/
 - SWIFT. (2024–2026). *Customer Security Programme* — attestation framework and security controls guidance. https://www.swift.com/myswift/customer-security-programme-csp
-- Cryptomathic A/S. (2024). *Post-quantum cryptography in financial services* — industry transition considerations (informative synthesis).
-- Meridian Mutual Bank programme office. (2027). *Illustrative DORA examination evidence pack and payment HSM validation timeline* (composite case study).
-- Thomas Bergström & Elena Vasquez. (2026). *Sector Overlay Matrix application in EU banking PQC programmes* — Meridian Mutual Bank internal methodology (composite teaching narrative).
+- European Central Bank. (2024–2026). *Eurosystem cryptographic transition* and financial market infrastructure guidance (informative synthesis).
+- World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era* — financial services transition dimensions (informative synthesis).
+- Meridian Mutual Bank programme office. (2027). *Illustrative DORA examination evidence pack, payment HSM validation timeline, and SOM financial overlay* (composite case study).
 
 ---
 

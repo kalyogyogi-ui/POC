@@ -272,13 +272,13 @@ Chapter 9 introduced TRADE scoring and Migration Priority Index (MPI) calculatio
 
 For Apex NSS workloads, Priya Nair's programme applied:
 
-| TRADE dimension | Corporate default weight | NSS overlay weight | Rationale |
-|-----------------|-------------------------|-------------------|-----------|
-| Threat (T) | 1.0 | 1.3 | Classified data HNDL exposure |
-| Regulatory (R) | 1.0 | 1.4 | CNSA binding milestones |
-| Architectural (A) | 1.0 | 1.3 | Guard and HSM blocking nodes |
-| Data longevity (D) | 1.0 | 1.2 | Long-retention mission archives |
-| Ecosystem (E) | 1.0 | 1.3 | Subcontractor synchronisation |
+| TRADE dimension | Universal default (Ch 9 §9.3) | NSS overlay weight | Modifier | Rationale |
+|-----------------|------------------------------|-------------------|----------|-----------|
+| Threat (T) | 1.5 | 1.75 | +0.25 | Classified data HNDL exposure |
+| Regulatory (R) | 1.25 | **1.75** | **+0.50** | CNSA binding milestones (Ch 9 §9.22) |
+| Architectural (A) | 1.25 | 1.50 | +0.25 | Guard and HSM blocking nodes |
+| Data longevity (D) | 1.0 | 1.25 | +0.25 | Long-retention mission archives |
+| Ecosystem (E) | 0.75 | 1.00 | +0.25 | Subcontractor synchronisation |
 
 Weighted MPI shifts Wave 0 toward **HSM module validation, firmware signing infrastructure, and guard configuration** — not toward corporate SaaS TLS, which scored lower despite executive visibility.
 
@@ -286,15 +286,19 @@ Weighted MPI shifts Wave 0 toward **HSM module validation, firmware signing infr
 
 James Whitfield's Northfield overlay emphasised:
 
-| TRADE dimension | Corporate IT default | OT overlay weight | Rationale |
-|-----------------|---------------------|-------------------|-----------|
-| Threat (T) | 1.0 | 1.4 | Historian and SCADA archive confidentiality |
-| Regulatory (R) | 1.0 | 1.2 | NERC CIP audit evidence |
-| Architectural (A) | 1.0 | 1.5 | OT vendor firmware dependencies |
-| Data longevity (D) | 1.0 | 1.5 | 30-year operational data retention |
-| Ecosystem (E) | 1.0 | 1.5 | Three-vendor firmware signing chain |
+| TRADE dimension | Universal default (Ch 9 §9.3) | OT overlay weight | Modifier | Rationale |
+|-----------------|------------------------------|-------------------|----------|-----------|
+| Threat (T) | 1.5 | **1.75** | **+0.25** | Historian and SCADA archive confidentiality (Ch 9 §9.22) |
+| Regulatory (R) | 1.25 | 1.40 | +0.15 | NERC CIP audit evidence |
+| Architectural (A) | 1.25 | 1.50 | +0.25 | OT vendor firmware dependencies |
+| Data longevity (D) | 1.0 | 1.25 | +0.25 | 30-year operational data retention |
+| Ecosystem (E) | 0.75 | 1.00 | +0.25 | Three-vendor firmware signing chain |
 
 Northfield's Wave 0 prioritised **firmware CBOM completion and vendor contractual PQC roadmap clauses** (Chapters 6, 16) before WAN IPsec production — reversing the order corporate IT would naturally prefer.
+
+> **Dependency Alert**
+>
+> **Sector weight modifiers do not override CDG blocking nodes.** Elevating wT or wR for OT historians raises MPI rank — but WAN concentrator firmware may still block archive key rotation paths (Chapter 9 §9.14). Northfield's steering committee learned this when highest threat scores did not produce fastest field deployment; James Whitfield escalated through programme authority, not by rescore alone.
 
 ### 20.7.3 "Do not migrate yet" conditions
 

@@ -132,7 +132,7 @@ It **is** the closing argument that enterprise post-quantum migration is achieva
 
 ## Suggested Reading Sequences
 
-**Financial services path:** Introduction → Chapter 19 (full) → Chapter 3 regulatory cross-ref → Chapter 16 vendor assessment → Chapter 22 (§22.4 sustain).
+**Financial services path:** Introduction → Chapter 19 (full) → Chapter 3 regulatory cross-ref → Chapter 16 vendor assessment → Chapter 22 (§22.5 sustain).
 
 **Defence / government path:** Introduction → Chapter 20 (full) → Chapter 18 assurance → Chapter 14 HSM → Chapter 22.
 
@@ -148,9 +148,11 @@ It **is** the closing argument that enterprise post-quantum migration is achieva
 
 British English, illustrative figures labelled as planning examples, pedagogical boxes (*Migration Moment*, *Dependency Alert*, *Regulatory Lens*, *Architect's Decision*), and *Apply in Your Organisation* checklists continue from prior parts.
 
-Standards references align with FIPS 203–205 and IETF specifications at time of writing. NIST IR 8547 remains in Initial Public Draft at time of writing — monitor authoritative sources before embedding draft language in supervisory submissions. Sector regulatory instruments (DORA RTS, CNSA 2.0, NERC CIP) should be verified against current authoritative publications before examination or assessment use.
+Standards references align with FIPS 203–205 and IETF specifications at time of writing. NIST IR 8547 remains in Initial Public Draft at time of writing — monitor authoritative sources before embedding draft language in supervisory submissions. IETF hybrid TLS specifications may advance from Internet-Draft to RFC during the migration horizon; sector playbooks should reference standards-track identifiers with version dates. Sector regulatory instruments (DORA RTS, CNSA 2.0, NERC CIP) should be verified against current authoritative publications before examination or assessment use.
 
 ASCII figures in manuscript form include production briefs for artwork; final diagrams follow in production.
+
+Vendor and cloud provider names appear as **categories** for pattern illustration — no product endorsement.
 
 The four teaching organisations are **composite case studies** synthesising patterns from multiple enterprise programmes — illustrative, not representations of specific institutions.
 

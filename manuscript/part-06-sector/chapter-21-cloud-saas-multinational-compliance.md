@@ -757,8 +757,8 @@ Marcus Chen noted Year 3 truth: **platform migration velocity exceeded tenant cu
 - National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
 - CycloneDX Contributors. (2024). *Authoritative Guide to CBOM* and *CycloneDX specification v1.6+*. OWASP Foundation.
 - International Organization for Standardization. (2024). *ISO/IEC 27001:2022* — Information security management systems (processor control mapping for cloud services).
-- GlobalSync Logistics programme office. (2028). *Illustrative multi-tenant PQC architecture and cross-border evidence packs* (composite case study).
-- Marcus Chen & Sofia Lindström. (2027). *Three-region PQC programme operating model* — GlobalSync Logistics programme documentation (composite case study).
+- National Institute of Standards and Technology. (2022). NIST SP 800-218: Secure Software Development Framework (SSDF) Version 1.1. https://doi.org/10.6028/NIST.SP.800-218
+- GlobalSync Logistics programme office. (2028). *Illustrative multi-tenant PQC architecture, three-region operating model, and cross-border evidence packs* (composite case study).
 
 ---
 

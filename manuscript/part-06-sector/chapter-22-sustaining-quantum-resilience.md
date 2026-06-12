@@ -638,6 +638,9 @@ Northfield's twelve percent field device long-tail is not a governance failure �
 10. **Declare Level 5 per scope zone** — honest gaps with charter amendments and investment asks.
 11. **Integrate acquisition/M&A crypto playbook** — 90-day CBOM certification SLA (Meridian lesson).
 12. **Extend runtime verification** — build-time gates necessary but insufficient (GlobalSync lesson).
+13. **Publish zone-level PQ-ADAPT reporting** — prevent aggregate maturity overstatement (Meridian lesson).
+14. **Align sustainment funding vocabulary** with reliability or control budgets — not project close-out (Northfield lesson).
+15. **Maintain partner SDK inventory** as permanent ecosystem custodianship — not Wave 0 one-off (GlobalSync lesson).
 
 ---
 

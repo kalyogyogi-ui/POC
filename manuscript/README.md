@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part VI draft complete (June 2026); full manuscript Chapters 1–22 drafted  
+**Status:** Part VI editorial revision complete (June 2026); full manuscript Chapters 1–22 drafted  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -78,15 +78,32 @@
 
 | File | ~Words | Notes |
 |------|--------|-------|
-| `part-06-introduction.md` | 1,423 | Proof phase, SOM, PQ-ADAPT L4–5, four-org arcs |
-| `chapter-19-financial-services-playbook.md` | 8,022 | DORA examination, SOM wR +0.25, Meridian Year 2 arc |
-| `chapter-20-defense-government-critical-infrastructure.md` | 7,886 | CNSA 2.0, CMMC, NERC CIP; Apex + Northfield |
-| `chapter-21-cloud-saas-multinational-compliance.md` | 8,188 | Multi-tenant PQC, GDPR evidence; GlobalSync arc |
-| `chapter-22-sustaining-quantum-resilience.md` | 7,921 | Standards watch, Level 5, four-org Year 3 retrospective |
+| `part-06-introduction.md` | 1,461 | Proof phase, SOM, PQ-ADAPT L4–5, four-org arcs |
+| `chapter-19-financial-services-playbook.md` | 8,042 | DORA examination, SOM wR +0.25, Meridian Year 2 arc |
+| `chapter-20-defense-government-critical-infrastructure.md` | 7,984 | CNSA 2.0, CMMC, NERC CIP; Apex + Northfield |
+| `chapter-21-cloud-saas-multinational-compliance.md` | 8,190 | Multi-tenant PQC, GDPR evidence; GlobalSync arc |
+| `chapter-22-sustaining-quantum-resilience.md` | 7,965 | Standards watch, Level 5, four-org Year 3 retrospective |
 
-**Part VI total (chapters + intro):** ~33,440 words
+**Part VI total (chapters + intro):** ~33,642 words
 
-**Full manuscript (Parts I–VI, chapters + intros):** ~192,897 words
+**Full manuscript (Parts I–VI, chapters + intros):** ~193,099 words
+
+## Editorial Revisions — Part VI (June 2026)
+
+Expert technical review against Parts I–V standards:
+
+- British English pass; Northfield NIS2 framing verified (US operator; NERC CIP/TSA/CISA only)
+- TRADE weight consistency with Chapter 9 §9.3: corrected Ch 19 Table 19.1 defaults (wT 1.5, wA 1.25, wD 1.0, wE 0.75); fixed wA mislabel (*Architectural dependency*, not *Agility*)
+- Ch 20 §20.7 NSS/OT overlay tables aligned to Ch 9 sector modifiers (wR +0.50 NSS; wT +0.25 OT)
+- Part VI introduction expanded: IETF hybrid TLS note, vendor category disclaimer (Part V parity)
+- Ch 19: vendor-neutral references (removed Cryptomathic); composite case study citation format standardised
+- Ch 20: Dependency Alert added (§20.7 CDG blocking vs weight modifiers)
+- Ch 21: composite author reference merged to org case study format; SSDF reference added
+- Ch 22: Apply checklist expanded to 15 items (parity with Ch 19–21)
+- Character consistency: Marcus Chen (GlobalSync), Elena Vasquez (Meridian), Dr. Priya Nair (Apex), James Whitfield (Northfield), Thomas Bergström (Meridian regulatory), Sofia Lindström (GlobalSync PO)
+- Cross-references to Parts I–V verified: SOM (Ch 9 §9.22), Governance Stack (Ch 15), procurement (Ch 16), CI/CD gates (Ch 17), assurance (Ch 18)
+- Pedagogical boxes (6–8 per chapter), Apply checklists (15 items), 10 references per chapter verified
+- Navigation: Proceed lines Ch 19–21; Ch 22 handoff to Appendices A–E
 
 ## Editorial Revisions — Part V (June 2026)
 
