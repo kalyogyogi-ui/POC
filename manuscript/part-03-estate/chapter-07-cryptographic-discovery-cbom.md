@@ -9,7 +9,7 @@ Elena forwarded the slide to the programme office with one question: *"Which 14,
 
 Silence followed. The bank had certificates in a PKI database, applications in a CMDB, and contracts in procurement — but no **authoritative cryptographic inventory**. Phase 1's mission became explicit: build a Cryptographic Bill of Materials that could answer her question with evidence, not optimism.
 
-Fourteen months later, Meridian's CBOM contained **14,200 cryptographic assets** across applications, HSM partitions, API gateways, partner endpoints, and embedded payment modules. **38%** of assets touched third-party systems with incomplete visibility — SaaS platforms, hosted payment services, and vendor-managed HSM firmware. The CBOM did not make Meridian quantum-resilient. It made Meridian **honest** — the prerequisite for every subsequent decision in this book.
+The procurement slide incident became a programme origin story — Elena cited it in every Phase 1 steering meeting. The narrative was not embarrassment but **alignment**: security, procurement, and engineering needed one inventory language before debating algorithms or timelines. Fourteen months later, Meridian's CBOM contained **14,200 cryptographic assets** across applications, HSM partitions, API gateways, partner endpoints, and embedded payment modules. **38%** of assets touched third-party systems with incomplete visibility — SaaS platforms, hosted payment services, and vendor-managed HSM firmware. The CBOM did not make Meridian quantum-resilient. It made Meridian **honest** — the prerequisite for every subsequent decision in this book.
 
 This chapter teaches how to build that honesty at enterprise scale.
 
@@ -46,6 +46,8 @@ The CBOM is not a one-time spreadsheet. It is a **maintained dataset** with owne
 ---
 
 ## 7.2 PQ-ADAPT Level 2: Inventoried
+
+Enterprises frequently overclaim inventory maturity. PQ-ADAPT Level 2 is deliberately **narrow** — visibility with documented limits, not migration execution. Steering committees should treat Level 2 as a **gate** before funding wave planning (Chapter 9), not as a programme completion milestone.
 
 PQ-ADAPT Level 2 (*Inventoried*) requires:
 
@@ -332,6 +334,8 @@ Meridian classified CBOM as **Internal — Confidential** — broader than typic
 ---
 
 ## 7.13 Meridian Phase 1: Programme Execution
+
+Elena Vasquez opened each steering committee with the same framing: Phase 1 measured **honesty velocity** — how fast unknown rows converted to verified or explicitly owned gaps — not vanity coverage percentages. That discipline prevented the procurement questionnaire incident in the chapter opening from recurring in a different guise.
 
 Meridian's Phase 1 CBOM executed in four tranches:
 
@@ -763,7 +767,161 @@ Elena credited operating rhythm with sustaining Level 2 past Phase 1 — program
 
 ---
 
-## 7.35 Chapter Summary
+## 7.35 API Gateways and Cryptographic Aggregation
+
+API gateways terminate TLS, validate JWTs, and re-encrypt toward backends — one gateway row in CMDB can represent **dozens of cryptographic roles**. CBOM programmes must decide aggregation rules:
+
+| Modelling choice | When appropriate | Risk |
+|------------------|------------------|------|
+| One row per gateway instance | Capacity planning | Hides per-route algorithms |
+| One row per route/backend | Fine-grained TRADE | CBOM explosion |
+| One row per crypto function on gateway | Balance | Requires gateway config export |
+
+Meridian chose **function-level** rows for payment API gateways — separate rows for `tls_termination`, `jwt_validation`, `request_signing` on the same hardware cluster. Discovery sourced from gateway policy export plus network scan cross-check.
+
+GlobalSync service mesh sidecars received **one CBOM row per mesh identity** — sidecar cert algorithm captured; backend application crypto captured separately. Aggregation would have double-counted TLS (sidecar + ingress) without `crypto_layer` attribute distinguishing edge vs service.
+
+**JWT at gateway:** Gateways validating RSA-signed JWTs while backends use ECDSA created CBOM conflict — resolved by treating gateway as **verification consumer** with `trusts` edge to issuer key (feeds Chapter 8), not as signing implementation.
+
+---
+
+## 7.36 Mobile, IoT, and Edge Device Discovery
+
+Mobile applications and IoT devices carry cryptography outside data-centre discovery reach:
+
+| Asset class | Discovery approach | CBOM confidence |
+|-------------|-------------------|-----------------|
+| iOS/Android apps | Binary analysis; app store build pipeline | Verified at release |
+| MDM-managed devices | MDM cert profiles API | Inferred until sample |
+| IoT fleet | Vendor model catalogue + site survey | Verified per site |
+| CDN edge | Provider attestation + config API | Attested |
+
+Meridian retail banking app — static analysis of release binaries found **certificate pinning** to corporate root plus backup pin to legacy root scheduled for removal. Pinning configuration became CBOM row `asset_type=mobile_pinning` — migration required app release, not server TLS change alone.
+
+Northfield IoT **did not** use mobile patterns — embedded devices documented per `device_class` template. Template covered 18 compressor gateway sites with identical firmware crypto profile — efficient CBOM without 18 separate engineering interviews for identical stacks.
+
+> **Architect's Decision**
+>
+> **Separate mobile CBOM lifecycle from server CBOM.** App release trains differ from server deploy cadence. Force mobile rows into server change tickets and updates stall — assign mobile product owner as CBOM responsible party.
+
+---
+
+## 7.37 Worked Example: Single Payment Microservice CBOM Rows
+
+Illustrative decomposition for `payments-authorization-svc` — one microservice, multiple CBOM rows:
+
+| bom-ref | asset_type | algorithm_name | quantum_vulnerable | confidence |
+|---------|------------|----------------|-------------------|------------|
+| pay-auth-001 | tls_termination | ECDSA-P256 / TLS1.3 | true | verified |
+| pay-auth-002 | jwt_signing | RSA-2048 | true | verified |
+| pay-auth-003 | db_field_encrypt | AES-256-GCM | false | verified |
+| pay-auth-004 | kms_wrap | RSA-2048-OAEP | true | inferred |
+| pay-auth-005 | partner_mtls | ECDSA-P256 | true | verified |
+
+Roll-up for executive reporting: one workload. TRADE scoring and CDG construction use **fine-grained rows** — jwt_signing row linked to enterprise JWT issuer CDG node; partner_mtls row linked to `partner-mtls-policy-v3` blocking hub.
+
+This pattern prevented Meridian from declaring the microservice "TLS migrated" when only `pay-auth-001` upgraded — partial migration visible in CBOM, not hidden in green dashboard status.
+
+---
+
+## 7.38 M&A and Divestiture CBOM Handling
+
+Acquisitions inject cryptographic inventory faster than integration teams can verify. Meridian subsidiary acquisition (*illustrative*):
+
+**Day 0:** Inherited 2,100 CBOM rows from seller questionnaire — `confidence=attested`, 62% `quantum_vulnerable`.
+
+**Day 30:** Sample verification on payment paths — 18% algorithm mismatch vs attestation.
+
+**Day 90:** Integrated tranche — seller rows merged with namespace prefix `sub-acq-`; duplicates deduplicated against existing card network rows.
+
+**Divestiture:** Carve-out requires **CBOM export slice** by business unit tag — rows without `business_unit` attribute could not be separated. Post-acquisition lesson: mandatory `business_unit` on all new rows.
+
+---
+
+## 7.39 Communicating Discovery Results to Engineering
+
+Engineering teams resist CBOM when perceived as audit overhead. Effective communication:
+
+1. **Lead with blocking insight** — "Your service trusts partner policy X; here is the fan-in" — not "fill algorithm field."
+2. **Provide remediation path** — link row to Wave plan and architecture standard (Part IV preview).
+3. **Automate first** — CI/CD gates before manual surveys.
+4. **Celebrate coverage** — domain leaderboard on verified % — GlobalSync internal hackathon on CBOM freshness.
+
+Marcus Chen tied CBOM schema compliance to **deployment velocity** — compliant repos deployed faster through expedited CAB — incentive alignment reducing friction.
+
+---
+
+## 7.40 Shadow IT and Cryptographic Surprise
+
+Shadow IT produces **cryptographic surprise** — systems processing regulated data with algorithms unknown to security. Meridian CT and DNS log analysis identified:
+
+- **14 shadow SaaS integrations** with OAuth and embedded RSA JWT signing
+- **6 engineering teams** running self-signed mTLS internal tools in production
+- **3 acquired-skill shadow APIs** bypassing corporate API gateway
+
+Each shadow system received CBOM row with `confidence=inferred`, `owner=unknown` until procurement or HR identity linkage resolved business owner. Shadow rows **counted against unknown bucket** — incentivising business units to claim systems.
+
+GlobalSync reduced shadow incidence by **mandatory service mesh enrollment** — unregistered services could not receive production network policy. Mesh enrollment auto-emitted CBOM sidecar row — prevention over detection.
+
+---
+
+## 7.41 Baseline Declaration Ceremony
+
+PQ-ADAPT Level 2 baseline declaration is a **steering committee decision**, not a project milestone email:
+
+**Agenda (60 minutes):**
+
+1. Present verified coverage by segment (§7.26)
+2. Present unknown bucket — owners, dates, interim risk posture
+3. Present methodology and exclusions document
+4. Present quality metric trends
+5. Vote: declare baseline / extend Phase 1 / accept risk on gaps
+
+Meridian baseline declared October 2026 — 82% verified regulated, 22% unknown with owners. Elena read unknown list aloud — including hosted payment processor with incomplete HSM attestation — steering accepted with procurement escalation deadline.
+
+**Failure mode:** Declaring baseline without vote — auditors question governance. **Failure mode:** Waiting for 100% — perpetual Phase 1.
+
+---
+
+## 7.42 Auditor Questions and CBOM Evidence Mapping
+
+Auditors and assessors ask predictable questions — map CBOM exports to answers:
+
+| Question | CBOM evidence |
+|----------|---------------|
+| What quantum-vulnerable algorithms exist? | Filter `quantum_vulnerable=true` |
+| How do you know? | `confidence` distribution |
+| What is unknown? | Unknown bucket report |
+| How do third parties participate? | `third_party_flag=true` rows |
+| When last verified? | `last_verified_date` histogram |
+| Who owns inventory? | RACI + `owner_team` |
+
+Thomas Bergström rehearsed supervisory dialogue with **filtered CBOM exports** — not narrative slides. DORA ICT provider register matched CBOM third-party rows one-to-one — supervisor accepted mapping as state-of-the-art evidence.
+
+---
+
+## 7.43 Continuous Discovery vs Phase 1
+
+Phase 1 establishes baseline; **continuous discovery** maintains it. Minimum continuous activities:
+
+- CI/CD CBOM emission on every production deploy
+- Weekly cloud KMS API sync
+- Quarterly third-party attestation chase
+- Annual OT site reverification sample (20% sites per year, full cycle in five years)
+
+Meridian transitioned from Phase 1 tranche mentality to **continuous mode** at baseline declaration — tranche owners became **domain custodians** with ongoing quotas for unknown resolution.
+
+---
+
+## 7.44 Figure Production Brief — CBOM Discovery Architecture
+
+**Figure 7.1** (§7.4): Three-column diagram — Sources (SAST, scan, cloud API, manual), Aggregation (CBOM repository with quality dashboard), Consumers (TRADE, CDG, regulatory evidence, board reporting). Use solid arrows for automated flows, dashed for manual/attestation. Include legend for `confidence` tiers.
+
+**Figure 7.2** (§7.13): PQ-ADAPT maturity progression horizontal timeline with Level 0–3 and "maintained" state — annotate Meridian Phase 1 exit at Level 2 baseline.
+
+---
+
+## 7.45 Chapter Summary
 
 - The CBOM is the cryptographic system of record — not certificate inventory, not vendor questionnaires alone.
 - PQ-ADAPT Level 2 requires maintained baseline with documented unknowns and methodology.
@@ -790,3 +948,6 @@ Elena credited operating rhythm with sustaining Level 2 past Phase 1 — program
 - IBM Research. (2023). Cryptographic bill of materials and dependency typing for enterprise migration planning (industry reference).
 - World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*.
 - OWASP. (2024). Software and cryptographic bill of materials guidance. https://owasp.org
+- National Institute of Standards and Technology. (2023). *Hardware security modules for key management* (informative for HSM CBOM fields).
+- European Union Agency for Cybersecurity. (2024). Post-quantum cryptography — current state and quantum mitigation efforts.
+- Payment Card Industry Security Standards Council. (2024). PCI DSS cryptographic requirements (informative mapping).

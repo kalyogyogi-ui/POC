@@ -7,11 +7,15 @@ Apex Defense Technologies' board risk committee received a migration plan in Mar
 
 The committee approved the plan in one session. The differentiator was not slide design — it was **defensible multi-dimensional prioritisation** backed by CBOM rows, CDG blocking nodes, and scored trade-offs the board could audit.
 
+A board member asked why a visible customer portal ranked Wave 3 while an obscure HSM ranked Wave 0. Priya walked the CDG fan-in slide — 2,400 verifiers, contract clauses, CNSA floor — in three minutes. The portal had high visibility and moderate MPI; the HSM had structural blocking. That exchange is the pedagogical goal of this chapter: make sequencing legible to non-specialists without dumbing down cryptography.
+
 This chapter teaches readers to produce the same artefact: a board-approved migration wave plan that survives supervisory review, vendor reality, and dependency topology.
 
 ---
 
 ## 9.1 From Inventory to Action
+
+Priya Nair told Apex's programme director: *"We have standards from Part II and inventory from Part III. The board will not fund fourteen thousand migrations — they will fund a wave plan they can defend."* Chapter 9 is that defensibility layer.
 
 Parts I and II established urgency and standards. Chapters 7 and 8 produced visibility — CBOM and CDG. Chapter 9 converts visibility into **sequenced action**.
 
@@ -800,7 +804,281 @@ E dimension gates production — low E is not low priority for **planning**:
 
 ---
 
-## 9.38 Chapter Summary
+## 9.38 Wave Exit Criteria and Completion Gates
+
+Each wave requires **measurable exit criteria** — not "migration complete" narrative:
+
+**Table 9.3 — Wave Exit Criteria Template**
+
+| Criterion type | Example metric | Verification |
+|----------------|----------------|--------------|
+| Coverage | 100% in-scope systems migrated or deferred with approval | CBOM `hlm_phase` |
+| Blocking resolution | Fan-in on Wave 0 nodes reduced to agreed threshold | CDG query |
+| Ecosystem | Partner acceptance ≥ 85% for affected integrations | Partner programme |
+| Policy | Zero new classical-only deploys in wave scope | Change tickets |
+| Audit | TRADE worksheets archived for all wave members | GRC export |
+
+**Meridian Wave 0 exit:** Manufacturing root dual-trust operational; payment HSM firmware dual-signature in production; card-scheme policy negotiation memorandum signed — three gates, not single technical milestone.
+
+**GlobalSync Wave 0 exit:** Partner acceptance 85%; mesh root hybrid profile in staging validated across 50 namespace sample; tenant KMS partition policy updated.
+
+Failed exit criteria **extend wave** — do not silently roll incomplete items to next wave without steering approval. Meridian extended Wave 0 by one quarter when terminal trust store update reached 78% not 95% target.
+
+---
+
+## 9.39 Threat and Data Longevity Dimension Deep Dives
+
+### Threat (T) — extended guidance
+
+Align T scoring with Chapter 2 TES workshop outputs. Additional rules:
+
+| Situation | T adjustment |
+|-----------|--------------|
+| Public internet exposure | +1 (max 5) |
+| Air-gapped OT | Base TES; integrity may dominate |
+| Aggregated multi-tenant data | Use highest tenant classification |
+| Ephemeral session keys only | Cap T at 3 unless long-lived derived keys |
+
+**Document** `threat_actor_basis` and `tes_rationale` on every worksheet — Meridian auditors sampled 10% annually.
+
+### Data longevity (D) — extended guidance
+
+Map `confidentiality_horizon_years` from CBOM to D score (§9.3.4). Special cases:
+
+| Data type | Horizon consideration |
+|-----------|----------------------|
+| Backup tapes | Retention policy years, not last access |
+| Legal hold archives | Hold duration may exceed retention |
+| Aggregated analytics | Re-identification risk may extend horizon |
+| OT historian | Operational lifespan of asset (30+ years common) |
+
+Northfield historian D = 5 drove Wave 1 membership despite WAN Wave 0 dependency — TRADE dimensions identify urgency; CDG identifies sequence.
+
+---
+
+## 9.40 Worked Example: Northfield VPN Concentrator Wave 0
+
+Full worksheet for `wan-concentrator-cluster-NE` — structural blocker, moderate MPI:
+
+| Dimension | Score | Rationale |
+|-----------|-------|-----------|
+| T | 4 | OT operational data transits WAN |
+| R | 4 | NIS2 essential entity |
+| A | 5 | 14 sites, 1,200+ devices fan-in |
+| D | 3 | Operational data 7-year retention |
+| E | 2 | Vendor IKE hybrid roadmap Q3 2027 |
+
+MPI = (1.5×4 + 1.25×4 + 1.25×5 + 1.0×3 + 0.75×2) / 5.75 = **3.87**
+
+MPI suggests Wave 1 — **CDG override to Wave 0** documented: `blocking: true`, `fan_in: 1247`. Wave charter assigned €1.2M (*illustrative*) for concentrator firmware qualification programme.
+
+**"Do not migrate yet":** Individual compressor TLS endpoints — E = 1, dependent on concentrator — 340 systems on deferral register until Wave 0 exit.
+
+---
+
+## 9.41 Worked Example: Apex NSS Deliverable Signing
+
+| Dimension | Score | Rationale |
+|-----------|-------|-----------|
+| T | 4 | Integrity-critical deliverables |
+| R | 5 | CNSA flow-down, contract clause |
+| A | 5 | All NSS deliverables fan-in |
+| D | 3 | Programme data 10-year retention |
+| E | 2 | HSM module in qualification |
+
+MPI = (1.5×4 + 1.25×5 + 1.25×5 + 1.0×3 + 0.75×2) / 5.75 = **4.26**
+
+Wave 0 NSS track — commercial IT items with MPI 3.0–3.5 did not displace NSS funding. Priya's board slide showed **separate budget bars** per track — prevented NSS starvation during commercial quick wins.
+
+**Contract linkage:** Three primes with 2027 renewal — wave charter referenced `contract_id` fields on TRADE worksheets.
+
+---
+
+## 9.42 Board and Executive Narrative Templates
+
+**Template A — Wave approval request:**
+
+> We request approval for Wave [N] execution, budget range [€X–Y], [date range]. Wave addresses [N] workloads (see appendix) prioritised by TRADE analysis with CDG dependency gates. Wave 0 blocking items [status]. Regulatory alignment: [DORA/CNSA/NIS2 references]. Risks: [top 3 from register].
+
+**Template B — Deferral escalation:**
+
+> [N] systems remain on "do not migrate yet" past review date. Highest MPI: [system], MPI [X.XX], reason: [E<3 / partner / accreditation]. Requested action: [risk acceptance renewal / funding / contract amendment].
+
+**Template C — Wave completion:**
+
+> Wave [N] exit criteria met: [criteria list with evidence links]. [M] items rolled to Wave [N+1] with steering approval. CDG blocking fan-in reduced from [X] to [Y].
+
+Elena used Template A for Meridian Wave 0 — board approved in single session with appendix TRADE tables.
+
+---
+
+## 9.43 Wave Capacity and Portfolio Management
+
+Enterprises run change portfolios — PQC waves compete with cloud migration, ERP upgrades, regulatory programmes. **Portfolio rules:**
+
+| Rule | Rationale |
+|------|-----------|
+| Cap Wave 0 at 30% annual change budget | Blocking work is expensive but foundational |
+| No more than 2 active waves per domain team | Prevents collapse |
+| Quick wins ≤ 10% wave budget | Morale without starvation |
+| NSS/defence track ring-fenced | Commercial portfolio cannot borrow NSS budget |
+
+GlobalSync programme office reported **wave capacity utilization** monthly — domains above 85% utilization deferred new wave members to next quarter.
+
+---
+
+## 9.44 TRADE Score Decay and Re-Scoring Triggers
+
+Scores are not permanent. **Mandatory re-score triggers:**
+
+| Trigger | Affected dimensions |
+|---------|---------------------|
+| Vendor PQC GA announcement | E |
+| Data classification change | T, D, R |
+| CDG edge added/removed | A |
+| Regulatory publication | R |
+| Decommission date set | Remove from scoring |
+| Partner acceptance threshold met | E, wave membership |
+
+**Score decay:** Systems in "do not migrate yet" > 12 months without review — steering escalation, not automatic score reduction. Meridian quarterly re-score for TES 5; annual for TES 3–4.
+
+---
+
+## 9.45 Integrating Waves with HLM and CBOM Attributes
+
+Wave execution updates CBOM:
+
+| Wave action | CBOM update |
+|-------------|-------------|
+| Wave 0 blocking resolved | `blocking_resolved_date` on CDG mirror field |
+| Hybrid deployed | `hlm_phase=H1`, `h2_trigger_value` set |
+| PQC-native complete | `hlm_phase=H3`, `quantum_vulnerable=false` |
+| Deferred | `deferral_id`, `review_date` |
+
+GlobalSync automated wave status from CBOM — steering dashboard pulled live data, not slide decks.
+
+---
+
+## 9.46 GlobalSync Tenant Segmentation for TRADE
+
+Multi-tenant platforms cannot assign single TRADE score to **platform cryptography** — tenant data classification varies:
+
+| Scoring unit | Rationale |
+|--------------|-----------|
+| Platform shared service | Score once; highest tenant R applies |
+| Tenant-dedicated partition | Per-tenant worksheet |
+| Per-tenant integration | Per-tenant T and R |
+
+Marcus segmented **healthcare tenants** (GDPR Article 9) — R modifier +1, Wave 2 priority within EU region. Standard logistics tenants — R baseline, later wave.
+
+**CBOM linkage:** `tenant_id` on rows enabled filtered TRADE export for customer compliance questionnaires — product feature emerging from migration programme discipline.
+
+---
+
+## 9.47 Meridian Wave 2–4 Sketch
+
+**Wave 2 (PKI and shared services):** Internal issuing CAs, API gateway templates, workforce IdP signing — 8 meta-nodes, 45 CBOM rows rolled up. Exit: no new server certs from quantum-vulnerable issuers without exception.
+
+**Wave 3 (application estate):** 340 microservices, MPI 2.5–3.9 — bulk of engineering effort 2028–2031. Natural refresh alignment for container base images carrying OpenSSL upgrades.
+
+**Wave 4 (third-party residual):** SaaS with E = 2 — contractual pressure programme; 22% unknown at Phase 1 reduced to 8% by Wave 4 entry.
+
+**Decommission path:** 1,800 systems never entered waves — retirement before deprecation cheaper than migration.
+
+---
+
+## 9.48 Measuring Programme Success Beyond MPI
+
+Wave plans succeed on **outcome metrics**, not scoring activity:
+
+| Metric | Definition |
+|--------|------------|
+| Blocking fan-in reduction | CDG metric quarter-over-quarter |
+| Quantum-vulnerable % verified | CBOM trend |
+| Wave exit on time | % waves meeting exit criteria by target date |
+| Deferral backlog | Count overdue "do not migrate yet" |
+| Partner acceptance | % partners on approved profiles |
+| Budget variance | Actual vs wave budget range |
+
+Meridian steering committee shifted from MPI coverage discussions to **blocking fan-in reduction** — better aligned with Chapter 1 synchronisation thesis.
+
+---
+
+## 9.49 What Wave Planning Deliberately Omits
+
+This chapter does not specify **how** to implement hybrid TLS, re-wrap KMS keys, or negotiate partner cert profiles — Part IV and Part V. Wave plan identifies **what moves when**; implementation chapters define **how**.
+
+Wave planning also does not replace **programme charter** — RACI, steering cadence, and budget authority remain Part V.
+
+---
+
+## 9.50 Part III Exit Checklist
+
+Before proceeding to Part IV, programme office confirms:
+
+- [ ] CBOM baseline declared (PQ-ADAPT Level 2)
+- [ ] CDG at CDG-2 minimum with blocking nodes flagged
+- [ ] TRADE worksheets complete for in-scope workloads
+- [ ] Board-approved wave plan with exit criteria
+- [ ] "Do not migrate yet" register with review dates
+- [ ] Deferral and risk acceptance integration active
+- [ ] Reassessment schedule published
+
+Meridian completed checklist October 2026 — Part IV hybrid TLS standards referenced Wave 1 and Wave 2 members by CBOM ID from day one.
+
+---
+
+## 9.51 Escalation Paths When Waves Stall
+
+When Wave 0 blocking nodes miss exit dates, programme office follows **escalation ladder**:
+
+| Week overdue | Action |
+|--------------|--------|
+| 2 | Domain architect escalation to VP Engineering |
+| 4 | Steering committee agenda item |
+| 8 | Board risk committee briefing |
+| 12 | Risk acceptance or contract/legal escalation |
+
+GlobalSync partner programme hit week-8 escalation — board authorised additional partner incentive budget. Meridian HSM vendor delay hit week-4 — steering approved temporary classical continuation with **12-month maximum** risk acceptance.
+
+Escalation without pre-defined ladder produces ad hoc heroics — programme director owns ladder definition in charter.
+
+---
+
+## 9.52 Wave Plan Anti-Patterns Catalogue
+
+| Anti-pattern | Symptom | Remediation |
+|--------------|---------|-------------|
+| **Spreadsheet waves** | Unmaintained Excel | GRC-linked wave register |
+| **Hero wave** | One team owns 80% of Wave 1 | Rebalance or extend timeline |
+| **Zombie deferrals** | Review dates pass silently | Steering escalation ladder (§9.51) |
+| **MPI without owner** | Scored but unmigrated | Worksheet owner mandatory |
+| **Wave 0 neglect** | Funding flows to visible TLS | CDG blocking dashboard |
+| **Single-track defence** | NSS starved by commercial | Dual-track budget (Apex) |
+
+---
+
+## 9.53 Figure Production Brief — Migration Wave Gantt
+
+**Figure 9.1** (§9.6): Multi-year Gantt with overlapping waves 0–4. Solid bars for active execution, lighter bars for planning overlap. Vertical dashed lines for NIST deprecation (2030) and disallowance (2035) anchors. Gate diamonds at partner policy, HSM firmware, PKI root milestones. Include legend distinguishing NSS vs commercial track for defence enterprises.
+
+---
+
+## 9.54 Cross-Functional Wave Ownership
+
+Each wave requires **triad ownership** — not security alone:
+
+| Role | Wave responsibility |
+|------|---------------------|
+| Programme director | Budget, steering, board narrative |
+| Domain engineering VP | Capacity, delivery commitment |
+| CISO / risk | TRADE integrity, deferral approvals |
+
+Meridian Wave 0 triad met weekly — Elena (programme), VP Payments Engineering, Thomas Bergström (CISO office). GlobalSync added **partner programme director** as fourth chair for Wave 0 — ecosystem dimension mandatory.
+
+---
+
+## 9.55 Chapter Summary
 
 - TRADE provides multi-dimensional prioritisation — Threat, Regulatory, Architectural dependency, Data longevity, Ecosystem readiness.
 - MPI aggregates dimensions with documented weights; default formula in §9.2.
@@ -823,6 +1101,9 @@ E dimension gates production — low E is not low priority for **planning**:
 - National Institute of Standards and Technology. (2024). *SP 1800-38* — PQC migration planning practices (informative).
 - Cybersecurity and Infrastructure Security Agency. (2024). Post-quantum cryptography migration guidance.
 - World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*.
+- European Parliament and Council. (2022). Digital Operational Resilience Act (DORA).
+- European Parliament and Council. (2022). NIS2 Directive — measures for high common level of cybersecurity.
+- Meridian Mutual Bank programme office. (2026). *Illustrative TRADE methodology and wave governance* (composite case study).
 
 ---
 

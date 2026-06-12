@@ -87,6 +87,24 @@ A **blocking node** is a vertex whose migration or rotation *must complete* (or 
 
 Chapter 9’s wave planner consumes blocking flags: **Wave 0** often addresses blocking nodes with long lead times (HSM firmware, root CA, partner standards).
 
+### Blocking node register template
+
+Programme office maintains **blocking node register** — living document feeding wave planning:
+
+| Field | Example |
+|-------|---------|
+| `node_id` | `partner-mtls-policy-v3` |
+| `label` | Partner mutual TLS issuance policy |
+| `fan_in` | 203 |
+| `owner` | Platform security |
+| `lead_time_months` | 14 |
+| `wave` | W0 |
+| `exit_criterion` | 85% partner acceptance |
+| `budget_range` | €X–Y (*planning example*) |
+| `cdg_snapshot_ref` | `cdg-2026-Q4` |
+
+Meridian updated register monthly — steering committee reviewed register, not raw graph. GlobalSync published register to engineering wiki — transparency reduced duplicate migration proposals.
+
 ---
 
 ## 8.4 GlobalSync: Partner API as Blocking Node
@@ -125,6 +143,23 @@ CDG reconstruction revealed one **blocking node**: `partner-mtls-policy-v3` (tru
 
 > **Migration Moment**  
 > GlobalSync’s architecture review had approved PQ-ready libraries in 14 services — but none could deploy until partner trust policy allowed ML-DSA or hybrid cert profiles. The CDG made the sequencing conflict visible in one diagram; the CBOM had hidden it in row count.
+
+### Partner programme structure
+
+Marcus Chen staffed **partner programme** as Wave 0 workstream — not a side project:
+
+| Role | Responsibility |
+|------|----------------|
+| Partner programme director | Negotiation strategy, acceptance metrics |
+| Technical liaison | Hybrid profile documentation, test endpoints |
+| Legal | Contract amendments, liability for algorithm change |
+| CDG curator | Update `partner_acceptance_pct`, trust edges |
+
+**Pilot topology:** Five partner tiers by integration volume — Tier 1 (top 20 partners, 80% traffic) piloted hybrid profiles first. CDG subgraph `partner-tier-1` validated before Tier 2 invitation.
+
+**Test harness:** Staging environment mirrored production trust policy with **parallel hybrid root** — partners validated without production risk. Successful pilot added `trusts` edge with `parallel_trust_until` before production policy flip.
+
+**Failure mode avoided:** Engineering deployed hybrid in staging to one eager partner while policy node remained classical-only — CDG review caught mismatch before cutover. Policy node and consumer edges migrated in **same change window** — sequencing rule formalised in Chapter 9.
 
 ---
 
@@ -239,6 +274,25 @@ CDG construction is a **programme workstream**, not a one-off architecture diagr
 | Domain architect | Full subgraph per application |
 | Auditor | Evidence links on edges |
 | Wave planner | Blocking flags + lead times (feeds Chapter 9) |
+
+### Phase B enrichment — domain priorities
+
+Meridian sequenced enrichment **payments → corporate IT → third-party → OT** — payments had highest regulatory exposure and surfaced blocking HSM node by month four. Corporate IT ran parallel automated edge inference from PKI logs while payments interviews proceeded — avoiding idle waiting.
+
+**Automated edge inference rules (illustrative):**
+
+| If CBOM shows | Infer edge |
+|---------------|------------|
+| `issuer` field on cert | `signs` from issuer to cert |
+| `trust_store_ref` on app | `trusts` from app to store |
+| `kms_key_id` on service | `wraps` from KMS to data key |
+| Shared `hsm_partition` | `implements` from HSM to keys |
+
+Inferred edges carry `confidence=inferred` until validated in Phase C — same discipline as CBOM confidence tiers.
+
+### Phase C validation — blast-radius sampling
+
+Not every edge warrants interview validation. Sample **blocking candidates** and **high fan-in nodes** first — 100% validation of 800,000 edges is infeasible. Meridian validated all nodes with fan-in > 20; sampled 10% of fan-in 5–20; accepted automated inference for fan-in < 5 unless OT or NSS scope.
 
 ---
 
@@ -681,7 +735,297 @@ Meridian ran **120 interviews** over eight weeks — payments domain alone requi
 
 ---
 
-## 8.38 Chapter Summary
+## 8.38 Service Mesh and East-West Trust
+
+East-west microservice traffic often uses mesh-issued certificates distinct from north-south ingress certs. CDG must model **two layers**:
+
+| Layer | Typical nodes | Common blocking pattern |
+|-------|---------------|------------------------|
+| North-south | Ingress cert, WAF TLS | External visibility |
+| East-west | Mesh CA, sidecar identity | Shared mesh root |
+
+GlobalSync Istio deployment: **mesh-root-ca** node fan-in 180 namespaces — blocking node #2 after partner mTLS policy. Teams upgrading ingress TLS without mesh root migration passed north-south scans but failed east-west mTLS toward services requiring mesh identity.
+
+**CDG modelling:**
+
+```
+[partner-mtls-policy] <-- partner clients (blocking #1)
+[mesh-root-ca] <-- 180 sidecar identities (blocking #2)
+[ingress-wildcard-cert] <-- external users
+```
+
+Wave 0 sequenced partner policy first, mesh root second — Marcus documented CDG override on ingress-only migration proposals.
+
+Meridian corporate IT used **namespace-scoped issuers** subordinate to enterprise root — roll-up preserved subordinate visibility while compressing leaf cert count.
+
+---
+
+## 8.39 Worked Blast-Radius Exercise: Manufacturing Root Rotation
+
+**Scenario:** Meridian rotates manufacturing root CA from RSA-2048 to hybrid ML-DSA profile.
+
+**Step 1 — Anchor identification:** Node `manufacturing-root-ca`, `blocking: true`, fan-in 340 direct `signs` edges.
+
+**Step 2 — Reverse BFS depth 3:** Reveals 2,400 `verifies` edges to firmware images, 890 partner webhook verifiers, 12,400 retail terminal trust stores.
+
+**Step 3 — Classify dependents:**
+
+| Dependent class | Count | Migration mechanism |
+|-----------------|-------|---------------------|
+| Firmware images | 2,400 | Dual-signature release |
+| Terminals | 12,400 | Staged trust store update |
+| Partner webhooks | 890 | Partner notification programme |
+| CI pipelines | 45 | Signing template update |
+
+**Step 4 — Lead time estimate:** 12 months minimum — terminal logistics dominate.
+
+**Step 5 — Wave assignment:** Wave 0 with explicit parallel trust period — CDG edges annotated `parallel_trust_until`.
+
+Exercise output became **blocking node brief** appendix to board wave plan (Chapter 9). Without CDG, programme estimated 90-day CA migration — physically impossible given terminal fleet.
+
+---
+
+## 8.40 Code Signing and CI/CD Pipeline CDG
+
+Software supply chain cryptography forms CDG chains separate from runtime TLS:
+
+```
+[enterprise-code-sign-ca] --signs--> [build-artifact] --verifies--> [deployment-policy]
+                                         ^
+[developer-workstation] --signs---------+ (in dev flows — policy violation if prod)
+```
+
+Meridian discovered **three shadow signing keys** on engineering workstations trusted by ad hoc CI jobs — not in PKI inventory. CDG orphan hunt (nodes with no enterprise `signs` path to approved CA) surfaced shadow keys — remediated before Wave 0 manufacturing root work.
+
+**Pipeline attestation:** SLSA and in-toto attestations add `verifies` edges from deployment policy to expected signer — CDG integration optional but valuable for software supply chain PQC migration (Part IV).
+
+---
+
+## 8.41 Database and KMS Dependency Chains
+
+Application field encryption creates CDG paths:
+
+```
+[app] --implements--> [AES-256-GCM data key]
+[data key] --wrapped-by--> [KMS CMK RSA-2048]
+[CMK] --custodied-in--> [Cloud KMS / HSM partition]
+```
+
+Rotating CMK algorithm requires **re-wrap** of data keys — not application code change alone. Meridian PII KMS blocking analysis (Chapter 2, MPI 4.39) used this chain — A = 4 because twelve applications shared CMK partition.
+
+CDG edge attribute `rewrap_required: true` flagged migration complexity for wave sizing (Chapter 9).
+
+---
+
+## 8.42 CDN and Third-Party Edge Termination
+
+Enterprises using CDN TLS termination have cryptographic dependencies on **provider edge**:
+
+| Custody | CDG representation |
+|---------|-------------------|
+| Customer-managed cert on CDN | Customer cert node + `terminates` at CDN |
+| Provider-managed cert | Provider attestation node; customer `trusts` provider |
+| Keyless SSL | Customer HSM `signs` edge handshake — HSM node blocking |
+
+GlobalSync multi-CDN strategy required **per-provider subgraphs** — migrating one CDN did not migrate others. CBOM `cdn_provider` attribute filtered CDG views per provider negotiation.
+
+---
+
+## 8.43 CDG for Disaster Recovery and Standby Sites
+
+DR sites duplicate trust relationships — CDG must model **active vs standby** or risk half-migrated failover:
+
+Meridian active/standby PKI: standby issuing CA inherited same root — single root blocking node covered both sites. **Split-brain risk:** migrating active site before standby left failover on classical-only path.
+
+CDG edge attribute `dr_role: active|standby` enabled wave planners to gate migration on **pair completion** — sequencing rule extension for Chapter 9.
+
+---
+
+## 8.44 Apex NSS: Cross-Domain Guard Edge Cases
+
+Cross-domain guards implement **cryptographic policy enforcement** between classification levels:
+
+```
+[nss-enclave] --terminates--> [guard-appliance] --terminates--> [corporate-it]
+```
+
+Guard appliances use **approved crypto modules** — changing algorithms requires accreditation package update before configuration change. Apex CDG nodes for guards carried `accreditation_id` — Wave 0 NSS items included accreditation timeline, not only engineering effort.
+
+Priya rejected "migrate corporate first" proposals when CDG showed active guard paths from NSS to corporate analytics — corporate TLS upgrade without guard update broke classified data export workflows.
+
+---
+
+## 8.45 CDG Maintenance Operating Rhythm
+
+| Cadence | Activity | Owner |
+|---------|----------|-------|
+| Weekly | Automated cert/CMDB sync edge update | Platform engineering |
+| Monthly | Blocking node fan-in review | Programme office |
+| Quarterly | Full subgraph validation sample | Enterprise architecture |
+| Per acquisition | Merge and deduplicate subgraph | M&A integration |
+
+Meridian CDG health dashboard shared with CBOM dashboard (Chapter 7 §7.14) — single programme office view.
+
+---
+
+## 8.46 Common CDG Interview Questions
+
+Facilitators use standard prompts to elicit edges:
+
+1. *What trust stores does this service use — JVM, OS, custom PEM bundle?*
+2. *Who signs your firmware/binaries — which CA, which HSM partition?*
+3. *What client certificates do partners present — common policy or per-partner?*
+4. *What breaks if we rotate issuer X tomorrow?*
+5. *Does DR site use same roots — any standby-only trust?*
+
+Answers map to edge types — not free-text wiki storage.
+
+---
+
+## 8.47 Identity Provider and SSO Federation CDG
+
+Enterprise SSO and federation introduce **identity cryptography** often absent from TLS scans:
+
+| Component | CDG nodes | Typical edges |
+|-----------|-----------|---------------|
+| IdP signing key | `saml-signing-key`, `oidc-jwks` | `signs` → assertions/tokens |
+| SP trust | Service provider | `trusts` → IdP key |
+| Federation hub | Partner IdP bridge | `trusts` external IdP anchor |
+
+Meridian workforce SSO migration to PQC-capable signing keys required **IdP key rotation** before 400 relying party applications updated — CDG showed IdP node fan-in 400, blocking ranking #4 after HSM and card scheme.
+
+GlobalSync **tenant IdP isolation** — separate subgraph per enterprise tenant on multi-tenant platform — prevented one tenant's federation migration from blocking others.
+
+---
+
+## 8.48 Email, Document Signing, and S/MIME Chains
+
+S/MIME and document signing create long-lived **user certificates** with archival verification needs:
+
+```
+[enterprise-email-ca] --signs--> [user-smime-cert] --signs--> [archived-email]
+```
+
+Meridian legal hold archives required verifying 10-year-old S/MIME signatures — CDG `verifies` edges from archive systems to retired CA nodes. Wave 2 PKI planning included **archival trust** — retired CA keys remain in CDG as `status=retired-trust` until archive horizon expires.
+
+---
+
+## 8.49 Wireless, IoT Radio, and Non-IP Cryptography
+
+Northfield field sites used **proprietary radio encryption** between sensors and gateways — not IPsec, not TLS. OT extension schema field `radio_crypto_profile` captured non-IP algorithms. CDG modelled radio layer as `implements` edge from sensor node to profile node — separate from gateway TLS subgraph.
+
+**Lesson:** CDG abstraction must accommodate **non-IP crypto** without forcing TLS metaphors — OT programmes stall when models assume enterprise PKI patterns.
+
+---
+
+## 8.50 Blockchain and Ledger Dependencies (Meridian)
+
+Distributed ledger pilot used **Hyperledger** with ECDSA node identities — 12 nodes, separate from payment HSM chain but sharing corporate root for some client integrations. CDG **namespace isolation** (`ledger-pilot`) prevented pilot nodes from polluting production payment blocking metrics.
+
+Pilot MPI scored high on innovation agenda but low on production dependency — Wave 3, not Wave 0 — CDG fan-in only to pilot consumers.
+
+---
+
+## 8.51 Quantifying Blocking Strength
+
+Programme office may rank blocking nodes with **blocking strength score (BSS)** — illustrative composite:
+
+**BSS = (fan_in × 0.4) + (A_score × 0.3) + (lead_time_months/24 × 0.3)**
+
+Normalised to 1–5 scale for executive sorting. Partner mTLS policy: fan_in 203, A = 5, lead 14 months → high BSS. Manufacturing root: fan_in 340, A = 5, lead 12 months → highest BSS.
+
+BSS does not replace CDG — it **communicates** blocking severity to non-technical stakeholders. Meridian board slides showed BSS trend decreasing quarter-over-quarter as Wave 0 progressed.
+
+---
+
+## 8.52 CDG Tooling Comparison (Non-Endorsement)
+
+| Approach | Strengths | Weaknesses |
+|----------|-----------|------------|
+| Graph database (Neo4j, Neptune) | Query flexibility, path algorithms | Licence, skill curve |
+| Relational nodes/edges tables | Simple ops, SQL reporting | Path queries harder |
+| JSON-LD in object store | Interop, linked data | Query tooling immature |
+| Architecture tool (draw.io export) | Workshop friendly | Stale, not machine-queryable |
+
+**Minimum viable:** Relational tables plus quarterly export to graph visualiser — sufficient until CDG-3 maturity (§8.14). GlobalSync built on relational store; Meridian used GRC-integrated graph module.
+
+---
+
+## 8.53 Legal Hold and eDiscovery Trust Dependencies
+
+Legal systems verifying **historical signature validity** depend on retired trust anchors:
+
+Meridian eDiscovery platform `trusts` edges to **retired CA nodes** — migration must not revoke retired anchors until verification horizon ends. CDG `retired_trust_until` attribute on CA nodes — Wave 2 PKI planning sequenced **new issuer deployment** before **retired anchor removal** — two-step edge migration.
+
+Legal counsel attended one CDG workshop — unusual but necessary when archive verification horizons exceeded technology refresh cycles.
+
+---
+
+## 8.54 Northfield OT Gateway Deep Dive
+
+James Whitfield's OT security team modelled **one gateway model, eighteen sites** as CDG meta-node `ot-gateway-v3` with `site` attributes on dependent PLC edges. Firmware vendor qualification for hybrid profiles required **single vendor engagement** — eighteen sites inherited same roadmap date.
+
+Gateway node attributes:
+
+| Attribute | Value | Wave impact |
+|-----------|-------|-------------|
+| `vendor_pq_ga_date` | 2027-Q3 | Wave 0 exit gate |
+| `blocking` | true | WAN + field protocol |
+| `fan_in` | 18 production lines | High BSS |
+
+Northfield rejected site-by-site VPN migration proposals — CDG showed identical gateway dependency; **template migration** once qualified reduced engineering from eighteen projects to one.
+
+---
+
+## 8.55 CDG Quality Assurance Before Wave Planning
+
+Programme office runs **CDG QA checklist** before TRADE wave workshops accept blocking flags:
+
+- [ ] Top 20 blocking nodes have validated fan-in counts
+- [ ] Evidence `evidence_ref` on ≥90% of blocking edges
+- [ ] No orphan blocking nodes without owner
+- [ ] Partner external anchors modelled separately from corporate root
+- [ ] DR/active-standby pairs annotated
+- [ ] NSS/corporate subgraphs not improperly merged
+
+Meridian failed first QA on evidence attachment — 23% blocking edges undocumented — delaying wave workshop two weeks until PKI team completed ceremony log linkage.
+
+---
+
+## 8.56 Applying CDG in Regulated Assessments
+
+Regulated enterprises map CDG outputs to assessment frameworks:
+
+| Framework need | CDG artefact |
+|----------------|--------------|
+| DORA ICT risk | Third-party trust edges with `partner_sla_pq_date` |
+| NIS2 security measures | OT subgraph with site segmentation |
+| NSS accreditation | Classified subgraph with `accreditation_id` |
+| PCI network segmentation | Cardholder data path subgraph |
+
+Meridian assessors received **filtered CDG export** for payment path — not full 4,800-edge graph. Filtering by `data_classification=PCI` produced 340-edge payment subgraph — assessable scope.
+
+---
+
+## 8.57 Integrating CDG with Enterprise Architecture Repositories
+
+Enterprises maintaining ArchiMate or similar repositories should **link** CDG nodes to architecture components — not duplicate wholesale:
+
+| Integration pattern | Benefit |
+|---------------------|---------|
+| CDG node `arch_ref` → CMDB/EA ID | Traceability to business capability |
+| Automated cert → application CI | Edge refresh on deploy |
+| Blocking flag in architecture review template | Catch new dependencies pre-production |
+
+GlobalSync architecture review gate required **CDG impact field** for any change touching trust stores or signing pipelines — new microservice could not production-deploy without declaring trust edges in graph or explicit "no new crypto" attestation.
+
+Meridian linked CDG blocking nodes to **business capability map** — payment capability owned blocking nodes for payment domain, enabling business-aligned Wave 0 funding narrative.
+
+**Anti-pattern:** Treating EA repository as substitute for CDG — architecture diagrams show intended state; CDG must reflect **production trust** validated by scan, config, or interview. Synchronise quarterly; do not merge without validation.
+
+---
+
+## 8.58 Chapter Summary
 
 - CDG extends CBOM from inventory to consequence — *what breaks if we change this*.
 - Node types (key, cert, anchor, HSM, firmware, policy) and edge types (`trusts`, `signs`, `terminates`, `verifies`, `inherits`) form the modelling vocabulary.
@@ -696,12 +1040,14 @@ Meridian ran **120 interviews** over eight weeks — payments domain alone requi
 
 ---
 
-## 8.25 References and Further Reading
+## 8.59 References and Further Reading
 
-- CycloneDX CBOM linkage to dependency concepts — [CycloneDX CBOM](https://cyclonedx.org/capabilities/cbom/)
-- NIST SP 1800-38B — migration planning and asset dependency themes
-- IETF ARCHITECTURE FOR POST-QUANTUM PKI (drafts) — trust anchor evolution
-- MERGE programme dependency management patterns (informative)
+- CycloneDX. CBOM linkage to dependency concepts — [CycloneDX CBOM](https://cyclonedx.org/capabilities/cbom/)
+- National Institute of Standards and Technology. (2024). *SP 1800-38B* — migration planning and asset dependency themes.
+- Internet Engineering Task Force. Post-quantum PKI architecture (drafts) — trust anchor evolution.
+- Basescu, C., et al. (2024). Deployment considerations for secure post-quantum cryptography in practice. *USENIX Security Symposium*.
+- Supply chain levels for software artifacts (SLSA) — informative for code-signing CDG patterns.
+- IBM Research. (2023). Cryptographic dependency typing for enterprise migration planning (industry reference).
 
 ---
 

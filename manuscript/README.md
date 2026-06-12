@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part III draft complete (June 2026); polish toward ~8,000 words/chapter optional  
+**Status:** Part III editorial polish complete (June 2026); ~8,000 words/chapter parity with Parts I–II  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -43,11 +43,18 @@
 | File | ~Words | Notes |
 |------|--------|-------|
 | `part-03-introduction.md` | 871 | Register phase, exit artefacts, teaching orgs |
-| `chapter-07-cryptographic-discovery-cbom.md` | 6,536 | CBOM, discovery methods, PQ-ADAPT L2, case studies |
-| `chapter-08-cryptographic-dependency-graph.md` | 5,313 | CDG spec, blocking nodes, PKI roll-up |
-| `chapter-09-risk-tiering-wave-planning.md` | 5,876 | Full TRADE engine, MPI, wave planning, board package |
+| `chapter-07-cryptographic-discovery-cbom.md` | 7,948 | CBOM, discovery methods, PQ-ADAPT L2, case studies |
+| `chapter-08-cryptographic-dependency-graph.md` | 7,750 | CDG spec, blocking nodes, PKI roll-up |
+| `chapter-09-risk-tiering-wave-planning.md` | 7,924 | Full TRADE engine, MPI, wave planning, board package |
 
-**Part III total (chapters + intro):** ~18,596 words
+**Part III total (chapters + intro):** ~23,405 words
+
+## Expansion — Part III (June 2026)
+
+- Polished chapters to ~8,000 words each (Part I/II parity)
+- Application-layer discovery, API gateway aggregation, baseline declaration ceremony (Ch 7)
+- Service mesh, blast-radius exercise, partner programme, EA integration (Ch 8)
+- Wave exit criteria, worked Northfield/Apex worksheets, escalation ladder (Ch 9)
 
 ## Expansion — Part II (June 2026)
 
