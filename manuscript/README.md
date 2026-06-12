@@ -7,7 +7,7 @@
 
 | Part | Directory | Chapters | Status |
 |------|-----------|----------|--------|
-| I — The Migration Imperative | `part-01-imperative/` | 1–3 | Draft complete |
+| I — The Migration Imperative | `part-01-imperative/` | 1–3 | Expanded draft (~8,000 words/chapter) |
 | II — Standards as Inputs | `part-02-standards/` | 4–6 | Planned |
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | 7–9 | Planned |
 | IV — Architecting for Transition | `part-04-architecture/` | 10–14 | Planned |
