@@ -538,7 +538,7 @@ Chapter 16 established procurement as cryptographic enforcement. Financial servi
 Single vendor evidence repository exports:
 
 - **DORA examination** — Article 28 register extract
-- **PCI QSA** — Appendix D third-party template
+- **PCI QSA** — Appendix D §D.12 third-party exhibit pointer
 - **Internal audit** — TRADE Ecosystem dimension input
 - **Steering committee** — concentration escalation dashboard
 

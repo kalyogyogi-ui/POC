@@ -351,7 +351,7 @@ NIST FIPS 203–205 are the practical deployment baseline. International bodies 
 
 ### ISO/IEC JTC 1 SC 27
 
-ISO/IEC working groups incorporate ML-KEM and ML-DSA into international standards including ISO/IEC 18033 (encryption) and ISO/IEC 14888 (signatures). ISO 27001 Annex A control 8.24 references organisational cryptography policies — which, post-2024, should name FIPS-aligned algorithm suites. Appendix A provides regulatory supplement depth.
+ISO/IEC working groups incorporate ML-KEM and ML-DSA into international standards including ISO/IEC 18033 (encryption) and ISO/IEC 14888 (signatures). ISO 27001 Annex A control 8.24 references organisational cryptography policies — which, post-2024, should name FIPS-aligned algorithm suites. Appendix C §C.5 provides regulatory supplement depth.
 
 ### ETSI
 

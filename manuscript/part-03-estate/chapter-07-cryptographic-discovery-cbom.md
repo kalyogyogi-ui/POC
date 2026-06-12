@@ -500,7 +500,7 @@ Part I established regulatory forcing functions. Part III operationalises them: 
 - Quarterly quality dashboard
 - Mapping from CBOM `asset_id` to provider contract reference
 
-**NIS2 / critical infrastructure (Northfield):** Essential entity status elevated OT inventory from "engineering documentation" to **supervisory evidence**. James presented CBOM segments by site and safety classification — linking cryptographic assets to NIS2 security measure documentation without claiming false precision on air-gapped devices.
+**US critical infrastructure (Northfield):** NERC CIP and TSA expectations elevated OT inventory from "engineering documentation" to **supervisory evidence**. James presented CBOM segments by site and safety classification — linking cryptographic assets to CIP evidence requirements without claiming false precision on air-gapped devices.
 
 **NSS / classified (Apex):** Aggregate reporting only — board saw enclave-level metrics; NSS CBOM detail remained in classified programme office. Priya's team rejected merging corporate and NSS inventories; **cross-reference index** listed shared vendors (HSM manufacturer, firmware signer) without exposing classified asset attributes.
 

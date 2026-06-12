@@ -175,7 +175,7 @@ Directive (EU) 2022/2555 (NIS2) requires essential and important entities across
 
 NIS2 does not explicitly reference quantum computing. It requires measures **consistent with the state of the art**. ENISA's implementation guidance, published in 2025, recommends that entities adopt quantum-resistant algorithms to protect sensitive data against harvest-now-decrypt-later attacks.
 
-For financial entities, DORA is **lex specialis** — it prevails over NIS2 where both apply to the same obligation. For energy companies like Northfield Energy, NIS2 (as transposed into national law) is the primary cryptographic compliance vehicle. Northfield's PQC programme must satisfy NIS2 Article 21 risk management measures and produce evidence that encryption controls reflect state-of-the-art practice.
+For financial entities, DORA is **lex specialis** — it prevails over NIS2 where both apply to the same obligation. For EU energy companies subject to NIS2 (as transposed into national law), NIS2 is a primary cryptographic compliance vehicle alongside sector-specific rules. **US operators such as Northfield Energy are not subject to NIS2** — they map evidence to NERC CIP, TSA, and CISA guidance (Chapter 20) while using the same programme structure with jurisdiction annotations.
 
 **NIS2 transposition variation** matters for multinational enterprises. Member States transposed NIS2 by October 2024 with national variations in scope, enforcement authority, and penalty structures. Germany's BSIG amendment, France's *loi relative à la sécurité des systèmes d'information* transposition measures, and the Netherlands' *Cyberbeveiligingswet* create jurisdiction-specific enforcement contexts for the same EU directive. Programme regulatory overlays should annotate national transposition differences where they affect evidence requirements or timelines.
 
@@ -415,7 +415,7 @@ A practical implication of the landscape above: **enterprises should not design 
 
 Divergent compliance programmes — one for DORA, one for NIST, one for PCI — produce inconsistent priorities, duplicated discovery effort, and audit findings when artefacts contradict each other.
 
-The recommended approach is a **single PQC migration programme** with a regulatory overlay matrix (Appendix C) annotating which artefacts satisfy which obligations in which jurisdictions. Northfield Energy, subject primarily to NIS2 and NERC CIP, uses the same programme structure as Meridian Mutual Bank, subject primarily to DORA — with sector and jurisdiction annotations, not separate architectures.
+The recommended approach is a **single PQC migration programme** with a regulatory overlay matrix (Appendix C) annotating which artefacts satisfy which obligations in which jurisdictions. Northfield Energy, subject primarily to NERC CIP and US sector agency guidance (not NIS2), uses the same programme structure as Meridian Mutual Bank, subject primarily to DORA — with sector and jurisdiction annotations, not separate architectures.
 
 ### Building the regulatory overlay
 
@@ -468,7 +468,7 @@ The regulatory diversity did not require programme diversity. It required **anno
 
 ## 3.12 International Standards, Insurance, and Contractual Risk
 
-Regulatory instruments reference "leading practices and standards" (ISO/IEC, ETSI, IETF) and create obligations beyond primary legislation — including cyber insurance questionnaires, contractual security exhibits, and litigation exposure for undocumented migration planning. **Appendix A** provides reference depth on these supplements. Enterprise compliance officers should ensure the regulatory overlay matrix (Appendix C) includes industry body publications and insurance renewal cycles where they create quasi-binding obligations.
+Regulatory instruments reference "leading practices and standards" (ISO/IEC, ETSI, IETF) and create obligations beyond primary legislation — including cyber insurance questionnaires, contractual security exhibits, and litigation exposure for undocumented migration planning. **Appendix C §C.5** provides reference depth on these supplements. Enterprise compliance officers should ensure the regulatory overlay matrix (Appendix C) includes industry body publications and insurance renewal cycles where they create quasi-binding obligations.
 
 Apex Defense Technologies encountered contractual flow-down early: a 2026 DoD subcontract amendment required CNSA 2.0 alignment evidence before option-year exercise — eighteen months before the enterprise's internal corporate IT migration plan would have produced equivalent documentation. Apex's regulatory overlay now tags **contractual instruments** alongside statutory ones, with equal weight in horizon monitoring.
 

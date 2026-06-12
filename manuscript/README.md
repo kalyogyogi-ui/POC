@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part VI editorial revision complete (June 2026); full manuscript Chapters 1–22 drafted  
+**Status:** Appendices A–E draft complete (June 2026); full manuscript Chapters 1–22 + appendices  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -13,7 +13,7 @@
 | IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Draft complete |
 | V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Draft complete |
 | VI — Sector Playbooks and Proof | `part-06-sector/` | Intro + 19–22 | Draft complete |
-| Appendices | `appendices/` | A (draft); B–E planned | Appendix A drafted |
+| Appendices | `appendices/` | A–E | Draft complete |
 
 ## Part I Files
 
@@ -23,7 +23,6 @@
 | `chapter-01-synchronization-problem.md` | 7,812 | Thesis, ARCS Awareness, programme vs project |
 | `chapter-02-threat-models.md` | 7,393 | TRADE Threat dimension, MPI formula, Figure 2.2 |
 | `chapter-03-regulatory-landscape.md` | 7,683 | Governance Stack, Figure 3.2, regulatory overlay |
-| `appendices/appendix-a-regulatory-supplements.md` | 718 | ISO/ETSI/IETF, insurance, contractual risk |
 
 **Part I total (chapters + intro):** ~24,470 words
 
@@ -87,6 +86,20 @@
 **Part VI total (chapters + intro):** ~33,642 words
 
 **Full manuscript (Parts I–VI, chapters + intros):** ~193,099 words
+
+## Appendices
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `appendix-a-cbom-cdg-templates.md` | 1,682 | CycloneDX schema, CDG graph, blocking register |
+| `appendix-b-pq-adapt-self-assessment.md` | 1,212 | Levels 0–5 questionnaire with evidence index |
+| `appendix-c-regulatory-mapping-matrix.md` | 1,414 | DORA/NIS2/GDPR/PCI/US matrix; supplements §C.5 |
+| `appendix-d-migration-programme-charter-template.md` | 1,238 | Board charter template; third-party exhibit pointer |
+| `appendix-e-glossary-standards-reference.md` | 1,160 | Glossary, algorithm and standards quick reference |
+
+**Appendices total:** ~6,706 words
+
+**Complete handbook (chapters + intros + appendices):** ~199,805 words
 
 ## Editorial Revisions — Part VI (June 2026)
 
@@ -157,7 +170,7 @@ Expert technical review against Parts I–II standards:
 Priority 1–3 editorial review items addressed:
 
 - Part I Introduction created; preface material moved from Chapter 1
-- Chapter 3 restructured: meta-bridge removed; ISO/insurance depth moved to Appendix A
+- Chapter 3 restructured: meta-bridge removed; ISO/insurance depth moved to Appendix C §C.5
 - Figure 2.2 (Threat-to-control mapping) and Figure 3.2 (Regulatory convergence map) added
 - TRADE MPI weighting formula and worked example (MPI = 4.39) in Chapter 2
 - Northfield NIS2 framing corrected (US operators not under NIS2)
