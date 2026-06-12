@@ -72,7 +72,7 @@
 | `chapter-17-software-supply-chain-embedded-cryptography.md` | 7,900 | SBOM/CBOM CI/CD gates, SSDF alignment |
 | `chapter-18-fips-validation-testing-assurance.md` | 7,904 | FIPS 140-3, CMMC evidence, test matrix |
 
-**Part V total (chapters + intro):** ~32,978 words
+**Part V total (chapters + intro):** ~33,144 words
 
 ## Editorial Revisions — Part V (June 2026)
 
