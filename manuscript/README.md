@@ -44,7 +44,7 @@
 |------|--------|-------|
 | `part-03-introduction.md` | 871 | Register phase, exit artefacts, teaching orgs |
 | `chapter-07-cryptographic-discovery-cbom.md` | 7,948 | CBOM, discovery methods, PQ-ADAPT L2, case studies |
-| `chapter-08-cryptographic-dependency-graph.md` | 7,750 | CDG spec, blocking nodes, PKI roll-up |
+| `chapter-08-cryptographic-dependency-graph.md` | 7,795 | CDG spec, blocking nodes, PKI roll-up |
 | `chapter-09-risk-tiering-wave-planning.md` | 7,924 | Full TRADE engine, MPI, wave planning, board package |
 
 **Part III total (chapters + intro):** ~23,405 words
