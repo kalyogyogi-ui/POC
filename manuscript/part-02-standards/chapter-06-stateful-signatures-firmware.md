@@ -160,7 +160,31 @@ SLH-DSA is a poor fit for **on-device verification** in MCU-class OT controllers
 
 ## 6.7 LMS and XMSS Operational Design
 
-When LMS or XMSS is selected, operational design precedes deployment.
+When LMS or XMSS is selected, operational design precedes deployment. Stateful signing is where **cryptographic engineering meets operations engineering** — failures are operational, not mathematical.
+
+### Catastrophic failure scenarios
+
+| Failure | Cause | Impact | Prevention |
+|---------|-------|--------|------------|
+| Index reuse | DR restore to stale backup | Forgery or repudiation break | Monotonic index verification on every sign |
+| Split-brain signing | Dual appliances without coordination | Duplicate index use | Leader election or partitioned index ranges |
+| Index exhaustion | Undersized tree height | Emergency key rotation | Capacity planning (§6.15) |
+| Lost state media | Air-gap transfer error | Cannot sign next release | Redundant state backup; ceremony checklist |
+| Unsigned emergency patch | Bypass state store under pressure | Policy violation + potential index gap | Pre-approved break-glass with post-incident audit |
+
+Northfield's programme treated index reuse as **Severity 1** — equivalent to private key compromise in incident classification. Playbooks required immediate suspension of signing operations, stakeholder notification, and key hierarchy review before resumption.
+
+### Disaster recovery and state continuity
+
+DR testing for stateful signing must verify **index monotonicity**, not only key material availability:
+
+1. Simulate primary signing appliance failure during active release cycle
+2. Fail over to secondary appliance with replicated state
+3. Attempt signature on secondary — verify index matches expected sequence
+4. Restore primary from backup taken before failover — verify restored index is **behind** active secondary (never promote stale primary without state reconciliation)
+5. Document results in Assurance layer evidence package
+
+Quarterly DR tests were contractual for Northfield's compressor vendor LMS deployment. Apex required similar tests for NSS firmware signing — classified environments added physical escort requirements for state media.
 
 ### Key hierarchy
 
@@ -351,7 +375,7 @@ Meridian's assessment:
 
 Meridian did not route payment HSM to LMS — the HSM vendor committed to ML-DSA-87 in FIPS-validated firmware, satisfying PCI and DORA evidence requirements without stateful signature operational complexity. The programme lesson: **special-case analysis is per device class**, not per sector label. Financial HSMs may follow standard ML-DSA paths while adjacent OT devices on the same estate require LMS.
 
-Elena Vasquez's team linked the HSM firmware row in the algorithm standards matrix (Chapter 4, Table 4.6) directly to the firmware signing row in Chapter 6's selection matrix — one asset, two chapter perspectives, single CBOM entry.
+Elena Vasquez's team linked the HSM firmware row in the algorithm standards matrix (Chapter 4, Table 4.7) directly to the firmware signing row in Chapter 6's selection matrix — one asset, two chapter perspectives, single CBOM entry.
 
 > **Regulatory Lens**
 >
@@ -361,7 +385,7 @@ Elena Vasquez's team linked the HSM firmware row in the algorithm standards matr
 
 ## 6.14 Apex Defense: Classified and Unclassified Boundaries
 
-Apex Defense Technologies encounters firmware signing across classified and unclassified boundaries. NSS programmes follow CNSA 2.0 without scheme flexibility. Unclassified OT-adjacent systems may use commercial patterns from this chapter.
+Apex Defense Technologies encounters firmware signing across classified and unclassified boundaries — the most stringent special-case environment in the teaching organisations. NSS programmes follow CNSA 2.0 without scheme flexibility. Unclassified OT-adjacent systems may use commercial patterns from this chapter.
 
 Apex's boundary policy:
 
@@ -370,6 +394,12 @@ Apex's boundary policy:
 - **Cross-domain transfer** — firmware images crossing classification boundaries require separate signing chains; PQC migration planned per domain, not assumed portable
 
 Priya Nair's architecture board reviews firmware signing proposals against both CNSA and enterprise matrices — preventing commercial subsidiaries from accidentally adopting schemes that fail NSS audit.
+
+### Personnel and clearance considerations
+
+Classified firmware signing ceremonies may restrict which staff witness LMS state transfers or ML-DSA key generation. Apex's programme HR plan identified **certified ceremony roles** 18 months ahead of CNSA 2030 firmware milestones — clearance processing could not be accelerated after vendor delivery. Programmes treating personnel as unlimited resource fail on classified boundaries.
+
+Unclassified subsidiaries without clearance constraints still inherited **export control** review for cryptographic implementations sourced from NSS programmes — legal review of LMS tooling transfer between divisions added three months to one subsidiary's OT pilot.
 
 ---
 
@@ -429,6 +459,32 @@ Firmware signing migration fails catastrophically when validation is inadequate.
 5. **Full deployment** — with rollback procedure validated at each prior stage
 
 Northfield required compressor vendor to complete stages 1–3 before Northfield security approved stage 4. Canary deployment ran thirty days with enhanced firmware integrity monitoring — detecting a certificate chain ordering bug that lab tests missed because lab devices used shorter chains.
+
+### Rollback architecture
+
+Firmware PQC migration must assume **failed upgrades**. Rollback design precedes rollout:
+
+| Scenario | Rollback strategy | Preconditions |
+|----------|-------------------|---------------|
+| Dual-sign H1 | Device accepts classical signature; revert to classical-only image | Classical trust anchor retained during H1 |
+| ML-DSA-only new units | Factory reflash with classical image (if stock available) | Stock management for pre-migration images |
+| LMS migration | Revert to last classical-signed image | Classical signing key retained until H3 |
+| Payment HSM | Vendor-defined downgrade path; may be **unavailable** | Contractual downgrade requirement before migration |
+
+Northfield's RTU programme retained classical root trust anchor for **24 months** after dual-sign H1 began — enabling rollback without emergency key ceremony. Compressor LMS path had **no cryptographic rollback** after classical key destruction — making staged rollout and canary period non-negotiable.
+
+Meridian's payment HSM vendor contract required documented downgrade procedure before production ML-DSA firmware — vendor initially claimed downgrade was "not applicable." Legal review made it a contract condition; vendor delivered procedure in month four of negotiation.
+
+### Field technician playbook
+
+OT migration fails when field staff receive cryptographic theory instead of procedures. Northfield's playbook pages covered:
+
+- Visual verification of manifest fields (§6.9)
+- When to abort installation (index gap, signature verify fail)
+- Escalation contact and SLA
+- Explicit **do not bypass** signature verification steps under maintenance pressure
+
+Playbooks were validated in staging with actual maintenance crews — not security analysts. Three playbook revisions followed staging feedback before canary approval.
 
 ### Validation evidence for regulators
 
@@ -525,7 +581,28 @@ Compensating controls require **risk acceptance documentation** with supervisory
 
 ---
 
-## 6.20 Firmware Signing Programme Charter Elements
+## 6.20 Cloud-Native vs OT: Comparative Programme Patterns
+
+Firmware signing challenges appear in both OT and cloud — with different constraints and faster iteration in cloud.
+
+**Table 6.3 — Northfield OT vs GlobalSync Cloud Signing**
+
+| Dimension | Northfield (OT firmware) | GlobalSync (container images) |
+|-----------|--------------------------|-------------------------------|
+| Device lifetime | 15–30 years | Minutes to hours (ephemeral) |
+| Size constraint | Fixed flash (4–8 KB certs) | Registry/config limits |
+| Signature scheme | LMS + ML-DSA dual-sign | ML-DSA dual-sign H1 |
+| Stateful signing | Yes (LMS) | No |
+| Rollback | Field technician; days | Automated; seconds |
+| Ecosystem gate | Vendor engineering cycles | Deployment agent versions |
+| Regulatory surface | NERC CIP, TSA | SOC 2, customer contracts |
+| Programme owner | OT security + PKI | Platform engineering |
+
+The comparison teaches **pattern transfer, not solution copy**. GlobalSync cannot use Northfield's LMS path — no state constraint benefit. Northfield cannot match GlobalSync's deployment velocity — staged field rollout is mandatory. Both require signature strategy decisions before production claims.
+
+---
+
+## 6.21 Firmware Signing Programme Charter Elements
 
 Enterprises consolidating firmware signing under the PQC programme should charter explicitly — not assume OT will "handle devices." Minimum charter elements:
 
@@ -542,7 +619,7 @@ Northfield's charter named James Whitfield as accountable owner with dotted-line
 
 ---
 
-## 6.21 Apply in Your Organisation
+## 6.22 Apply in Your Organisation
 
 1. **Classify firmware assets in CBOM** with cert store size, verification CPU, and signing vendor — flag special-case candidates before defaulting to ML-DSA.
 2. **Apply Table 6.1** consistently — document scheme per device class in cryptography policy.
@@ -552,7 +629,45 @@ Northfield's charter named James Whitfield as accountable owner with dotted-line
 
 ---
 
-## 6.22 Chapter Summary
+## 6.23 Programme Anti-Patterns in Firmware Migration
+
+**Anti-pattern 1: OT silo.** Firmware signing owned exclusively by plant engineering without PKI or security programme integration. Produces incompatible certificate profiles and duplicate vendor negotiations.
+
+**Anti-pattern 2: Hardware refresh as only strategy.** Defaulting to full device replacement when LMS or profile compression could bridge refresh cycles — capital waste and timeline extension.
+
+**Anti-pattern 3: Stateful signing without state owner.** LMS deployed because signatures fit; no team owns index DR. Inevitable index incident.
+
+**Anti-pattern 4: Dual-sign without H2 trigger.** ECDSA + ML-DSA on firmware indefinitely — permanent hybrid on longest-lived assets.
+
+**Anti-pattern 5: Test lab only validation.** Cryptographic correctness in vendor lab without operational timing test on field hardware — Northfield's canary caught chain ordering bug labs missed.
+
+**Anti-pattern 6: Payment HSM as general case.** Applying OT LMS analysis to FIPS HSM firmware where vendor provides ML-DSA path — over-engineering.
+
+Meridian explicitly reviewed Anti-pattern 6 before chartering payment HSM work — confirming ML-DSA via validated module rather than LMS by default.
+
+---
+
+## 6.24 Cross-Functional Stakeholder Map for Firmware Signing
+
+Firmware PQC migration requires a broader coalition than IT TLS projects:
+
+| Stakeholder | Role in firmware signing programme |
+|-------------|-----------------------------------|
+| OT / plant engineering | Operational acceptance; maintenance windows; field rollout |
+| Enterprise PKI | Certificate profiles; root migration; CRL/OCSP capacity |
+| Vendor management | Contract clauses; roadmap enforcement; audit rights |
+| Procurement | Capital for refresh; vendor engineering fees |
+| Legal / regulatory | Risk acceptance; NERC/TSA/PCI evidence |
+| Incident response | Index reuse and signing failure playbooks |
+| Physical security | Air-gap ceremony; tamper-evident media |
+
+Northfield's monthly firmware programme meeting required attendees from all seven rows — with decision authority documented. Meetings without OT operations representation were cancelled — preventing security-only decisions that operations could not execute.
+
+James Whitfield's rule: **no field push without operations sign-off on maintenance window and rollback procedure** — regardless of cryptographic test success.
+
+---
+
+## 6.25 Chapter Summary
 
 - Firmware and embedded systems require special-case signature strategy — ML-DSA defaults do not always fit fixed stores and CPU budgets.
 - SP 800-208 stateful schemes (LMS, XMSS) offer compact signatures with mandatory state management — index reuse is catastrophic.

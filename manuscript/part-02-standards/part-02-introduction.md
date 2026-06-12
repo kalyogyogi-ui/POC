@@ -116,4 +116,29 @@ ASCII figures in manuscript form include production briefs for artwork; final di
 
 ---
 
+## How Part II Connects to the Book Arc
+
+| Part | Question | Part II contribution |
+|------|----------|-------------------|
+| I | Why migrate? | Threat, regulation, synchronisation thesis |
+| **II** | **What standards apply?** | **FIPS suite, timelines, hybrids, firmware exceptions** |
+| III | Where is crypto deployed? | CBOM and CDG consume algorithm policy |
+| IV | How to implement? | Hybrid TLS, PKI, KMS execute HLM phases |
+| V | Who governs and when? | Programme office maintains timeline overlay |
+| VI | Sector proof? | SOM modifies defaults from Chapters 4–6 |
+
+Readers skipping Part II arrive at inventory and architecture chapters without algorithm vocabulary, hybrid sunset criteria, or firmware exception frameworks — producing CBOM entries that name "PQC" generically and policies that fail supervisory scrutiny.
+
+---
+
+## Suggested Reading Sequences
+
+**Architect fast path:** Introduction → Chapter 4 (§4.1, §4.8, §4.12–4.14) → Chapter 5 (§5.6–5.7, §5.24–5.25) → Chapter 6 (§6.4, §6.8) → Part III.
+
+**OT / critical infrastructure path:** Introduction → Chapter 4 (§4.9) → Chapter 6 (full) → Chapter 5 (§5.14, §5.17) → Chapter 19 (Part VI).
+
+**Compliance officer path:** Introduction → Chapter 4 (§4.15, Table 4.7) → Chapter 5 (§5.2, §5.11, §5.15) → Chapter 3 cross-reference (Part I).
+
+---
+
 *Proceed to Chapter 4: From NIST Competition to FIPS 203–205.*

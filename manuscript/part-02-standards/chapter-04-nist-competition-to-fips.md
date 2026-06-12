@@ -236,7 +236,7 @@ HQC provides an alternative code-based KEM — algorithmically distinct from ML-
 
 ### Why contingency planning matters
 
-Cryptographic history includes algorithm families weakened by unexpected analysis. Responsible programmes plan for algorithm agility (Chapter 10) and monitor NIST's ongoing work. Irresponsible programmes use "FN-DSA isn't final yet" as justification for programme paralysis. The distinction is operational: contingency algorithms inform **policy future-proofing** and **agility requirements**; finalized algorithms inform **deployment planning**.
+Cryptographic history includes algorithm families weakened by unexpected analysis. Responsible programmes plan for algorithm agility (Chapter 10) and monitor NIST's ongoing work. Irresponsible programmes use "FN-DSA isn't final yet" as justification for programme paralysis. The distinction is operational: contingency algorithms inform **policy future-proofing** and **agility requirements**; finalised algorithms inform **deployment planning**.
 
 ---
 
@@ -352,11 +352,65 @@ GlobalSync Logistics maintains a protocol standards watchlist across IETF, ETSI,
 
 ---
 
-## 4.12 Apex Defense: CNSA 2.0 vs. Commercial Availability
+## 4.12 Evaluating Vendor PQC Claims
+
+Vendor marketing outpaces FIPS validation. Enterprise procurement and architecture teams need a structured evaluation rubric — not a checklist of algorithm names in slide decks.
+
+**Table 4.4 — Vendor PQC Claim Evaluation Rubric**
+
+| Claim | Acceptable evidence | Reject |
+|-------|---------------------|--------|
+| "PQC-ready" | FIPS 140-3 cert listing specific algorithms and module version | Algorithm in beta branch without validation |
+| "Supports ML-KEM" | Certificate number; supported parameter sets; platform list | Internet-Draft implementation only |
+| "Hybrid TLS enabled" | Standards-track construction ID; tested client matrix | Proprietary hybrid without public spec |
+| "Roadmap Q3 2026" | Contractual milestone with liquidated damages or termination right | Verbal account manager assurance |
+| "FN-DSA supported" | FIPS publication + validation (or explicit lab scope) | Pre-standard reference implementation |
+| "Full suite support" | Per-algorithm validation rows — not aggregate marketing | Any single validated algorithm cited as full coverage |
+
+Apex's procurement team rejected three vendor responses in 2025 for citing "CRYSTALS-Dilithium support" without FIPS 204 module validation — pre-standard naming in a post-August 2024 RFP was treated as a negative indicator of implementation maturity.
+
+Meridian embedded the rubric in RFP Annex D. Evaluators scored responses 0–2 per row; minimum passing score required evidence in every row applicable to the workload class. The rubric prevented a repeat of Elena's pre-programme experience: an HSM vendor's "PQC roadmap" slide without binding delivery dates.
+
+> **Migration Moment**
+>
+> *"Our vendor says they're quantum-ready — do we need a separate PQC programme?"*
+>
+> Vendor readiness for one algorithm in a lab build is not enterprise migration. Readiness requires validated modules on your platforms, in your configurations, under your compliance regime — with contractual delivery dates for gaps. Programme chartering proceeds independently of vendor marketing; vendor evidence informs TRADE Ecosystem readiness scores.
+
+---
+
+## 4.13 GlobalSync Logistics: Platform-Wide Algorithm Consistency
+
+GlobalSync operates forty regional deployments with shared platform code but tenant-variable compliance overlays. Algorithm policy must be **globally consistent** while **locally annotated** — the same pattern as regulatory timeline overlays (Chapter 5).
+
+Marcus Chen's architecture team defined a **single platform algorithm baseline**:
+
+- TLS termination: ML-KEM-768 hybrid (H1) on all public API tiers
+- Internal mTLS: ML-KEM-768; ML-DSA-65 certificates from shared PKI
+- Container signing: ML-DSA-65 dual-sign H1
+- Tenant-dedicated HSM partitions: parameter elevation per contract, not per region
+
+Regional annotations applied only where law or contract mandated Category 5 — for example, a US federal logistics tenant requiring ML-KEM-1024 on dedicated endpoints. GlobalSync did not operate separate EU and US algorithm policies; it operated one matrix with **tenant rows**, avoiding the contradictory hybrid constructions that arose during its failed first-year dual-programme experiment (Chapter 3).
+
+Platform-wide consistency reduced engineering cost: one TLS configuration template, one certificate profile set, one CBOM normalisation pipeline. Tenant exceptions were CBOM rows — not forked codebases.
+
+### API and message size regression testing
+
+GlobalSync added PQC regression tests to CI/CD after ML-DSA-signed JWT prototypes exceeded API gateway header limits. Test categories:
+
+- Maximum HTTP header size with ML-DSA-signed bearer tokens
+- gRPC metadata limits with post-quantum certificate chains
+- Webhook payload size with dual-signed container attestations
+
+Failures blocked release — treating parameter size as a **platform SLO**, not a cryptographic afterthought. Three services required header limit configuration changes before platform baseline approval; none were discovered during the initial TLS-only pilot.
+
+---
+
+## 4.14 Apex Defense: CNSA 2.0 vs. Commercial Availability
 
 Apex Defense Technologies operates dual cryptographic tracks: NSS workloads under CNSA 2.0 mandates and commercial IT under NIST IR 8547 guidance. Priya Nair's architecture team documented the mapping in a single **algorithm standards matrix** — the Policy layer artefact regulators and customers expect.
 
-**Table 4.4 — Apex Algorithm Standards Matrix (Excerpt)**
+**Table 4.5 — Apex Algorithm Standards Matrix (Excerpt)**
 
 | Workload class | Key establishment | Signatures | Authority |
 |----------------|-------------------|------------|-----------|
@@ -377,7 +431,7 @@ Apex's commercial subsidiaries without NSS obligations followed the corporate IT
 
 ---
 
-## 4.13 Meridian and GlobalSync: Standards in Policy Documents
+## 4.15 Meridian and GlobalSync: Standards in Policy Documents
 
 Meridian Mutual Bank translated FIPS references into its **Cryptographic Control Policy** — the DORA-linked document Thomas Bergström's regulatory team defended in supervisory dialogue. The policy did not reproduce FIPS content. It stated:
 
@@ -390,7 +444,7 @@ GlobalSync Logistics faced a different challenge: **tenant-visible cryptography 
 
 ---
 
-## 4.14 FIPS 140-3 Validation and the Implementation Gap
+## 4.16 FIPS 140-3 Validation and the Implementation Gap
 
 Algorithm standards mean little without validated implementations. FIPS 140-3 defines security requirements for cryptographic modules — hardware and software — that process sensitive data in regulated environments.
 
@@ -430,7 +484,7 @@ Software libraries may implement FIPS-approved algorithms without full FIPS 140-
 
 ---
 
-## 4.15 Protocol and Library Readiness
+## 4.17 Protocol and Library Readiness
 
 Algorithms deploy through protocols and libraries. Architects track three readiness layers:
 
@@ -452,7 +506,7 @@ GlobalSync maintained a **protocol readiness register** listing each production 
 
 Architects familiar with classical algorithms need a translation table for design discussions — not implementation.
 
-**Table 4.5 — Classical Algorithm × PQC Replacement Mapping**
+**Table 4.6 — Classical Algorithm × PQC Replacement Mapping**
 
 | Classical operation | Example algorithms | PQC replacement | Notes |
 |--------------------|-------------------|-----------------|-------|
@@ -471,7 +525,7 @@ Applications inherit cryptography from container base images, language runtimes,
 
 ---
 
-## 4.16 Conducting an Algorithm Standards Workshop
+## 4.18 Conducting an Algorithm Standards Workshop
 
 Algorithm policy should not be written by a single architect in isolation. A half-day standards workshop produces defensible policy inputs:
 
@@ -494,7 +548,7 @@ Apex ran this workshop twice — once for NSS programmes, once for commercial IT
 
 ---
 
-## 4.17 Meridian Deep Dive: Payment HSM as Ecosystem Gate
+## 4.19 Meridian Deep Dive: Payment HSM as Ecosystem Gate
 
 Meridian's Chapter 1 blocking dependency — payment HSM firmware signing — illustrates standards-to-operations gap. The algorithm standard (ML-DSA-65 or ML-DSA-87) was clear by August 2024. The validated module was not.
 
@@ -510,11 +564,11 @@ The sequence demonstrates standards literacy enabling **parallel programme progr
 
 ---
 
-## 4.18 Worked Example: Meridian Algorithm Standards Matrix
+## 4.20 Worked Example: Meridian Algorithm Standards Matrix
 
 The following excerpt illustrates how Meridian translated Chapter 4 content into Policy-layer documentation — not a template, but a representative structure supervisors recognise.
 
-**Table 4.6 — Meridian Mutual Bank Algorithm Standards Matrix (Excerpt)**
+**Table 4.7 — Meridian Mutual Bank Algorithm Standards Matrix (Excerpt)**
 
 | Workload class | Key establishment | Signatures | Elevation trigger | Validation required |
 |----------------|-------------------|------------|-------------------|---------------------|
@@ -532,7 +586,27 @@ Thomas Bergström's regulatory team attached this matrix to Meridian's Cryptogra
 
 ---
 
-## 4.19 What This Chapter Deliberately Omits
+## 4.21 Common Algorithm Policy Mistakes
+
+Programmes fail at the policy layer before engineering begins. Recurring mistakes:
+
+**Mistake 1: Estate-wide Category 5 mandate.** Mandating ML-KEM-1024 and ML-DSA-87 everywhere "because security." Increases cost, breaks constrained devices, and provides no proportional risk reduction for ephemeral TLS sessions. *Remediation:* default Category 3; elevation criteria tied to TRADE and data classification.
+
+**Mistake 2: Algorithm policy without validation matrix.** Policy names ML-DSA; production HSMs lack validated modules. Engineering improvises; auditors find gap. *Remediation:* pair policy publication with validation coverage matrix (§4.23).
+
+**Mistake 3: Per-project algorithm selection.** Ten teams choose ten parameter sets; PKI cannot issue coherent certificate profiles. *Remediation:* architecture board owns matrix; projects request exceptions.
+
+**Mistake 4: Ignoring pre-standard names in CBOM.** Discovery tools report "Kyber" and "Dilithium"; policy requires FIPS names; inventory reconciliation fails. *Remediation:* normalisation rules in CBOM pipeline (Part III).
+
+**Mistake 5: Contingency algorithm deployment.** FN-DSA in production because "signatures are smaller" without FIPS validation or policy approval. *Remediation:* contingency monitoring only until standardised.
+
+**Mistake 6: TLS-only policy scope.** Algorithm policy addresses external TLS; ignores key wrapping, code signing, firmware, email. *Remediation:* operation-type rows in matrix, not protocol-specific silos.
+
+Northfield avoided Mistake 1 by device-class elevation. Meridian avoided Mistake 2 by delaying production claims until validation matrix showed gaps honestly. GlobalSync avoided Mistake 3 by platform baseline with tenant exception rows.
+
+---
+
+## 4.22 What This Chapter Deliberately Omits
 
 This chapter does not teach:
 
@@ -545,7 +619,7 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 ---
 
-## 4.20 Apply in Your Organisation
+## 4.23 Apply in Your Organisation
 
 1. **Publish an algorithm standards matrix** with default parameter sets (ML-KEM-768, ML-DSA-65) and Category 5 elevation criteria — do not leave selection to individual project teams.
 2. **Normalise CBOM algorithm names** to FIPS terminology — map Kyber/Dilithium/SPHINCS+ legacy labels in discovery output.
@@ -555,7 +629,7 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 ---
 
-## 4.21 Validation Coverage Matrix Example
+## 4.24 Validation Coverage Matrix Example
 
 Meridian maintained the following Operational-layer matrix — updated quarterly from CMVP listings and vendor correspondence:
 
@@ -571,7 +645,21 @@ The matrix prevented a common failure mode: engineering teams deploying software
 
 ---
 
-## 4.22 Chapter Summary
+## 4.25 Communicating Algorithm Standards to Engineering Teams
+
+Algorithm policy fails when written for auditors but unreadable by engineers. Effective internal communication:
+
+**Do** publish the algorithm standards matrix with workload-class rows engineers can map to their systems. **Do** link each row to validation coverage status — engineers then understand why production is gated. **Do** provide FIPS names and parameter sets in ticket templates and architecture review checklists.
+
+**Do not** distribute FIPS PDFs as the only guidance. **Do not** assume conference talks on PQC substitute for internal standards. **Do not** allow "team choice" between ML-DSA-65 and ML-DSA-87 without elevation criteria.
+
+GlobalSync embedded matrix rows in its internal developer portal — API teams selected workload class from dropdown; portal displayed approved algorithms and HLM phase requirements. Meridian embedded requirements in architecture review gates — no production approval without matrix row citation.
+
+Priya Nair's Apex team ran quarterly **standards office hours** — engineers brought systems; architects assigned matrix rows. Attendance counted toward architecture governance metrics — reducing shadow algorithm choices in R&D environments.
+
+---
+
+## 4.26 Chapter Summary
 
 - FIPS 203 (ML-KEM), 204 (ML-DSA), and 205 (SLH-DSA) are final standards — the enterprise deployment baseline as of August 2024.
 - The standards-as-inputs principle: reference FIPS in policy; implement migration through programme frameworks — not by reproducing standards in internal documents.

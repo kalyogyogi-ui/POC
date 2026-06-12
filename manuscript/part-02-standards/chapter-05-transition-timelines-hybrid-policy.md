@@ -436,7 +436,69 @@ Northfield's internal schedule targets 2028 completion for Wave 1 — **ahead of
 
 ---
 
-## 5.15 Hybrid TLS: Operational Deep Dive
+## 5.15 Meridian: Risk Acceptance Worked Example
+
+Meridian's payment HSM chain could not reach production PQC migration before the 2030 deprecation anchor without vendor acceleration. Thomas Bergström's legal team approved a **deprecation-period risk acceptance** — not a permanent waiver.
+
+**Risk acceptance record (abridged):**
+
+| Field | Value |
+|-------|-------|
+| System | Payment HSM firmware signing chain (vendor anonymised) |
+| Classical algorithm | RSA-2048 / ECDSA-P256 firmware signatures |
+| TRADE MPI | 4.39 (Chapter 2) |
+| Blocking dependency | FIPS 140-3 L3 module ML-DSA-87 — vendor GA Q3 2026 |
+| Compensating controls | HSM physical security; dual-control ceremony; firmware integrity monitoring |
+| Review date | 2025-12-31 (quarterly thereafter) |
+| Remediation date | 2027-06-30 (vendor module + integration) |
+| Supervisory notification | Assessed — not required pre-examination in home jurisdiction |
+| Approval | CISO + General Counsel |
+
+The record linked to CBOM asset ID, CDG node reference, and procurement escalation ticket. Supervisory reviewers could trace **why** classical algorithms remained — vendor ecosystem gate, not programme neglect.
+
+Meridian capped payment-domain risk acceptances at **two renewal cycles** before steering committee escalation — preventing the exception register from becoming a shadow migration policy.
+
+---
+
+## 5.16 GlobalSync: Tenant Notification and Contractual Sunsets
+
+Hybrid TLS on GlobalSync's API required tenant awareness — contractual notice periods treated cryptographic parameter changes as material amendments for three enterprise tenants.
+
+GlobalSync's tenant programme:
+
+1. **Inventory** — contractual notice periods and material-change clauses per tenant (legal + customer success)
+2. **Tier B client outreach** — updatable classical clients; 90-day notice with migration guide
+3. **Tier C negotiation** — fixed embedded clients; risk acceptance or amended contract with sunset date
+4. **Revenue impact model** — Tier C clients at 2.1% API traffic (*illustrative*); acceptable for H1 scope with compensating monitoring
+
+Marcus Chen's team sequenced tenant work **before** H1 production date — not after hybrid pilot success. Two tenants required contract amendments averaging **74 days** legal cycle (*illustrative*) — a synchronization delay invisible to TLS benchmarks but decisive for production rollout.
+
+> **Regulatory Lens**
+>
+> **GDPR and commercial contract law intersect hybrid deployment.** GlobalSync's EU tenants required documentation that hybrid constructions maintained appropriate technical measures under Article 32 — satisfied by standards-track hybrid references and updated customer security whitepaper, not by algorithm reassurances in email.
+
+---
+
+## 5.17 Northfield Energy: VPN and IKE Hybrid Transition
+
+Northfield's Wave 1 WAN VPN concentrators protected SCADA historian traffic — TES 5 HNDL exposure (Chapter 2). Hybrid TLS lessons did not transfer directly; IKEv2 hybrid constructions carried different fragmentation and failover behaviour.
+
+Northfield's VPN programme:
+
+| Phase | Activity | Outcome |
+|-------|----------|---------|
+| Assessment | Two concentrator models tested with ML-KEM hybrid IKE profiles | Model A passed; Model B required hardware refresh |
+| Capital | $2.8M refresh approved (*illustrative*) | Model B replaced in Wave 1 budget |
+| Pilot | Single non-production site; 30-day monitoring | Fragmentation on one path — MTU tuning required |
+| Rollout | Regional staging per §6.16 pattern | Operational continuity maintained |
+
+James Whitfield reported VPN migration to the board as **threat reduction on historian archives** — linking Chapter 2 threat analysis to Chapter 5 timeline capital. Regulatory evidence (NERC CIP) attached test reports demonstrating integrity controls remained effective post-migration.
+
+IKE hybrid policy joined Meridian-style risk acceptance for one legacy site that could not refresh until 2029 — six-month exception renewal with network segmentation compensating control.
+
+---
+
+## 5.18 Hybrid TLS: Operational Deep Dive
 
 TLS is the most common H1 deployment target — and the most common source of false programme confidence. Operational depth beyond pilot success separates production-ready hybrid policy from slide-deck compliance.
 
@@ -482,7 +544,7 @@ Hybrid TLS requires certificates signed with ML-DSA (or transitional classical c
 
 ---
 
-## 5.16 Board and Executive Reporting on Timelines
+## 5.19 Board and Executive Reporting on Timelines
 
 Executives require timeline communication without algorithm detail. Effective board reporting structure:
 
@@ -502,7 +564,7 @@ Marcus Chen's board deck never mentioned lattice cryptography. It reported that 
 
 ---
 
-## 5.17 Integration with Zero Trust and Identity Programmes
+## 5.20 Integration with Zero Trust and Identity Programmes
 
 Enterprises running Zero Trust architecture programmes alongside PQC migration must integrate timeline policy — not sequence blindly.
 
@@ -528,7 +590,7 @@ Chapter 1's Dependency Alert recommended embedding PQC agility in Zero Trust sta
 
 ---
 
-## 5.18 Conducting a Timeline Alignment Workshop
+## 5.21 Conducting a Timeline Alignment Workshop
 
 Before publishing enterprise timeline policy, run a alignment workshop connecting standards anchors to estate reality.
 
@@ -551,7 +613,7 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.19 Common Hybrid Policy Failures
+## 5.22 Common Hybrid Policy Failures
 
 **Permanent hybrid.** H1 deployed without H2 trigger; classical component never sunset. Dual attack surface indefinitely.
 
@@ -565,7 +627,7 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.20 Apply in Your Organisation
+## 5.23 Apply in Your Organisation
 
 1. **Publish a timeline overlay** mapping NIST, CNSA, and applicable national anchors to your programme waves — distinguish anchors from internal schedules.
 2. **Adopt the HLM** with mandatory H2 triggers on every H1 deployment — no permanent hybrids.
@@ -575,7 +637,23 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 
 ---
 
-## 5.21 HLM Governance Cadence
+## 5.24 Procurement and Timeline Alignment
+
+Timeline policy without procurement integration produces vendor surprises at gate reviews. Programme procurement clauses tied to Part II anchors:
+
+- **Algorithm delivery milestones** — FIPS-validated module dates by algorithm and platform
+- **Hybrid support** — standards-track construction IDs in deliverables
+- **Deprecation cooperation** — vendor obligation to remove classical-only paths by contract sunset
+- **Termination rights** — if milestones slip beyond exception-covered dates
+- **Roadmap transparency** — quarterly written updates referenced in steering committee
+
+Meridian's HSM contract amendment linked **€2.4 million** (*illustrative*) remaining contract value to ML-DSA module delivery — creating commercial leverage Elena's team lacked during the original RSA-only negotiation. Northfield's compressor contract tied **15%** of remaining vendor engineering fees to LMS acceptance test completion.
+
+Procurement teams need the timeline overlay and validation matrix as **exhibits** — not summaries from security email threads.
+
+---
+
+## 5.25 HLM Governance Cadence
 
 Sustaining HLM across a decade requires operational rhythm — not one-time policy publication.
 
@@ -591,7 +669,54 @@ Meridian added HLM phase distribution to the board dashboard introduced in Chapt
 
 ---
 
-## 5.22 Chapter Summary
+## 5.26 HLM Metrics and Executive Dashboards
+
+Effective dashboards measure **phase distribution and trigger adherence** — not pilot completion counts.
+
+**Table 5.6 — HLM Programme Metrics**
+
+| Metric | Definition | Target (illustrative) |
+|--------|------------|----------------------|
+| `hlm_phase` distribution | % estate in H1/H2/H3 by criticality tier | TES 5: 100% minimum H1 by 2027 |
+| Trigger coverage | % H1 systems with documented `h2_trigger_value` | 100% |
+| Trigger breach | H1 systems past trigger date without H2 transition | 0 without exception |
+| Exception ageing | Count exceptions >12 months | Steering committee threshold: 10 |
+| Classical new-deploy rate | New systems with classical-only PKC in H2 scope | 0 without exception |
+| Ecosystem readiness (E) | Average TRADE E for TES 5 systems | Rising quarterly |
+
+Meridian replaced "PQC pilot complete" board slides with HLM distribution by TRADE tier — eliminating the credibility loss pattern from Chapter 1 when pilots did not reach production.
+
+GlobalSync added tenant Tier C exposure as a subsidiary metric — API traffic percentage on classical-only clients with active risk acceptance. When Tier C exceeded 5%, customer success received programme escalation.
+
+---
+
+## 5.27 Exception Lifecycle Management
+
+Exceptions are programme state — not email approvals. Meridian's exception lifecycle:
+
+```
+Request (engineer) → TRADE/CBOM validation → Legal/compliance (if regulated data)
+    → CISO approval → CBOM annotation → Quarterly review → Sunset or renewal
+         ↓ (2 failed renewals)
+    Steering committee → Board risk committee (if TES 5 + >18 months)
+```
+
+GlobalSync automated expiry notifications **60 days** before exception review date. Expired exceptions without renewal triggered change freeze on affected systems — preventing silent classical-only deployments.
+
+Apex segregated NSS exceptions — waiver authority elevated to programme sponsor with classified security officer concurrence. Corporate IT exceptions followed Meridian-style lifecycle at lower approval tier.
+
+**Table 5.7 — Exception Renewal Decision Criteria**
+
+| Question | Renew | Escalate / deny |
+|----------|-------|-----------------|
+| Has blocking dependency changed? | No — renew with updated vendor letter | Yes — if resolved, deny renewal |
+| Has TRADE MPI decreased? | Possible renew with justification | MPI increased — expedite migration |
+| Same compensating controls active? | Renew | Controls failed audit — deny |
+| Exceeds max renewal cycles? | Deny — escalate | N/A |
+
+---
+
+## 5.28 Chapter Summary
 
 - NIST IR 8547 (IPD) provides deprecation (post-2030) and disallowance (post-2035) anchors for quantum-vulnerable PKC — not enterprise migration schedules.
 - CNSA 2.0 imposes more aggressive milestones for NSS and defence industrial base workloads.

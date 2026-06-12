@@ -31,16 +31,20 @@
 
 | File | ~Words | Notes |
 |------|--------|-------|
-| `part-02-introduction.md` | 1,019 | Standards-as-inputs, PQ-ADAPT L3 artefacts, teaching orgs |
-| `chapter-04-nist-competition-to-fips.md` | 5,882 | FIPS 203–205, algorithm matrix, validation gap, Northfield OT |
-| `chapter-05-transition-timelines-hybrid-policy.md` | 5,615 | IR 8547, HLM, hybrid policy, CBOM attributes |
-| `chapter-06-stateful-signatures-firmware.md` | 5,489 | SP 800-208, LMS/XMSS, Northfield/Meridian firmware cases |
+| `part-02-introduction.md` | 1,229 | Standards-as-inputs, PQ-ADAPT L3, reading sequences |
+| `chapter-04-nist-competition-to-fips.md` | 6,837 | FIPS 203–205, vendor rubric, validation matrix |
+| `chapter-05-transition-timelines-hybrid-policy.md` | 6,710 | IR 8547, HLM, hybrid policy, exception lifecycle |
+| `chapter-06-stateful-signatures-firmware.md` | 6,619 | SP 800-208, LMS/XMSS, OT/cloud firmware patterns |
 
-**Part II total (chapters + intro):** ~18,005 words
+**Part II total (chapters + intro):** ~21,395 words (~88% of Part I chapter depth)
+
+## Expansion — Part II (June 2026)
+
+- Expanded chapters to ~6,600–6,850 words each (Part I benchmark ~7,600)
 
 ## Editorial Revisions — Part II (June 2026)
 
-- Expanded chapters toward Part I parity (~5,500–5,900 words/chapter)
+- Expanded chapters toward Part I parity
 - British English pass; IR 8547 IPD qualification; Ch 5 timeline arithmetic fix
 - Pedagogical boxes standardised; Dependency Alert (Ch 5), Regulatory Lens (Ch 6)
 - HLM failure modes, CBOM `hlm_phase` attributes, sample hybrid policy language
