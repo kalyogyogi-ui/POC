@@ -5,7 +5,7 @@
 
 Meridian Mutual Bank's PKI engineering lead, Sofia Andersson, presented a root CA migration plan in November 2026 that made the steering committee uncomfortable for the right reasons. The proposal did not ask permission to replace RSA-4096 with ML-DSA-87 in a single cutover weekend. It asked permission to operate **two root trust anchors in parallel for ten years** — classical and post-quantum — with explicit sunset criteria, trust store distribution logistics for twelve thousand retail terminals, and a €1.8 million budget line labelled *overlap operations*, not *migration completion*.
 
-Elena Vasquez recognised the pattern from Chapter 1's synchronization meeting: PKI is where programme timelines meet physical reality. Hybrid TLS pilots succeeded in the laboratory because they changed negotiated groups, not trust anchors. Every downstream verifier — load balancers, mobile apps with certificate pinning, partner webhook clients, manufacturing firmware stores — still trusted certificates chained to roots that could not sign ML-DSA profiles until Sofia's team completed Wave 0 work.
+Elena Vasquez recognised the pattern from Chapter 1's synchronisation meeting: PKI is where programme timelines meet physical reality. Hybrid TLS pilots succeeded in the laboratory because they changed negotiated groups, not trust anchors. Every downstream verifier — load balancers, mobile apps with certificate pinning, partner webhook clients, manufacturing firmware stores — still trusted certificates chained to roots that could not sign ML-DSA profiles until Sofia's team completed Wave 0 work.
 
 Thomas Bergström's hybrid TLS deployment (Chapter 11) remained blocked on twelve services until the issuing CA published ML-DSA server certificate templates. Marcus Chen's partner mTLS programme (Chapter 8) could not accept client certificates the partner gateway's trust policy rejected. Priya Nair's NSS deliverable signing track (Chapter 9) required a separate root hierarchy that must never inherit trust paths from Apex commercial PKI.
 
@@ -32,7 +32,7 @@ PKI blocking differs from application blocking in **lead time**. Rotating an API
 
 > **Dependency Alert**
 >
-> **Issuing CA migration before root strategy is a common failure mode.** Teams re-issue end-entity certificates with ML-DSA keys while chaining to classical roots — valid transitional posture during H1, but not a substitute for root/subordinate architecture. Without root overlap planning, the enterprise repeats full trust migration at root retirement — paying the synchronization cost twice.
+> **Issuing CA migration before root strategy is a common failure mode.** Teams re-issue end-entity certificates with ML-DSA keys while chaining to classical roots — valid transitional posture during H1, but not a substitute for root/subordinate architecture. Without root overlap planning, the enterprise repeats full trust migration at root retirement — paying the synchronisation cost twice.
 
 ### Relationship to HLM and hybrid patterns
 
@@ -71,7 +71,7 @@ Meridian selected **parallel hierarchy with ten-year overlap** for manufacturing
 
 > **Architect's Decision**
 >
-> **Default to parallel hierarchy with documented overlap for internal enterprise PKI** unless CDG analysis proves greenfield separation for new workloads only. In-place evolution without overlap period forces simultaneous trust store updates across all dependents — the synchronization failure mode Chapter 1 described for SHA-1 root retirement, amplified by ML-DSA chain size and partner lead times.
+> **Default to parallel hierarchy with documented overlap for internal enterprise PKI** unless CDG analysis proves greenfield separation for new workloads only. In-place evolution without overlap period forces simultaneous trust store updates across all dependents — the synchronisation failure mode Chapter 1 described for SHA-1 root retirement, amplified by ML-DSA chain size and partner lead times.
 
 ### Path length, name constraints, and profile binding
 

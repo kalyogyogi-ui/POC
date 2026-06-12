@@ -110,11 +110,44 @@ It **is** the engineering foundation that makes Part V programme execution and P
 
 ---
 
+## How Part IV Connects to the Book Arc
+
+| Part | Question | Part IV contribution |
+|------|----------|---------------------|
+| I | Why migrate? | Synchronisation thesis — architecture prevents local optimisation failures |
+| II | What standards apply? | FIPS algorithms and HLM policy executed in patterns |
+| III | Where and what order? | CBOM rows, CDG blocking nodes, wave assignments drive architecture scope |
+| **IV** | **How to implement?** | **Agility NFRs, hybrids, protocols, PKI, keys** |
+| V | Who governs and when? | Programme office sustains standards adoption |
+| VI | Sector proof? | Sector overlays modify Part IV defaults |
+
+Readers arriving at Part IV without Part III wave plans risk architecture standards detached from sequencing — producing excellent laboratory pilots that CDG analysis later blocks in production. Readers skipping Part II HLM policy risk hybrid deployments without sunset criteria.
+
+---
+
+## Suggested Reading Sequences
+
+**Enterprise architect path:** Introduction → Chapter 10 (full) → Chapter 11 (§11.1–11.4, §11.10) → Chapter 13 (§13.1–13.7) → Chapter 12 (protocol sections matching estate) → Chapter 14.
+
+**Cryptographic engineer path:** All five chapters sequentially — agility before hybrids before protocols; PKI and keys before application-layer shortcuts.
+
+**PKI specialist path:** Introduction → Chapter 10 (§10.5 NFR template) → Chapter 13 (full) → Chapter 11 (§11.6 code signing) → Chapter 14 (§14.3–14.9).
+
+**OT / critical infrastructure path:** Introduction → Chapter 10 (§10.12 Northfield) → Chapter 11 (§11.5 VPN, §11.7 firmware) → Chapter 12 (§12.6–12.7 IPsec) → Chapter 19 (Part VI).
+
+**Programme director path:** Introduction → Chapter 10 (§10.1, §10.25 Level 3 checklist) → Chapter 11 (§11.1 HLM governance) → Part V.
+
+---
+
 ## Conventions
 
 British English, illustrative figures labelled as planning examples, pedagogical boxes (*Migration Moment*, *Dependency Alert*, *Regulatory Lens*, *Architect's Decision*), and *Apply in Your Organisation* checklists continue from prior parts.
 
-Standards references align with FIPS 203–205 and IETF specifications at time of writing; monitor NIST and IETF for updates before production deployment.
+Standards references align with FIPS 203–205 and IETF specifications at time of writing. NIST IR 8547 remains in Initial Public Draft at time of writing — monitor authoritative sources before embedding draft language in contractual instruments. IETF hybrid TLS specifications may advance from Internet-Draft to RFC during the migration horizon; architecture documents should reference standards-track identifiers with version dates.
+
+ASCII figures in manuscript form include production briefs for artwork; final diagrams follow in production.
+
+Vendor and cloud provider names appear as **categories** for pattern illustration — no product endorsement.
 
 ---
 

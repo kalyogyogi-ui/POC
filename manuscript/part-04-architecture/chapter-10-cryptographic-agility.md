@@ -535,7 +535,7 @@ Test harnesses require **non-production key material** — never copy production
 | Vendor test vectors | Algorithm correctness | Public NIST/KAT vectors |
 | Anonymised prod-shaped certs | Size/parse testing | Strip identifying metadata |
 
-Apex NSS harnesses ran in classified lab enclaves — results summarized for commercial programme office without exporting key material. Summary artefacts satisfied gate evidence; raw logs remained in enclave.
+Apex NSS harnesses ran in classified lab enclaves — results summarised for commercial programme office without exporting key material. Summary artefacts satisfied gate evidence; raw logs remained in enclave.
 
 ### 10.14.4 Performance regression gates
 
@@ -770,7 +770,26 @@ Meridian added agility coverage to PQ-ADAPT self-assessment — Level 3 requires
 
 ---
 
-## 10.24 Figure Production Brief — Agility Layer Model
+## 10.24 Editorial Consistency with Programme Artefacts
+
+Architecture standards fail when published in isolation from Part III inventory. GlobalSync's agility rollout required:
+
+| Programme artefact | Architecture response |
+|--------------------|----------------------|
+| CBOM `asset_id` | Every NFR cites inventory row |
+| CDG blocking node | Retrofit priority; centralise partner negotiation |
+| Wave plan membership | Level 3 checklist scoped to Wave 0–2 first |
+| TRADE E score | Gates production profile activation |
+
+Meridian linked agility SDLC gates to **DORA ICT risk register** — each gate produced evidence artefact Thomas Bergström's team could map to supervisory templates without re-authoring documentation per examination.
+
+> **Regulatory Lens**
+>
+> DORA expects ICT risk management tools, methods, processes, and policies to support **technological resilience** — including the ability to adapt cryptography as threats evolve. Crypto-agility NFRs are not advanced engineering preferences; they are structural evidence that the enterprise can execute algorithm transition without uncontrolled outage. Agility without CBOM linkage fails the evidence test — supervisors ask *which systems* comply, not *whether a standard exists*.
+
+---
+
+## 10.25 Figure Production Brief — Agility Layer Model
 
 **Figure 10.1** (§10.3): Three-layer stack diagram — Policy (governance board), Configuration (profiles/ConfigMaps), Implementation (provider interface → applications). Show HLM phase as horizontal band across policy layer. Annotate GlobalSync microservice calling provider with profile ID; contrast anti-pattern of algorithm literal in code sidebar.
 
@@ -778,7 +797,7 @@ Meridian added agility coverage to PQ-ADAPT self-assessment — Level 3 requires
 
 ---
 
-## 10.25 PQ-ADAPT Level 3 Exit Checklist
+## 10.26 PQ-ADAPT Level 3 Exit Checklist
 
 Before declaring Level 3 (*Architected*) for agility workstreams, programme office confirms:
 
@@ -797,7 +816,7 @@ GlobalSync declared Level 3 agility workstream complete Q3 2027 — hybrid TLS p
 
 ---
 
-## 10.26 Apply in Your Organisation
+## 10.27 Apply in Your Organisation
 
 1. **Publish the three-layer model** (policy / configuration / implementation) as enterprise architecture principle — one page, board-visible.
 2. **Adopt the master NFR template** (§10.5) with substitution windows per system class.
@@ -806,15 +825,15 @@ GlobalSync declared Level 3 agility workstream complete Q3 2027 — hybrid TLS p
 5. **Build or procure config schema** for `policy_profile_id` and `hlm_phase` on all crypto-touching services.
 6. **Centralise partner-facing negotiation** at gateway tier — microservices inherit, do not re-negotiate.
 7. **Integrate static analysis** for algorithm literals (AGL-01) in CI merge gates.
-8. **Deploy enterprise test harness** — parametrized profile matrix runner before production agility claims.
+8. **Deploy enterprise test harness** — parameterised profile matrix runner before production agility claims.
 9. **Extend CBOM schema** with agility fields (§10.15); automate dashboard for steering committee.
 10. **Document OT agility ceilings** honestly — Tier 2 with firmware path beats fictional Tier 4.
 11. **Schedule annual substitution drill** — measure against NFR window **S**.
-12. **Complete Level 3 exit checklist** (§10.25) before Chapter 11 hybrid deployment at scale.
+12. **Complete Level 3 exit checklist** (§10.26) before Chapter 11 hybrid deployment at scale.
 
 ---
 
-## 10.27 Chapter Summary
+## 10.28 Chapter Summary
 
 - Cryptographic agility is **separation of policy from implementation** — the architectural foundation of migration-ready systems.
 - **ARCS Decide** and **PQ-ADAPT Level 3** require agility NFRs embedded in SDLC, not wiki guidance.

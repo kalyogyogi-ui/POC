@@ -10,7 +10,7 @@
 | I — The Migration Imperative | `part-01-imperative/` | Intro + 1–3 | Editorial revision complete |
 | II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Editorial revision complete |
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Draft complete |
-| IV — Architecting for Transition | `part-04-architecture/` | 10–14 | Planned |
+| IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Draft complete |
 | V — Running the Migration Programme | `part-05-programme/` | 15–18 | Planned |
 | VI — Sector Playbooks and Proof | `part-06-sector/` | 19–22 | Planned |
 | Appendices | `appendices/` | A (draft); B–E planned | Appendix A drafted |
@@ -48,6 +48,30 @@
 | `chapter-09-risk-tiering-wave-planning.md` | 7,924 | Full TRADE engine, MPI, wave planning, board package |
 
 **Part III total (chapters + intro):** ~23,405 words
+
+## Part IV Files
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `part-04-introduction.md` | 1,297 | Decide/Execute phase, PQ-ADAPT L3, reading sequences |
+| `chapter-10-cryptographic-agility.md` | 7,919 | Agility NFRs, SDLC gates, maturity model |
+| `chapter-11-hybrid-deployment-patterns.md` | 7,948 | Full HLM deployment, hybrid TLS/VPN/signing |
+| `chapter-12-protocol-transition.md` | 8,428 | TLS, IPsec, SSH, messaging protocol playbooks |
+| `chapter-13-pki-evolution-certificate-lifecycle.md` | 7,834 | PQC PKI hierarchy, Meridian root overlap |
+| `chapter-14-key-management-hsm-cloud.md` | 7,889 | HSM/KMS, ceremonies, multi-cloud custody |
+
+**Part IV total (chapters + intro):** ~41,315 words
+
+## Editorial Revisions — Part IV (June 2026)
+
+Expert technical review against Parts I–II standards:
+
+- British English pass (*synchronisation*, *summarised*, *parameterised*, *organisation*)
+- Character consistency: Marcus Chen (GlobalSync) vs Elena Vasquez (Meridian) — corrected Ch 11–12 cross-org attributions
+- Part IV introduction expanded: book arc table, suggested reading sequences, IR 8547 IPD qualification
+- Chapter 10: DORA regulatory lens, programme artefact linkage (§10.24), figure production briefs
+- Pedagogical boxes, Apply checklists, and 8–14 references per chapter verified
+- Cross-references to Parts II–III (HLM, CBOM, CDG, TRADE) standardised
 
 ## Expansion — Part III (June 2026)
 

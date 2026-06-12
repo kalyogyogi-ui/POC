@@ -789,7 +789,7 @@ Extend Chapter 11 Table 11.4 with protocol-class fields:
 | `partner_sync_status` | blocked / pilot / production | Partner programme |
 | `library_min_version` | Semver | CI/CD gate |
 
-Elena Vasquez's GlobalSync team rejected change tickets where `protocol_class` was populated but `library_min_version` failed platform baseline — linking protocol transition to Chapter 17 CI/CD gates.
+Marcus Chen's GlobalSync platform team rejected change tickets where `protocol_class` was populated but `library_min_version` failed platform baseline — linking protocol transition to Chapter 17 CI/CD gates.
 
 ---
 

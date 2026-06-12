@@ -436,7 +436,7 @@ Chapter 7 established that application-layer crypto is the largest inventory gap
 | gRPC mTLS | Inherits mesh ingress row | Phase follows mesh policy |
 | Webhook verification | Partner-specific row | May remain classical until partner migrates |
 
-Elena Vasquez's CBOM team required **application teams to file hybrid intent** at architecture review — before merge request approval — populating `hybrid_construction_ref` and `h2_trigger_value` in the component metadata emitted to CycloneDX on build. Services deploying hybrid patterns without CBOM rows failed GlobalSync's CI/CD gate (Chapter 17 preview).
+Elena Vasquez's programme office required **Meridian application teams to file hybrid intent** at architecture review — before merge request approval — populating `hybrid_construction_ref` and `h2_trigger_value` in CBOM metadata. Marcus Chen's GlobalSync pipeline enforced the same fields in CycloneDX build output; services deploying hybrid patterns without CBOM rows failed CI/CD gate (Chapter 17 preview).
 
 ### Anti-patterns in application-layer hybrids
 
