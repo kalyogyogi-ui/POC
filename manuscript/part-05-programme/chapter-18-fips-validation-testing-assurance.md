@@ -348,7 +348,7 @@ PQC module upgrades are FedRAMP **significant changes** — requiring reassessme
 
 ### 18.7.3 Contractor flow-down
 
-Defence contractors using FedRAMP-authorized cloud for CUI must trace **flow-down requirements** from DFARS, CMMC, and agency-specific clauses. The evidence chain:
+Defence contractors using FedRAMP-authorised cloud for CUI must trace **flow-down requirements** from DFARS, CMMC, and agency-specific clauses. The evidence chain:
 
 ```
 Agency mission need → FedRAMP auth package → Provider crypto table →

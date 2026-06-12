@@ -434,7 +434,7 @@ Templates reduce authoring burden and train consistent board narrative. Meridian
 
 ### Dual-track reporting (Apex)
 
-Apex Defence Technologies required **NSS and commercial swim lanes** in board reporting — Priya Nair presented separate wave progress with shared procurement savings. Forced single-track narrative either understated NSS urgency or overstated commercial progress. Board risk committee appreciated parallel lanes with explicit **interface boundary** metrics — cross-domain guard nodes, not unified PKI.
+Apex Defense Technologies required **NSS and commercial swim lanes** in board reporting — Priya Nair presented separate wave progress with shared procurement savings. Forced single-track narrative either understated NSS urgency or overstated commercial progress. Board risk committee appreciated parallel lanes with explicit **interface boundary** metrics — cross-domain guard nodes, not unified PKI.
 
 ---
 
@@ -469,6 +469,10 @@ PQC waves compete with cloud migration, ERP, and regulatory programmes. Chapter 
 ### Chargeback and regional funding
 
 GlobalSync adopted **corporate-funded central programme office** with **regional execution budgets** aligned to wave membership. Regional MDs funded domain engineering effort; corporate funded cross-region blocking work — partner gateway, global CBOM platform, steering secretariat. Without corporate funding for cross-region assets, Wave 0 becomes orphan.
+
+> **Architect's Decision**
+>
+> **Fund cross-region blocking assets centrally; fund domain execution regionally.** Wave 0 partner gateways, global CBOM platforms, and steering secretariats rarely map cleanly to a single regional P&L — yet they unblock every region's migration. Programmes that charge blocking work to regional budgets produce orphan dependencies and repeated Frankfurt–Singapore–Oregon negotiation failures. Corporate ring-fence for structural assets; regional budgets for wave membership execution.
 
 ---
 

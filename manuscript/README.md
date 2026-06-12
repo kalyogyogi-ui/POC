@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part V draft complete (June 2026); ~8,000 words/chapter parity  
+**Status:** Part V editorial revision complete (June 2026); ~8,000 words/chapter parity  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -66,13 +66,27 @@
 
 | File | ~Words | Notes |
 |------|--------|-------|
-| `part-05-introduction.md` | 1,095 | Synchronize phase, PQ-ADAPT L4, Governance Stack operating model |
-| `chapter-15-programme-governance-operating-model.md` | 8,048 | Charter, RACI, KPIs, steering rhythm, board reporting |
-| `chapter-16-procurement-contracts-third-party-risk.md` | 8,031 | Contract clauses, DORA ICT risk, vendor assessment |
+| `part-05-introduction.md` | 1,184 | Synchronize phase, PQ-ADAPT L4, Governance Stack operating model |
+| `chapter-15-programme-governance-operating-model.md` | 8,114 | Charter, RACI, KPIs, steering rhythm, board reporting |
+| `chapter-16-procurement-contracts-third-party-risk.md` | 8,042 | Contract clauses, DORA ICT risk, vendor assessment |
 | `chapter-17-software-supply-chain-embedded-cryptography.md` | 7,900 | SBOM/CBOM CI/CD gates, SSDF alignment |
 | `chapter-18-fips-validation-testing-assurance.md` | 7,904 | FIPS 140-3, CMMC evidence, test matrix |
 
 **Part V total (chapters + intro):** ~32,978 words
+
+## Editorial Revisions — Part V (June 2026)
+
+Expert technical review against Parts I–IV standards:
+
+- British English pass (*authorise*, *defence industrial base*, *FedRAMP-authorised*)
+- Organisation name consistency: Apex Defense Technologies (corrected Ch 15 §15.12 *Defence* variant)
+- Part V introduction expanded: IR 8547 IPD qualification, ASCII figure convention, vendor category disclaimer (Part IV parity)
+- Chapter 15: pedagogical box added (§15.13 funding model); five teaching boxes verified
+- Chapter 16: *Proceed to Chapter 17* navigation line added after references
+- Cross-references to Parts I–IV verified: Governance Stack (Ch 3), 94% readiness callback (Ch 7), CDG blocking (Ch 8), wave gates (Ch 9), agility gates (Ch 10), hybrid CBOM (Ch 11), HSM assessment (Ch 14)
+- Character consistency: Marcus Chen (GlobalSync), Elena Vasquez (Meridian), Dr. Priya Nair (Apex), James Okafor (Northfield) — no cross-org attribution errors
+- Pedagogical boxes, Apply checklists (12–15 items), and 10 references per chapter verified
+- Word counts meet ~8,000/chapter target; Part V handoff to Part VI documented in Ch 18
 
 ## Editorial Revisions — Part IV (June 2026)
 

@@ -140,6 +140,12 @@ It **is** the organisational layer that prevents Parts I–IV artefacts from dec
 
 British English, illustrative figures labelled as planning examples, pedagogical boxes (*Migration Moment*, *Dependency Alert*, *Regulatory Lens*, *Architect's Decision*), and *Apply in Your Organisation* checklists continue from prior parts.
 
+Standards references align with FIPS 203–205 and IETF specifications at time of writing. NIST IR 8547 remains in Initial Public Draft at time of writing — monitor authoritative sources before embedding draft language in contractual instruments. IETF hybrid TLS specifications may advance from Internet-Draft to RFC during the migration horizon; programme documents should reference standards-track identifiers with version dates.
+
+ASCII figures in manuscript form include production briefs for artwork; final diagrams follow in production.
+
+Vendor and cloud provider names appear as **categories** for pattern illustration — no product endorsement.
+
 Contract clause samples are informative — organisation-specific legal review required before use in binding instruments.
 
 ---

@@ -834,3 +834,7 @@ Cyber insurance renewals increasingly query PQC readiness. Meridian linked vendo
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era* — third-party risk dimensions.
 - Payment Card Industry Security Standards Council. (2024). PCI DSS v4.0 — third-party service provider cryptographic requirements (informative mapping).
+
+---
+
+*Proceed to Chapter 17: Software Supply Chain and Embedded Cryptography.*

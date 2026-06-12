@@ -582,7 +582,7 @@ Northfield's WAN concentrators (Tier 3 agility) ran standard container gates. Fi
 
 ## 17.15 Apex: Classified Build Pipelines
 
-Apex Defense Technologies operates **parallel build pipelines** — commercial IT, defense industrial base, and NSS enclaves — with cryptographic boundary enforcement at promotion, not documentation pretence.
+Apex Defense Technologies operates **parallel build pipelines** — commercial IT, defence industrial base, and NSS enclaves — with cryptographic boundary enforcement at promotion, not documentation pretence.
 
 ### 17.15.1 Pipeline separation model
 
@@ -592,7 +592,7 @@ Apex Defense Technologies operates **parallel build pipelines** — commercial I
 | **DIB programmes** | Segmented | Program-specific HSM | Program vault | `apex-dib-*` |
 | **NSS enclave** | Air-gapped | NSS CI HSM | Classified repository | `apex-nss-*` |
 
-Cross-enclave **artefact promotion is forbidden** — corporate pipeline success does not authorize NSS deployment. Priya Nair's architecture board rejected "build once, classify later" — classification boundary is a **compile-time and sign-time** property.
+Cross-enclave **artefact promotion is forbidden** — corporate pipeline success does not authorise NSS deployment. Priya Nair's architecture board rejected "build once, classify later" — classification boundary is a **compile-time and sign-time** property.
 
 ### 17.15.2 NSS gate enhancements
 
