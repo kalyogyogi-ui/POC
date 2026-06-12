@@ -84,7 +84,8 @@ Expert technical review against Parts I–IV standards:
 - Chapter 15: pedagogical box added (§15.13 funding model); five teaching boxes verified
 - Chapter 16: *Proceed to Chapter 17* navigation line added after references
 - Cross-references to Parts I–IV verified: Governance Stack (Ch 3), 94% readiness callback (Ch 7), CDG blocking (Ch 8), wave gates (Ch 9), agility gates (Ch 10), hybrid CBOM (Ch 11), HSM assessment (Ch 14)
-- Character consistency: Marcus Chen (GlobalSync), Elena Vasquez (Meridian), Dr. Priya Nair (Apex), James Okafor (Northfield) — no cross-org attribution errors
+- Character consistency: Marcus Chen (GlobalSync), Elena Vasquez (Meridian), Dr. Priya Nair (Apex), James Whitfield (Northfield) — no cross-org attribution errors
+- Northfield NIS2 framing corrected in Ch 17 (US operator; NERC CIP/CISA overlay)
 - Pedagogical boxes, Apply checklists (12–15 items), and 10 references per chapter verified
 - Word counts meet ~8,000/chapter target; Part V handoff to Part VI documented in Ch 18
 

@@ -572,7 +572,7 @@ CCB approval (CBOM row review) -> staged partition B -> maintenance deploy ->
 site survey confirmation -> CBOM confidence=verified
 ```
 
-James Whitfield rejected **"flash first, document later"** — OT culture clash resolved when NIS2 essential-entity reporting made firmware CBOM **supervisory evidence**, not engineering paperwork.
+James Whitfield rejected **"flash first, document later"** — OT culture clash resolved when NERC CIP evidence requirements and CISA sector guidance made firmware CBOM **supervisory evidence**, not engineering paperwork.
 
 ### 17.14.3 WAN versus field device separation
 
