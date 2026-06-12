@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part V editorial revision complete (June 2026); ~8,000 words/chapter parity  
+**Status:** Part VI draft complete (June 2026); full manuscript Chapters 1–22 drafted  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -12,7 +12,7 @@
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Draft complete |
 | IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Draft complete |
 | V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Draft complete |
-| VI — Sector Playbooks and Proof | `part-06-sector/` | 19–22 | Planned |
+| VI — Sector Playbooks and Proof | `part-06-sector/` | Intro + 19–22 | Draft complete |
 | Appendices | `appendices/` | A (draft); B–E planned | Appendix A drafted |
 
 ## Part I Files
@@ -73,6 +73,20 @@
 | `chapter-18-fips-validation-testing-assurance.md` | 7,904 | FIPS 140-3, CMMC evidence, test matrix |
 
 **Part V total (chapters + intro):** ~33,144 words
+
+## Part VI Files
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `part-06-introduction.md` | 1,423 | Proof phase, SOM, PQ-ADAPT L4–5, four-org arcs |
+| `chapter-19-financial-services-playbook.md` | 8,022 | DORA examination, SOM wR +0.25, Meridian Year 2 arc |
+| `chapter-20-defense-government-critical-infrastructure.md` | 7,886 | CNSA 2.0, CMMC, NERC CIP; Apex + Northfield |
+| `chapter-21-cloud-saas-multinational-compliance.md` | 8,188 | Multi-tenant PQC, GDPR evidence; GlobalSync arc |
+| `chapter-22-sustaining-quantum-resilience.md` | 7,921 | Standards watch, Level 5, four-org Year 3 retrospective |
+
+**Part VI total (chapters + intro):** ~33,440 words
+
+**Full manuscript (Parts I–VI, chapters + intros):** ~192,897 words
 
 ## Editorial Revisions — Part V (June 2026)
 
