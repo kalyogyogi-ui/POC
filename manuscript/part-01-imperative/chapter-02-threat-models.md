@@ -9,7 +9,7 @@ It also represented approximately 4.2 terabytes of operational data whose confid
 
 The adversary capable of exploiting a future cryptographically relevant quantum computer does not need to compromise Northfield's control network today. Recording encrypted historian traffic requires passive collection — a capability well within the means of sophisticated threat actors operating against critical infrastructure. The decryption can wait. The collection cannot.
 
-Dr. Sarah Okonkwo, Northfield's Director of Security Architecture, had argued for eighteen months that the historian replication link warranted upgraded encryption and key management independent of any quantum threat — simply on the basis of data sensitivity classification. The quantum framing gave her argument the executive urgency that data classification alone had not. It did not change the underlying analysis. The data was sensitive. The encryption protecting it in transit was adequate against classical adversaries. It was not adequate against an adversary who could wait.
+James Whitfield, Northfield's OT Security Director, had argued for eighteen months that the historian replication link warranted upgraded encryption and key management independent of any quantum threat — simply on the basis of data sensitivity classification. The quantum framing gave her argument the executive urgency that data classification alone had not. It did not change the underlying analysis. The data was sensitive. The encryption protecting it in transit was adequate against classical adversaries. It was not adequate against an adversary who could wait.
 
 This chapter replaces quantum threat hype with the decision-grade threat analysis that determines migration sequence. Not all quantum risk is equal. The enterprises that migrate effectively are those that distinguish between threats that demand action now and threats that remain bounded by shorter time horizons.
 
@@ -94,7 +94,7 @@ These four facts justify programme investment. They do not determine migration s
 
 ## 2.3 The Confidentiality Horizon
 
-Every encrypted asset has a confidentiality horizon: the period during which unauthorized disclosure would cause material harm. This horizon is independent of certificate validity, key rotation frequency, or quantum computer forecasts.
+Every encrypted asset has a confidentiality horizon: the period during which unauthorised disclosure would cause material harm. This horizon is independent of certificate validity, key rotation frequency, or quantum computer forecasts.
 
 Consider four assets in the same enterprise:
 
@@ -248,7 +248,7 @@ Threat exposure is not assessed in a vacuum. The enterprise's threat model — d
 |--------|------------------|---------------------------|-----------------|
 | Critical infrastructure | Nation-state, sabotage | **Assumed baseline** | High — firmware, OT |
 | Financial services | Criminal, nation-state (targeted) | High for payment data | High — transaction auth |
-| Defense industrial base | Nation-state | **Assumed baseline** | **Critical** — all signatures |
+| Defence industrial base | Nation-state | **Assumed baseline** | **Critical** — all signatures |
 | Healthcare | Criminal, insider | Moderate — PHI archives | Moderate — records integrity |
 | Multinational SaaS | Criminal, nation-state (tenant-dependent) | Tenant-dependent | High — platform signing |
 | Retail / e-commerce | Criminal | Low–moderate | Low–moderate |
@@ -552,7 +552,7 @@ Security leaders frequently fail to translate threat analysis into language that
 
 **For regulators:** "Our ICT risk assessment, conducted [date] using [methodology], identified quantum threat as material for [N] critical systems. Our encryption policy, updated [date], references NIST FIPS 203–205. Our certificate register contains [N] entries. Our migration plan addresses gaps over [timeline]."
 
-Each template connects threat analysis to governance artefacts regulators and executives recognize — without requiring the audience to evaluate TES scores directly.
+Each template connects threat analysis to governance artefacts regulators and executives recognise — without requiring the audience to evaluate TES scores directly.
 
 ---
 

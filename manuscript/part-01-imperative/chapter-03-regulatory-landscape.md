@@ -29,7 +29,7 @@ For post-quantum cryptography, the convergence pattern is:
 4. **Supervisory guidance** interprets the gap between current practice and state of the art as a compliance deficiency.
 5. **Audit practice** requests evidence.
 
-PQC compliance is therefore demonstrated not by citing a regulation that says "use ML-KEM" but by presenting a **documented programme** that supervisory reviewers recognize as state-of-the-art cryptographic governance in a post-2024 environment.
+PQC compliance is therefore demonstrated not by citing a regulation that says "use ML-KEM" but by presenting a **documented programme** that supervisory reviewers recognise as state-of-the-art cryptographic governance in a post-2024 environment.
 
 This logic applies across jurisdictions. The specific instruments differ. The evidentiary standard does not.
 
@@ -94,17 +94,17 @@ The Commercial National Security Algorithm Suite 2.0, published by NSA in 2022 a
 | 2033 | Most NSS platforms migrated |
 | 2035 | All NSS, including custom and legacy, fully migrated |
 
-CNSA 2.0 specifies ML-KEM-1024, ML-DSA-87, and SLH-DSA as the approved suite, with hybrid key establishment required during transition. Defence contractors, FedRAMP-authorized cloud providers, and enterprises serving the defense industrial base encounter CNSA 2.0 as a **contractual and certification requirement**, not advisory guidance.
+CNSA 2.0 specifies ML-KEM-1024, ML-DSA-87, and SLH-DSA as the approved suite, with hybrid key establishment required during transition. Defence contractors, FedRAMP-authorised cloud providers, and enterprises serving the defence industrial base encounter CNSA 2.0 as a **contractual and certification requirement**, not advisory guidance.
 
-Apex Defense Technologies, examined throughout this book, maps its programme milestones directly to CNSA 2.0 dates. Commercial subsidiaries without NSS obligations follow NIST IR 8547 timelines — creating the dual-track regulatory overlay common in defense industrial base enterprises.
+Apex Defense Technologies, examined throughout this book, maps its programme milestones directly to CNSA 2.0 dates. Commercial subsidiaries without NSS obligations follow NIST IR 8547 timelines — creating the dual-track regulatory overlay common in defence industrial base enterprises.
 
 ### FedRAMP, CMMC, and certification frameworks
 
-**FedRAMP** authorization requires compliance with NIST SP 800-53 controls, including cryptographic protections for federal cloud services. As NIST updates SP 800-53 and related control baselines to reference PQC standards, FedRAMP-authorized providers will face authorization revision requirements tied to cryptographic migration.
+**FedRAMP** authorisation requires compliance with NIST SP 800-53 controls, including cryptographic protections for federal cloud services. As NIST updates SP 800-53 and related control baselines to reference PQC standards, FedRAMP-authorised providers will face authorisation revision requirements tied to cryptographic migration.
 
 **CMMC (Cybersecurity Maturity Model Certification)** for defence contractors references NIST SP 800-171 and 800-172 controls including cryptographic protections for CUI. CMMC assessors will increasingly evaluate whether contractors' encryption controls reflect state-of-the-art practice — which, after 2024, includes PQC planning evidence.
 
-These certification frameworks do not yet mandate PQC deployment on specific dates for all authorized systems. They create **assessment surfaces** where quantum-vulnerable cryptography will be questioned and where absence of migration planning will be treated as a control deficiency.
+These certification frameworks do not yet mandate PQC deployment on specific dates for all authorised systems. They create **assessment surfaces** where quantum-vulnerable cryptography will be questioned and where absence of migration planning will be treated as a control deficiency.
 
 ### CISA and sector agency initiatives
 
@@ -185,7 +185,7 @@ For financial entities, DORA is **lex specialis** — it prevails over NIS2 wher
 |-----------|-------------|------------------------|---------------------|--------------------------|
 | NSM-10 | US (policy) | Yes — 2035 target | Federal; supply chain influence | Migration programme plan |
 | NIST IR 8547 | US (guidance) | Yes — 2030/2035 | Federal; industry de facto | Risk acceptance documentation |
-| CNSA 2.0 | US (NSS) | Yes — algorithm suite | NSS; defense contractors | CNSA compliance certification |
+| CNSA 2.0 | US (NSS) | Yes — algorithm suite | NSS; defence contractors | CNSA compliance certification |
 | DORA RTS 2024/1532 | EU (financial) | Implicit — quantum in recital | Financial entities (Jan 2025) | Encryption policy; certificate register |
 | NIS2 | EU (multi-sector) | Implicit — state of the art | Essential/important entities | Risk assessment; encryption controls |
 | GDPR Art. 32 | EU (data protection) | No — state of the art | All personal data controllers | TOMs documentation |
@@ -249,7 +249,7 @@ GDPR compliance officers should coordinate with security teams to ensure that:
 
 **Data Protection Impact Assessments (Article 35)** address cryptographic controls as part of necessity and proportionality analysis. A DPIA for processing involving ten-year data retention that identifies confidentiality risk without addressing PQC migration is incomplete.
 
-**Technical and Organizational Measures (TOMs) documentation** provided to data subjects and supervisory authorities should reflect current cryptographic standards, not standards at the time of initial processing authorization.
+**Technical and Organizational Measures (TOMs) documentation** provided to data subjects and supervisory authorities should reflect current cryptographic standards, not standards at the time of initial processing authorisation.
 
 **Cross-border data transfer mechanisms** — Standard Contractual Clauses, Binding Corporate Rules — increasingly reference encryption as a supplementary measure. Transfer impact assessments should address whether encryption protecting transferred data will remain adequate for the transfer's duration. A transfer impact assessment that certifies RSA-2048 protection for data retained twenty years is difficult to defend.
 
@@ -652,7 +652,7 @@ Meridian assigned regulatory horizon monitoring to Thomas Bergström's team with
 ## 3.19 Chapter Summary
 
 - Most regulations do not name PQC algorithms. They require state-of-the-art cryptographic governance that, after August 2024, necessarily includes a documented PQC trajectory.
-- U.S. federal framework: NSM-10 (2035 target), NIST IR 8547 (2030/2035 deprecation/disallowance), CNSA 2.0 (binding for NSS and defense industrial base), FedRAMP/CMMC assessment surfaces.
+- U.S. federal framework: NSM-10 (2035 target), NIST IR 8547 (2030/2035 deprecation/disallowance), CNSA 2.0 (binding for NSS and defence industrial base), FedRAMP/CMMC assessment surfaces.
 - EU framework: DORA RTS 2024/1532 (encryption policy, certificate register, quantum in recital 9), NIS2 (state of the art), GDPR Article 32 (appropriate measures).
 - PCI DSS 4.0 and payment scheme certification create binding timeline constraints for card-processing environments.
 - Compliance evidence is a coherent package of governance artefacts — not a single certificate or algorithm deployment.

@@ -3,7 +3,7 @@
 
 ---
 
-Thomas Bergström's team at Meridian Mutual Bank had a working hybrid TLS configuration in the laboratory by February 2026. OpenSSL negotiated X25519MLKEM768 successfully. The security architecture slide deck declared the pilot complete.
+Meridian Mutual Bank's security architecture team had a working hybrid TLS configuration in the laboratory by February 2026. OpenSSL negotiated X25519MLKEM768 successfully. The security architecture slide deck declared the pilot complete.
 
 Production told a different story. Of **4.2 million** customer API handshakes analysed over thirty days, **11.3%** of unique client fingerprints failed to negotiate the hybrid group — not because the cryptography was wrong, but because three legacy mobile banking integrations, two corporate treasury middleware products, and a partner webhook platform sent ClientHello messages that middleboxes truncated before the hybrid extension could complete. The CDG showed those clients fanning into twelve downstream payment workflows. Thomas could not declare H1 exit at 90% compatibility without a tiered endpoint strategy, tenant outreach, and compensating controls for fixed embedded clients.
 
@@ -550,7 +550,7 @@ Meridian's pilot scope: **retail mobile API** (`api-retail.meridian.example`), *
 | C — Classical, fixed | Embedded integration; no patch | 8 | 4.1% | Risk acceptance; parallel endpoint |
 | D — Unknown | Insufficient logging | 4 | <0.1% | Instrument; recategorise |
 
-Thomas Bergström refused to average tiers — **4.1% fixed clients** on payment-adjacent workflows required compensating controls, not silent classical fallback on the primary endpoint.
+Elena Vasquez refused to average tiers — **4.1% fixed clients** on payment-adjacent workflows required compensating controls, not silent classical fallback on the primary endpoint.
 
 ### Phase 2 — Tiered endpoint architecture
 

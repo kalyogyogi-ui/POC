@@ -1074,7 +1074,7 @@ Each wave requires **triad ownership** — not security alone:
 | Domain engineering VP | Capacity, delivery commitment |
 | CISO / risk | TRADE integrity, deferral approvals |
 
-Meridian Wave 0 triad met weekly — Elena (programme), VP Payments Engineering, Thomas Bergström (CISO office). GlobalSync added **partner programme director** as fourth chair for Wave 0 — ecosystem dimension mandatory.
+Meridian Wave 0 triad met weekly — Elena (programme), VP Payments Engineering, Thomas Bergström (regulatory affairs). GlobalSync added **partner programme director** as fourth chair for Wave 0 — ecosystem dimension mandatory.
 
 ---
 

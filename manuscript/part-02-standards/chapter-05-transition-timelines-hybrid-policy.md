@@ -50,7 +50,7 @@ NIST's Initial Public Draft of IR 8547 (November 2024; **subject to revision bef
 | Deprecation of quantum-vulnerable PKC (112-bit) | After 2030 | New deployments should use PQC; legacy requires risk acceptance |
 | Disallowance of quantum-vulnerable PKC | After 2035 | No quantum-vulnerable PKC in compliant systems |
 
-These dates inform revisions to SP 800-131A and related NIST transition documents. Federal contractors, FedRAMP-authorized cloud providers, and enterprises whose auditors reference NIST guidance will encounter them as **de facto compliance milestones** — regardless of whether the enterprise is legally bound by federal regulation.
+These dates inform revisions to SP 800-131A and related NIST transition documents. Federal contractors, FedRAMP-authorised cloud providers, and enterprises whose auditors reference NIST guidance will encounter them as **de facto compliance milestones** — regardless of whether the enterprise is legally bound by federal regulation.
 
 > **Migration Moment**
 >

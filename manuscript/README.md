@@ -117,6 +117,37 @@ Expert technical review against Parts I–VI standards:
 
 **Consolidated delivery branch:** `cursor/appendices-22e5` contains Parts I–VI (editorial revisions) + Appendices A–E — use PR #6 as single complete-manuscript merge target.
 
+## Editorial Revisions — Full Manuscript (June 2026)
+
+Expert technical review across all 22 chapters and appendices:
+
+**British English (Parts I–II pass):**
+- *authorise/authorisation*, *unauthorised*, *recognise*, *organise*, *defence industrial base*, *FedRAMP-authorised*, *synchronisation* in prose
+- Chapter title *The Synchronization Problem* retained as thesis branding; ARCS phase name *Synchronize* unchanged
+
+**Character consistency:**
+- Northfield: James Whitfield (OT Security Director) throughout — corrected Ch 2 opening (*Sarah Okonkwo* removed)
+- Thomas Bergström: regulatory affairs only — corrected Ch 9 triad label; removed erroneous hybrid TLS/middlebox/telemetry attribution (Ch 11–13)
+- Sofia Andersson: Meridian PKI lead (distinct from Sofia Lindström, GlobalSync programme director)
+- Marcus Chen (GlobalSync), Elena Vasquez (Meridian), Dr. Priya Nair (Apex) — no cross-org attribution errors found
+
+**Organisation naming:**
+- Apex Defense Technologies (consistent; not *Apex Defence*)
+
+**Northfield regulatory framing:**
+- US operator not subject to NIS2 — verified Ch 3, 7, 15, 20, Appendix C
+
+**Cross-references:**
+- Ch 13 §9.15 → §9.38 (wave exit criteria / terminal trust store extension)
+- Appendix A/B/C/D/E navigation chain verified
+- TRADE weights aligned to Ch 9 §9.3 (Part VI Ch 19–20)
+
+**Structural parity verified:**
+- Apply in Your Organisation checklists: all 22 chapters
+- Proceed / Next navigation: Parts IV–VI and appendices
+- Pedagogical boxes: 4–8 per chapter
+- References: 8–10 per chapter
+
 ## Editorial Revisions — Part VI (June 2026)
 
 Expert technical review against Parts I–V standards:

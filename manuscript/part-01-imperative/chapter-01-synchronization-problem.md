@@ -109,7 +109,7 @@ Quantum threat analysis operates on a different logic. Cryptographically relevan
 
 But a separate threat does not depend on quantum computer arrival: **harvest now, decrypt later**. An adversary who records encrypted traffic today — or exfiltrates encrypted archives — holds ciphertext that may become readable when quantum decryption becomes feasible. For data whose confidentiality must hold for fifteen, twenty, or thirty years, the threat is present-tense even when the quantum computer is not.
 
-This asymmetry means migration urgency is driven as much by **data longevity** as by **quantum computer forecasts**. Compliance frameworks are beginning to recognize this distinction. Enterprises that wait for a quantum computer before acting will have already lost confidentiality for their longest-lived data. Chapter 2 develops this threat analysis in full.
+This asymmetry means migration urgency is driven as much by **data longevity** as by **quantum computer forecasts**. Compliance frameworks are beginning to recognise this distinction. Enterprises that wait for a quantum computer before acting will have already lost confidentiality for their longest-lived data. Chapter 2 develops this threat analysis in full.
 
 > **Migration Moment**
 >
@@ -137,7 +137,7 @@ Consider Meridian's HSM finding in detail. Migrating to a post-quantum firmware 
 2. Meridian's PKI team to issue new firmware signing certificates with post-quantum-capable profiles
 3. The payment switch vendor to accept the new certificate chain without service interruption
 4. Acquiring banks and card networks to update trust stores on their timelines, not Meridian's
-5. PCI assessors to recognize and accept the new validation evidence
+5. PCI assessors to recognise and accept the new validation evidence
 6. Meridian's procurement team to negotiate contract terms covering algorithm migration obligations
 7. Internal change management to schedule firmware updates across 340 payment terminals without transaction disruption
 8. Operations staff to be trained on new certificate validation behaviour in monitoring systems
@@ -152,7 +152,7 @@ The synchronization problem is not confined to regulated industries with legacy 
 
 GlobalSync's platform team deployed hybrid TLS on its public API gateway in a well-executed pilot. Client compatibility exceeded ninety-five percent. Performance overhead was within acceptable bounds. The pilot was declared successful.
 
-Production rollout stalled for eleven months. The stall had nothing to do with TLS. Three enterprise tenants connected to GlobalSync's API through mutual TLS authentication with certificate chains signed by a partner CA that had not published a post-quantum roadmap. Two tenants operated in jurisdictions where data residency requirements mandated encryption in transit using algorithms approved by national authorities who had not yet recognized ML-KEM. One tenant's security contract required thirty days' notice for any cryptographic parameter change — and treated key size increases as material contract amendments requiring legal review.
+Production rollout stalled for eleven months. The stall had nothing to do with TLS. Three enterprise tenants connected to GlobalSync's API through mutual TLS authentication with certificate chains signed by a partner CA that had not published a post-quantum roadmap. Two tenants operated in jurisdictions where data residency requirements mandated encryption in transit using algorithms approved by national authorities who had not yet recognised ML-KEM. One tenant's security contract required thirty days' notice for any cryptographic parameter change — and treated key size increases as material contract amendments requiring legal review.
 
 GlobalSync's platform was ready. The ecosystem was not. The pilot measured technical feasibility. It did not measure synchronization feasibility.
 
@@ -315,7 +315,7 @@ The meta-lesson: **prior migrations succeeded when the enterprise controlled the
 
 ## 1.8 The ARCS Framework
 
-This book organizes its guidance around four interlocking enterprise capabilities. Together they form the **ARCS Framework** — Awareness, Register, Capability, and Synchronize.
+This book organises its guidance around four interlocking enterprise capabilities. Together they form the **ARCS Framework** — Awareness, Register, Capability, and Synchronize.
 
 **Awareness** is the organisational understanding that PQC migration is a programme with a decade-scale horizon, driven by threat asymmetry and regulatory forcing functions, not by vendor product announcements. Awareness produces the board narrative, the risk register entry, and the programme charter. Part I of this book establishes Awareness.
 
@@ -323,7 +323,7 @@ This book organizes its guidance around four interlocking enterprise capabilitie
 
 **Capability** is the architectural and operational ability to adopt, test, deploy, and retire cryptographic algorithms without re-engineering the systems that depend on them. Cryptographic agility, hybrid lifecycle management, and validation programmes are Capability investments. Part IV builds Capability.
 
-**Synchronize** is the programme discipline that aligns internal teams, external partners, vendor roadmaps, and regulatory timelines on a shared migration sequence. Governance structures, procurement requirements, and sector playbooks are Synchronization mechanisms. Parts V and VI build Synchronize.
+**Synchronize** is the programme discipline that aligns internal teams, external partners, vendor roadmaps, and regulatory timelines on a shared migration sequence. Governance structures, procurement requirements, and sector playbooks are Synchronisation mechanisms. Parts V and VI build Synchronize.
 
 ARCS is sequential in learning order but parallel in execution. An enterprise does not finish Awareness before beginning Register work. It does, however, need Awareness before it can justify Register investment to the board — and Register before it can make defensible Capability investments.
 
@@ -333,7 +333,7 @@ The **PQ-ADAPT Maturity Model** provides a measurable progression through ARCS c
 
 **Level 0 — Unaware:** No quantum risk in enterprise risk register. No cryptographic inventory. PQC not referenced in policies. *Most enterprises before 2024.*
 
-**Level 1 — Alerted:** Executive awareness established. Ad hoc discovery initiated. No programme charter. Pilots may be authorized without governance. *Many enterprises in 2025–2026.*
+**Level 1 — Alerted:** Executive awareness established. Ad hoc discovery initiated. No programme charter. Pilots may be authorised without governance. *Many enterprises in 2025–2026.*
 
 **Level 2 — Inventoried:** CBOM baseline established. Data classified by confidentiality horizon. HNDL risk assessed. Blocking dependencies identified. No enterprise-wide architecture standards for agility. *Target for Phase 1 completion.*
 
@@ -438,7 +438,7 @@ See §1.3 for Apex's mandate-consolidation lesson in the synchronization context
 
 ## 1.13 Common Failure Patterns
 
-Reviewing PQC migration programmes across sectors reveals recurring failure patterns. Naming them explicitly helps security leaders recognize early warning signs before programmes stall.
+Reviewing PQC migration programmes across sectors reveals recurring failure patterns. Naming them explicitly helps security leaders recognise early warning signs before programmes stall.
 
 **Pattern 1: Algorithm-first planning.** The programme begins with algorithm selection workshops before inventory is complete. Standards are chosen. Policies are drafted. Discovery then reveals that the chosen algorithms cannot be deployed in the systems that matter most — because of HSM limitations, certificate size constraints, or partner incompatibility. The policy is correct. The estate cannot comply. *Remediation: inventory before standards definition.*
 
@@ -492,7 +492,7 @@ These costs are not arguments for panic. They are arguments for programme struct
 - The enterprise cryptographic estate resembles an iceberg: visible assets above the waterline, blocking dependencies below it.
 - Programmes, not projects, are the correct organisational model for migration governance.
 - Credible programmes require cross-functional stakeholder coalitions with defined engagement sequencing.
-- The ARCS Framework — Awareness, Register, Capability, Synchronize — organizes the book's guidance and the PQ-ADAPT maturity progression.
+- The ARCS Framework — Awareness, Register, Capability, Synchronize — organises the book's guidance and the PQ-ADAPT maturity progression.
 - Board communication focuses on threat asymmetry, programme duration, and investment rationale — not algorithm details.
 - Realistic migration timelines extend 5–15+ years for most enterprises. Programme structure must reflect this horizon.
 

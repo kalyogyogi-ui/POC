@@ -561,7 +561,7 @@ Physical token migration cannot occur atomically across thousands of employees. 
 
 PKI certificate profiles for ML-DSA were published **before** token hardware procurement — avoiding the reverse sequencing that produced Northfield's early certificate-store surprises in OT.
 
-Apex Defence faced a parallel challenge with CAC/PIV-adjacent form factors for NSS personnel — CNSA 2.0 parameter requirements elevated to ML-DSA-87, tightening size constraints further. Apex's matrix row for physical tokens explicitly referenced secure element capacity tests as a procurement gate.
+Apex Defense Technologies faced a parallel challenge with CAC/PIV-adjacent form factors for NSS personnel — CNSA 2.0 parameter requirements elevated to ML-DSA-87, tightening size constraints further. Apex's matrix row for physical tokens explicitly referenced secure element capacity tests as a procurement gate.
 
 ---
 

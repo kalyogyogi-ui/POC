@@ -7,7 +7,7 @@ Meridian Mutual Bank's PKI engineering lead, Sofia Andersson, presented a root C
 
 Elena Vasquez recognised the pattern from Chapter 1's synchronisation meeting: PKI is where programme timelines meet physical reality. Hybrid TLS pilots succeeded in the laboratory because they changed negotiated groups, not trust anchors. Every downstream verifier — load balancers, mobile apps with certificate pinning, partner webhook clients, manufacturing firmware stores — still trusted certificates chained to roots that could not sign ML-DSA profiles until Sofia's team completed Wave 0 work.
 
-Thomas Bergström's hybrid TLS deployment (Chapter 11) remained blocked on twelve services until the issuing CA published ML-DSA server certificate templates. Marcus Chen's partner mTLS programme (Chapter 8) could not accept client certificates the partner gateway's trust policy rejected. Priya Nair's NSS deliverable signing track (Chapter 9) required a separate root hierarchy that must never inherit trust paths from Apex commercial PKI.
+Meridian's hybrid TLS deployment (Chapter 11) remained blocked on twelve services until the issuing CA published ML-DSA server certificate templates. Marcus Chen's partner mTLS programme (Chapter 8) could not accept client certificates the partner gateway's trust policy rejected. Priya Nair's NSS deliverable signing track (Chapter 9) required a separate root hierarchy that must never inherit trust paths from Apex commercial PKI.
 
 This chapter teaches readers to architect **PQC-capable PKI** — hierarchy design, certificate profiles, validity policy, automation, and trust store mechanics — as the structural foundation hybrid deployment patterns assume. PKI is not a certificate renewal project. It is the trust substrate whose migration gates every wave downstream.
 
@@ -174,7 +174,7 @@ Ten years aligns with **longest-lived dependent trust** — retail terminals wit
 >
 > *"Ten years of dual roots doubles our PKI operational cost."*
 >
-> Sofia's response to the CFO: dual-root cost is **budgeted synchronisation insurance**. Compressed overlap externalises cost to payment operations as terminal truck rolls, partner outage credits, and Wave 0 extension — Meridian extended Wave 0 one quarter when terminal trust store updates reached 78% not 95% (Chapter 9 §9.15). The overlap line item is cheaper than programme slip.
+> Sofia's response to the CFO: dual-root cost is **budgeted synchronisation insurance**. Compressed overlap externalises cost to payment operations as terminal truck rolls, partner outage credits, and Wave 0 extension — Meridian extended Wave 0 one quarter when terminal trust store updates reached 78% not 95% (Chapter 9 §9.38). The overlap line item is cheaper than programme slip.
 
 ### Overlap exit criteria
 

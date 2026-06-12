@@ -56,13 +56,13 @@ It **is** a source of original enterprise methodologies: the Cryptographic Depen
 
 Part I introduces four fictional organisations whose constraints span the enterprise landscape. Each reappears throughout the book as a teaching instrument — not a consulting case study, but a composite drawn from patterns observed across financial services, critical infrastructure, defence industrial base, and multinational SaaS environments.
 
-**Meridian Mutual Bank** — 8,000 employees, retail and commercial banking, EU-headquartered, DORA-regulated. Teaches vendor dependency, payment HSM constraints, and regulatory evidence under financial supervision.
+**Meridian Mutual Bank** — 8,000 employees, retail and commercial banking, EU-headquartered, DORA-regulated. Teaches vendor dependency, payment HSM constraints, and regulatory evidence under financial supervision. Key characters: Elena Vasquez (DPO/programme), Thomas Bergström (regulatory affairs), Sofia Andersson (PKI engineering lead).
 
-**Northfield Energy Systems** — 12,000 employees, gas transmission and distribution, US critical infrastructure. Teaches OT/IT convergence, long certificate validity, nation-state threat models, and operational continuity requirements.
+**Northfield Energy Systems** — 12,000 employees, gas transmission and distribution, US critical infrastructure. Teaches OT/IT convergence, long certificate validity, nation-state threat models, and operational continuity requirements. Key character: James Whitfield (OT Security Director).
 
-**Apex Defense Technologies** — 25,000 employees, defence prime contractor, CMMC and FedRAMP obligations. Teaches CNSA 2.0 alignment, classified/unclassified boundary management, and programme consolidation under competing mandates.
+**Apex Defense Technologies** — 25,000 employees, defence prime contractor, CMMC and FedRAMP obligations. Teaches CNSA 2.0 alignment, classified/unclassified boundary management, and programme consolidation under competing mandates. Key character: Dr. Priya Nair (assurance/NSS architecture).
 
-**GlobalSync Logistics** — 3,500 employees, multinational SaaS platform, forty-country operations. Teaches cloud-native agility, tenant contractual constraints, cross-border compliance, and ecosystem synchronization at scale.
+**GlobalSync Logistics** — 3,500 employees, multinational SaaS platform, forty-country operations. Teaches cloud-native agility, tenant contractual constraints, cross-border compliance, and ecosystem synchronisation at scale. Key characters: Marcus Chen (security architecture), Sofia Lindström (programme director).
 
 Following a single organisation's thread through the book — Meridian for financial services, Northfield for critical infrastructure, Apex for defence — provides narrative continuity for readers who prefer case-driven learning.
 

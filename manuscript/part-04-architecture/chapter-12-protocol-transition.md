@@ -5,7 +5,7 @@
 
 James Whitfield's Northfield Energy team qualified hybrid IKE on two WAN concentrator models by August 2026. Vendor documentation promised ML-KEM hybrid support. Laboratory rekey tests completed without historian gaps. The programme office scheduled regional rollout for the Gulf Coast compressor corridor.
 
-Then field operations opened the CPE inventory. Of **312** customer-premises routers terminating remote-site VPNs toward those concentrators, **241** ran firmware builds that rejected the hybrid IKE proposal before the first Child SA could form. The concentrators were ready. The path between concentrator and field device was not. James did not have a TLS problem — he had a **protocol ecosystem** problem identical in structure to Marcus Chen's partner mTLS blockage at GlobalSync, Thomas Bergström's middlebox truncation at Meridian, and Priya Nair's NSS accreditation gates at Apex. Different protocols; same synchronisation logic.
+Then field operations opened the CPE inventory. Of **312** customer-premises routers terminating remote-site VPNs toward those concentrators, **241** ran firmware builds that rejected the hybrid IKE proposal before the first Child SA could form. The concentrators were ready. The path between concentrator and field device was not. James did not have a TLS problem — he had a **protocol ecosystem** problem identical in structure to Marcus Chen's partner mTLS blockage at GlobalSync, Meridian's middlebox truncation, and Priya Nair's NSS accreditation gates at Apex. Different protocols; same synchronisation logic.
 
 Chapter 11 taught hybrid deployment patterns and HLM phase discipline. This chapter maps **protocol-by-protocol migration paths** — the engineering playbooks network, platform, and messaging teams execute when wave plans assign their workloads. Each protocol carries distinct readiness curves, client populations, inspection paths, and partner constraints. Enterprises that treat protocol transition as a single "enable PQC in TLS" programme discover, as Northfield did, that the slowest critical partner — or the slowest critical CPE firmware line — sets the pace for everyone downstream.
 
@@ -118,7 +118,7 @@ Enterprise policy should treat **TLS 1.3 as the minimum protocol version** for a
 | Internal mesh | Phase out per wave | Transitional | H1 default |
 | OT HTTPS (where used) | Vendor-dependent | Assess per device | Often blocked — parallel track |
 
-Meridian completed TLS 1.2 retirement on customer-facing APIs **before** hybrid group enablement — reducing variables during Thomas Bergström's compatibility measurement phase (Chapter 11 §11.12).
+Meridian completed TLS 1.2 retirement on customer-facing APIs **before** hybrid group enablement — reducing variables during Meridian's compatibility measurement phase (Chapter 11 §11.12).
 
 ### Named group policy
 
@@ -196,7 +196,7 @@ Tier C traffic must never silently fall back on a unified URL advertised as "qua
 | Synthetic monitoring | Known client profiles | Does not represent long tail |
 | Partner-declared inventory | Contractual client matrix | Often stale — verify with telemetry |
 
-Thomas Bergström's team correlated **4.2 million** unique handshake fingerprints over thirty days — discovering that three legacy mobile integrations accounted for disproportionate Tier C share despite low connection count (high-value treasury workflows).
+Meridian's security architecture team correlated **4.2 million** unique handshake fingerprints over thirty days — discovering that three legacy mobile integrations accounted for disproportionate Tier C share despite low connection count (high-value treasury workflows).
 
 ### Compatibility improvement levers
 
@@ -518,7 +518,7 @@ Either chain blocking prevents mTLS transition — GlobalSync's nine-month produ
 
 ### Meridian mTLS transition
 
-Thomas Bergström's retail API pilot was **server-authenticated TLS** only. Meridian's **corporate treasury mTLS** programme — higher TRADE Regulatory score — required:
+Meridian's retail API pilot was **server-authenticated TLS** only. Meridian's **corporate treasury mTLS** programme — higher TRADE Regulatory score — required:
 
 | Workstream | Dependency | Timeline |
 |------------|------------|----------|
@@ -762,7 +762,7 @@ GlobalSync rolled out hybrid TLS **by geographic CDN PoP** — APAC last due to 
 
 ## 12.17 Observability and CBOM Integration
 
-Protocol transition without telemetry reproduces pilot-production divergence — Thomas Bergström's laboratory success versus 11.3% handshake failure in production.
+Protocol transition without telemetry reproduces pilot-production divergence — Meridian's security architecture team's laboratory success versus 11.3% handshake failure in production.
 
 ### Protocol-specific metrics
 

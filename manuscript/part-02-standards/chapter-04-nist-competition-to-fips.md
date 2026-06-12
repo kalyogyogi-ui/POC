@@ -118,7 +118,7 @@ FIPS 203 defines three parameter sets, historically corresponding to Kyber-512, 
 >
 > For new enterprise deployments absent specific NSS or contractual requirements mandating ML-KEM-1024, **standardise on ML-KEM-768** as the default key establishment algorithm. Reserve ML-KEM-1024 for NSS-aligned systems, long-confidentiality key wrapping, and contracts explicitly requiring Category 5. Do not deploy ML-KEM-512 for new enterprise systems — the performance benefit rarely justifies reduced margin against future cryptanalytic advances.
 
-CNSA 2.0 mandates ML-KEM-1024 for National Security Systems. Apex Defence maps NSS workloads to ML-KEM-1024 and corporate IT to ML-KEM-768 unless contract flow-down elevates the requirement — a dual-track pattern common in defence industrial base enterprises (Chapter 3).
+CNSA 2.0 mandates ML-KEM-1024 for National Security Systems. Apex Defense Technologies maps NSS workloads to ML-KEM-1024 and corporate IT to ML-KEM-768 unless contract flow-down elevates the requirement — a dual-track pattern common in defence industrial base enterprises (Chapter 3).
 
 ### Size and performance implications
 
