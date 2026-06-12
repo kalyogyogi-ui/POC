@@ -10,6 +10,8 @@ This appendix provides a **zone-scoped self-assessment** for the PQ-ADAPT maturi
 
 **Scoring:** Each criterion scored **0** (absent), **1** (partial), **2** (complete with evidence). Zone level declared only when **all mandatory criteria** for that level score 2, or documented risk acceptance exists for gaps.
 
+**Prerequisites:** CBOM and CDG evidence uses Appendix A templates. Regulatory overlay annotations reference Appendix C. Charter evidence references Appendix D.
+
 ---
 
 ## B.1 Assessment Metadata

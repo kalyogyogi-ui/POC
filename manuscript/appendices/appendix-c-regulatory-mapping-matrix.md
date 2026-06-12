@@ -14,7 +14,7 @@ This appendix supports Chapter 3 and sector playbooks (Chapters 19–21). It pro
 
 Each row is a **programme artefact**. Each column is a **regulatory instrument**. Cell content: **article / control reference** + **evidence expectation**.
 
-**Legend:** ● = direct mapping | ○ = indirect / supporting | — = not applicable (verify jurisdiction)
+**Legend:** Cells list primary article or control references. Mark **n/a** where the instrument does not apply to your jurisdiction or sector. Verify mappings against current authoritative publications before examination or assessment use.
 
 ---
 
@@ -46,7 +46,7 @@ For multinational enterprises, annotate each subsidiary row:
 |--------|-------------------|----------------------|----------------------------|---------------------------|
 | Meridian Mutual Bank (EU) | DORA | GDPR; NIS2 (where applicable) | Financial services SOM | `MER-EU-DORA-2027` |
 | Northfield Energy (US) | NERC CIP; TSA; CISA | — (not NIS2) | Critical infrastructure SOM | `NF-US-CIP-2027` |
-| Apex Defense (US) | CMMC; DFARS; CNSA 2.0 (NSS) | FedRAMP (commercial) | Defence SOM | `APX-US-CMMC-2028` |
+| Apex Defense Technologies (US) | CMMC; DFARS; CNSA 2.0 (NSS) | FedRAMP (commercial) | Defence SOM | `APX-US-CMMC-2028` |
 | GlobalSync Logistics | GDPR; NIS2 (EU ops) | SOC 2; customer flow-down | SaaS SOM | `GS-EU-GDPR-2028` |
 
 ---
@@ -96,7 +96,7 @@ Include industry body publications in this matrix where they create binding or q
 
 **Contractual obligations:** Security exhibits, DPAs requiring state-of-the-art encryption, supply chain CBOM clauses, and government flow-downs (CNSA 2.0, FedRAMP) create obligations independent of primary legislation. Procurement integration (Chapter 16) addresses these systematically.
 
-**Litigation and duty of care:** Documented threat assessment and migration planning support a reasonable-care defence for long-retention data exposed to HNDL risk. Programme chartering serves duty-of-care objectives independent of regulatory deadlines.
+**Litigation and duty of care:** Documented threat assessment and migration planning support a reasonable-care defence for long-retention data exposed to HNDL risk. Programme chartering serves duty-of-care objectives independent of regulatory deadlines. General Counsel and regulatory affairs should link charter approval to litigation risk memos where long-retention data and HNDL exposure are material (Chapter 3; Meridian teaching narrative).
 
 ---
 

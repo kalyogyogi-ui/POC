@@ -8,6 +8,8 @@ This appendix provides **copy-ready templates** for the Cryptographic Bill of Ma
 
 **Usage:** Programme office owns template version control. Engineering tools consume CycloneDX exports; risk and wave planning consume normalised attributes and CDG blocking flags.
 
+**Conventions:** British English; illustrative JSON labelled as planning examples; FIPS algorithm names normalised per Chapter 4. NIST IR 8547 remains in Initial Public Draft at time of writing — verify transition timelines before contractual or supervisory embedding.
+
 ---
 
 ## A.1 CBOM Programme Minimum Schema

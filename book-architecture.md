@@ -2,7 +2,7 @@
 # Post-Quantum Cryptography: Enterprise Migration Handbook
 ## Book Architecture & Development Package (v1.0)
 
-**Status:** Appendices A–E draft complete; full handbook drafted (Chapters 1–22 + appendices)  
+**Status:** Appendices A–E editorial revision complete; full handbook ready for merge (Chapters 1–22 + appendices on `cursor/appendices-22e5`)  
 **Date:** June 2026  
 **Architecture approved:** June 2026  
 **Publisher targets:** Wiley · CRC Press · O'Reilly · IEEE Press · Apress

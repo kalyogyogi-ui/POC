@@ -101,6 +101,22 @@
 
 **Complete handbook (chapters + intros + appendices):** ~199,805 words
 
+## Editorial Revisions — Appendices (June 2026)
+
+Expert technical review against Parts I–VI standards:
+
+- Appendix A redefined per book architecture: CBOM/CDG templates (Ch 22 handoff); regulatory supplements merged into Appendix C §C.5
+- CycloneDX JSON example aligned to Chapter 7 §7.10 programme minimum schema
+- Appendix B PQ-ADAPT questionnaire aligned to Ch 15 Table 15.2 and Ch 22 Table 22.3; zone-scoped scoring enforced
+- Appendix C regulatory matrix covers DORA, NIS2, GDPR, PCI, FedRAMP, CMMC, NERC CIP; Northfield correctly excluded from NIS2
+- Appendix D charter template implements Ch 15 Table 15.4; third-party exhibit pointer (§D.12) resolves Ch 19 reference
+- Appendix E glossary includes ARCS, TRADE, HLM, PQ-ADAPT, SOM; algorithm and standards quick-reference tables
+- Cross-references updated: Ch 3, Ch 4 → Appendix C §C.5; Ch 7 Northfield NIS2 framing corrected
+- Navigation chain: Ch 22 → Appendix A → B → C → D → E
+- British English; IR 8547 IPD qualification in Appendix A conventions
+
+**Consolidated delivery branch:** `cursor/appendices-22e5` contains Parts I–VI (editorial revisions) + Appendices A–E — use PR #6 as single complete-manuscript merge target.
+
 ## Editorial Revisions — Part VI (June 2026)
 
 Expert technical review against Parts I–V standards:

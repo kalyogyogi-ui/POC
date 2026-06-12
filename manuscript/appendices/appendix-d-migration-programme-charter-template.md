@@ -10,6 +10,8 @@ This appendix provides a **fillable charter template** implementing Chapter 15 T
 
 **Renewal:** Annual minimum; amendment within five business days of material scope or authority change.
 
+**Related artefacts:** Regulatory overlay matrix (Appendix C); CBOM/CDG templates (Appendix A); PQ-ADAPT self-assessment (Appendix B); contract clause library (Chapter 16 Table 16.1).
+
 ---
 
 ## D.1 Charter Cover Sheet

@@ -11,7 +11,7 @@ Quick-reference tables for terms and standards used throughout this handbook. De
 
 | Term | Definition |
 |------|------------|
-| **ARCS Framework** | Awareness → Register → Capability → Synchronize enterprise capability model for PQC migration (Chapter 1). |
+| **ARCS Framework** | Awareness → Register → Capability → Synchronize — four enterprise capabilities for PQC migration (Chapter 1). Part VI sector playbooks deliver programme *proof*: validated outcomes under sector constraints (Chapter 22). |
 | **Blocking node** | CDG vertex whose migration must complete before dependents can adopt PQC (Chapter 8). |
 | **CBOM** | Cryptographic Bill of Materials — inventory of cryptographic components with programme attributes (Chapter 7). |
 | **CDG** | Cryptographic Dependency Graph — directed graph of cryptographic relationships and trust (Chapter 8). |
@@ -38,6 +38,7 @@ Quick-reference tables for terms and standards used throughout this handbook. De
 | **SSDF** | NIST Secure Software Development Framework — supply chain practices (Chapter 17). |
 | **TES** | Threat Exposure Score — TRADE Threat dimension input (Chapter 2). |
 | **TRADE** | Threat, Regulatory, Architectural dependency, Data longevity, Ecosystem — prioritisation engine (Chapters 2, 9). |
+| **Proof (programme)** | Part VI outcome phase — sector playbooks, examination results, and sustained resilience evidence (Chapters 19–22). |
 
 ---
 
