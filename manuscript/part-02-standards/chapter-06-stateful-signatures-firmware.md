@@ -626,6 +626,10 @@ Northfield's charter named James Whitfield as accountable owner with dotted-line
 3. **If selecting LMS/XMSS**, complete state management design before any pilot — state store, DR, audit, training.
 4. **Contract vendor signing obligations** — algorithm timeline, audit rights, test hardware.
 5. **Integrate OT firmware signing with enterprise PKI programme** — not a parallel OT science project.
+6. **Model root CA trust horizons** for OT device validity — elevate to ML-DSA-87 where validity exceeds ten years.
+7. **Exercise signing failure playbooks** in tabletop before canary deployment — include operations staff, not only security.
+8. **Publish multi-year firmware roadmap** with vendor dependencies explicit — avoid calendar-only commitments.
+9. **Define evidence retention** for signing logs, manifests, and test reports — aligned to sector regulatory horizons.
 
 ---
 
@@ -667,7 +671,138 @@ James Whitfield's rule: **no field push without operations sign-off on maintenan
 
 ---
 
-## 6.25 Chapter Summary
+## 6.25 Long-Term Trust Horizons for Firmware Certificates
+
+Chapter 2 introduced integrity horizons — how long signatures must remain verifiable. Firmware and OT amplify the question: devices deployed in 2026 may verify certificates signed in 2026 against roots valid until 2046 or beyond.
+
+| Factor | Enterprise IT PKI | OT / firmware |
+|--------|-------------------|---------------|
+| Typical cert validity | 1–2 years (TLS) | 10–20 years (device roots) |
+| Root rotation frequency | Annual operational task | Once per device lifetime |
+| ML-DSA size impact | Manageable with renewal | Baked into device trust store |
+| Wrong root choice cost | Reissue certificates | Field hardware replacement |
+
+Northfield's OT PKI team modelled **root CA migration as a 15-year programme** — not a project. ML-DSA-87 roots issued in 2027 would validate firmware signed through 2042 under current validity policy. Changing roots required device trust store updates — the same synchronization problem as firmware images.
+
+> **Architect's Decision**
+>
+> For OT device roots with validity exceeding ten years, **issue ML-DSA-87 (Category 5) at migration** even when enterprise default is ML-DSA-65 — long trust horizon justifies parameter elevation. Document in algorithm matrix elevation criteria linked to certificate validity years, not only data classification.
+
+Meridian's payment HSM chain used ML-DSA-87 for firmware signing roots for the same reason — fourteen-month vendor delivery did not reduce trust horizon requirements.
+
+---
+
+## 6.26 Incident Response for Firmware Signing Failures
+
+Firmware signing incidents differ from key compromise. Playbooks should cover:
+
+**Scenario A — LMS index reuse suspected.** Suspend signing; freeze releases; compare appliance logs; notify CISO and vendor; assess whether published firmware signatures require revocation notification to field sites.
+
+**Scenario B — Signature verification fails in field.** Halt rollout; preserve failed image; compare manifest; determine whether tampering, chain error, or device clock issue; rollback per §6.16.
+
+**Scenario C — Signing appliance compromise.** Treat as key compromise; rotate LMS hierarchy or ML-DSA key; full forensic imaging; regulatory notification per sector requirements.
+
+**Scenario D — Emergency unsigned patch request.** Deny by default; break-glass requires programme director + OT director written authorisation; post-incident review within 72 hours.
+
+Northfield exercised Scenario B in canary deployment — playbook functioned; rollout paused 72 hours; root cause was intermediate certificate ordering. Without playbook, operations might have bypassed verification to meet maintenance schedule — the failure mode James Whitfield feared most.
+
+Apex classified Scenario C as **reportable** for NSS environments — incident response integrated with classified security incident management, not standard IT IR tooling alone.
+
+---
+
+## 6.27 Five-Year Firmware Programme Roadmap (Northfield)
+
+Illustrative roadmap — planning tool, not commitment:
+
+| Year | Compressor (LMS) | RTU (dual-sign) | Eng. workstation (ML-DSA) | VPN / WAN |
+|------|------------------|-----------------|---------------------------|-----------|
+| 2026 | LMS design; appliance install | Vendor dual-sign dev | HSM upgrade | Assessment |
+| 2027 | Pilot site; canary | Staging tests | Air-gap SOP update | Model A hybrid |
+| 2028 | Regional rollout 1 | New units ML-DSA-only | Production ML-DSA | Model B refresh |
+| 2029 | Regional rollout 2 | Field dual-sign complete | — | Full WAN H1 |
+| 2030 | H2 classical sunset plan | H2 trigger | H3 target | Deprecation alignment |
+
+### Budget and business case framing
+
+Firmware PQC programmes compete for capital with safety, reliability, and modernisation projects. Effective business cases link:
+
+- **Threat** — TES 5, nation-state firmware forgery, HNDL on operational archives (Chapter 2)
+- **Regulatory** — NERC CIP, TSA, PCI evidence continuity (Chapter 3)
+- **Operational risk** — Unplanned downtime cost per day vs staged rollout cost
+- **Synchronization** — Vendor NSS investment reducing marginal engineering cost
+
+Northfield's compressor LMS business case cited **$4.2 million** avoided full refresh (*illustrative*) against **$1.1 million** LMS programme — threat and capital avoidance, not compliance checkbox. Board approval followed in one session. James noted the same board had deferred a prior "PQC TLS" request lacking OT specificity — firmware specificity converted sceptics.
+
+James presented the roadmap with **explicit dependency arrows** to vendor deliverables — steering committee could see that 2028 compressor rollout depended on 2027 vendor acceptance test, not internal ambition alone.
+
+---
+
+## 6.28 Training and Workforce Development
+
+Firmware signing programmes fail when only two specialists understand LMS index management. Workforce planning:
+
+| Role | Training requirement |
+|------|---------------------|
+| OT operations | Manifest verification; rollback procedures; escalation |
+| Signing ceremony staff | LMS index semantics; DR failover; two-person rule |
+| PKI engineers | ML-DSA profile design; root migration for device classes |
+| Vendor liaisons | Contract milestone language; acceptance test criteria |
+| Incident response | Scenarios A–D (§6.26); regulatory notification paths |
+
+Northfield trained **forty-two** field technicians on manifest verification before first regional LMS rollout — course duration four hours; practical assessment required pass. Training cost **$180,000** (*illustrative*) — less than one day of unplanned compressor downtime from failed verification.
+
+Apex required NSS signing staff to complete **stateful signature operations certification** before accessing production LMS appliances — certification renewed annually with DR exercise participation.
+
+Meridian's payment HSM path required fewer OT-style field skills — vendor-managed ceremony with bank staff oversight. Training focused on **evidence review** and escalation, not index management — illustrating device-class-appropriate workforce models.
+
+---
+
+## 6.29 Integrating Firmware Programme with TRADE Rescoring
+
+Firmware signing migration changes TRADE scores. When Northfield's compressor LMS path reached staging:
+
+- **Ecosystem readiness (E)** rose from 2 to 4 — vendor delivered signing appliance
+- **Architectural dependency (A)** remained 5 — still blocking twelve downstream systems until production
+- **Threat (T)** unchanged — TES 5 throughout
+
+Rescoring triggered **wave sequence confirmation** — staging success did not automatically promote production date; CDG downstream readiness still gated field rollout.
+
+Programme offices should **rescore quarterly** for all TES 5 firmware assets — vendor slips and acceptance test failures propagate to timeline overlay without manual executive escalation.
+
+---
+
+## 6.30 Warranty, Liability, and Vendor Indemnification
+
+Firmware signing contracts should address **liability allocation** for algorithm migration failures:
+
+- Vendor warrants signing tooling produces verifiable signatures per agreed scheme
+- Customer warrants field procedures follow manifest and rollback SOPs
+- Mutual indemnification caps negotiated for index reuse attributable to vendor appliance defect
+- Export control and classified handling responsibilities explicit in NSS contexts
+
+Northfield's LMS contract allocated index reuse liability to vendor if appliance failed monotonicity guarantee — legal novelty requiring external counsel specialised in OT vendor agreements. The clause accelerated vendor investment in state replication testing.
+
+Meridian's payment HSM contract used standard financial-services technology liability framework — ML-DSA module delivery linked to service credits, not novel LMS language.
+
+---
+
+## 6.31 Warranty and Evidence Retention
+
+Retain firmware signing evidence for regulatory and forensic horizons:
+
+| Artefact | Minimum retention (illustrative) |
+|----------|----------------------------------|
+| Signed image hash and manifest | Life of device + 7 years |
+| LMS index log | Life of key hierarchy + 7 years |
+| Acceptance test reports | 10 years (NERC CIP-aligned) |
+| Rollback execution records | 7 years |
+| Training completion records | 7 years |
+
+Apex classified retention requirements for NSS separately — classified environments followed records schedules exceeding commercial tables.
+
+---
+
+## 6.32 Chapter Summary
 
 - Firmware and embedded systems require special-case signature strategy — ML-DSA defaults do not always fit fixed stores and CPU budgets.
 - SP 800-208 stateful schemes (LMS, XMSS) offer compact signatures with mandatory state management — index reuse is catastrophic.
@@ -678,6 +813,11 @@ James Whitfield's rule: **no field push without operations sign-off on maintenan
 - Firmware signing is a supply chain, PKI, and validation programme — not an OT-only upgrade.
 - Meridian payment HSM firmware demonstrates financial-sector special-case analysis — ML-DSA via validated module, not LMS by default.
 - LMS parameter selection requires capacity planning evidence — releases × lifetime × headroom.
+- Long OT certificate validity drives ML-DSA-87 elevation independent of enterprise defaults.
+- Training and tabletop exercises precede field rollout — operations staff, not only cryptographers.
+- TRADE rescoring after firmware milestones prevents false production readiness claims.
+
+**Closing note:** The firmware chapter is where Part II's algorithm defaults meet physical reality — fixed buffers, decade lifetimes, air gaps, and stateful ceremonies. Enterprises that master TLS but neglect firmware signing discover their longest-lived vulnerabilities remain in the plant floor, the payment HSM, or the container registry — depending on sector.
 
 **Next:** Part III shifts from standards literacy to estate knowledge — cryptographic discovery, the Cryptographic Bill of Materials, and the Cryptographic Dependency Graph.
 

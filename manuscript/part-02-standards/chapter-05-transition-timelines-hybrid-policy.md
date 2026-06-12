@@ -634,6 +634,9 @@ Meridian's workshop identified that Wave 1 could not achieve 2030 deprecation fo
 3. **Define risk acceptance templates** for deprecation-period classical PKC — maximum duration, approval authority, CBOM fields.
 4. **Measure ecosystem readiness** with production traffic data for TLS/client hybrids — not lab tests alone.
 5. **Consolidate multinational programmes** under one policy with jurisdiction annotations — avoid parallel regional programmes.
+6. **Map five-year programme phases** with exit criteria — avoid calendar theatre without deliverable gates.
+7. **Brief internal audit** on hybrid policy before production H1 — close CBOM schema gaps proactively.
+8. **Embed procurement milestones** in vendor contracts linked to timeline overlay exhibits.
 
 ---
 
@@ -716,7 +719,125 @@ Apex segregated NSS exceptions — waiver authority elevated to programme sponso
 
 ---
 
-## 5.28 Chapter Summary
+## 5.28 Five-Year Programme Phase Model
+
+Enterprises benefit from mapping HLM phases to **multi-year programme phases** — communicating intent without false precision on every system date.
+
+**Table 5.8 — Illustrative Five-Year Phase Model (2026–2030)**
+
+| Year | Programme phase | HLM focus | Primary deliverables |
+|------|----------------|-----------|-------------------|
+| 2026 | Foundation | Policy + selective H1 pilots | Algorithm matrix; hybrid policy; CBOM baseline; validation matrix |
+| 2027 | Wave 1 execution | H1 production on TES 5 / blocking nodes | Payment HSM path; VPN; firmware signing pilots; vendor escalations closed |
+| 2028 | Wave 2 expansion | H1→H2 transitions begin where triggers met | PKI ML-DSA profiles; partner notifications; exception register stable |
+| 2029 | Consolidation | H2 dominant; classical deprecation enforced | Automated CBOM scanning; SDLC gates; reduced exception count |
+| 2030 | Deprecation compliance | H2/H3; risk acceptance only for documented gaps | NIST anchor alignment; supervisory evidence package |
+
+Meridian's steering committee reviewed **phase gates** annually — not every milestone date. A phase completed when exit criteria met: 2027 Wave 1 completed when payment HSM vendor module entered integration test, not when a calendar date arrived.
+
+GlobalSync aligned phases to **tenant cohorts** — Tier A tenants migrated per phase; Tier C tenants carried risk acceptance with explicit sunset into 2029. Phasing by tenant cohort prevented a single false "company-wide complete" narrative.
+
+Northfield aligned phases to **geographic regions** — Gulf Coast compressor sites followed LMS path on independent schedule from Midwest RTU dual-sign rollout. Single timeline slide obscured regional OT reality; regional swim lanes satisfied board and regulators.
+
+---
+
+## 5.29 Deprecation and Disallowance: Board Narrative Templates
+
+Executives confuse deprecation and disallowance. Provide distinct narratives:
+
+**Deprecation (post-2030 anchor):** *"New systems use post-quantum algorithms. Legacy systems operate under governed exceptions with named remediation dates. We are not non-compliant — we are transitioning under documented governance."*
+
+**Disallowance (post-2035 anchor):** *"Quantum-vulnerable public-key cryptography is removed from approved use. Residual exceptions require board risk committee approval and regulatory counsel sign-off."*
+
+**Incorrect narrative:** *"We are fully quantum-safe by 2030."* — Unless H3 achieved, this overclaims. **Incorrect narrative:** *"We have until 2035 to start."* — Programme work must be underway; anchors are endpoints, not start dates.
+
+Marcus Chen used these templates verbatim in board materials — reducing finance committee confusion that had previously compared PQC to Y2K single-event projects.
+
+---
+
+## 5.30 Auditor and Assessor Engagement on Hybrid Policy
+
+Internal audit and external assessors will ask hybrid policy questions before engineers finish deployment. Prepare evidence:
+
+| Assessor question | Evidence artefact |
+|-------------------|-------------------|
+| Do you have a hybrid cryptography policy? | Approved policy document (Chapter 5 §5.7 sample structure) |
+| How do you prevent permanent hybrids? | H2 trigger fields in CBOM; change-management gate records |
+| How many exceptions exist? | Risk acceptance register with ageing report |
+| How do you measure progress? | HLM metrics dashboard (Table 5.6) |
+| Are algorithms standards-based? | Algorithm matrix with FIPS references (Chapter 4) |
+
+Meridian invited internal audit to a **hybrid policy walkthrough** before first production H1 deployment — identifying missing CBOM fields auditors would request. Three CBOM schema updates followed; audit finding avoided.
+
+### Cloud provider shared responsibility
+
+FedRAMP and enterprise cloud contracts split cryptographic responsibility between provider and customer. Timeline policy must annotate **whose clock** applies:
+
+| Control | Provider responsibility | Customer responsibility |
+|---------|------------------------|------------------------|
+| Platform TLS (PaaS) | Provider HLM on managed endpoints | Customer configures allowed suites |
+| Customer-managed keys (CMK/KMS) | Provider validates modules | Customer selects algorithms per matrix |
+| SaaS application crypto | Provider policy | Customer verifies against contractual baseline |
+
+GlobalSync as **provider** published customer-facing HLM status per API tier. As **consumer** of AWS and Azure KMS, Marcus Chen's team tracked provider validation matrices separately — cloud KMS readiness gated internal microservice migration independently of external API hybrid TLS.
+
+PCI assessors for Meridian's card environment asked whether hybrid TLS affected PCI scope segmentation — evidence showed segmentation unchanged; only cipher suite policy updated. Proactive FAQ for assessors reduced examination friction.
+
+> **Migration Moment**
+>
+> *"Auditors don't understand PQC — we'll explain after deployment."*
+>
+> Assessors evaluate governance artefacts, not lattice mathematics. Presenting hybrid policy, exception registers, and HLM metrics **before** examination positions the enterprise as prepared. Presenting pilots without policy produces findings — even if cryptography is directionally correct.
+
+---
+
+## 5.31 Coordinating Timeline Policy with Part III Inventory
+
+Part II timeline policy becomes credible when Part III CBOM exists. Until inventory completes, timeline commitments should be **directional**:
+
+| CBOM maturity | Timeline policy posture |
+|---------------|------------------------|
+| No CBOM | Publish anchor alignment intent only; no wave dates |
+| Partial CBOM (<80% coverage) | Wave sequence draft; dates as ranges |
+| Baseline CBOM | TRADE-scored waves with quarterly date refinement |
+| Maintained CBOM | Firm internal schedules with exception register |
+
+Meridian published 2030/2035 anchor alignment in 2025 with **wave dates as ranges** until Phase 1 CBOM reached 85% coverage — then narrowed to quarterly commitments. Thomas Bergström defended the approach in supervisory dialogue: honest uncertainty preferred over false precision.
+
+GlobalSync refused customer contractual commitments to "PQC-native by 2028" until CBOM and tenant dependency analysis completed — sales team frustration accepted as cost of credible commitments.
+
+Part III delivers CBOM methodology. This chapter's timeline overlay consumes CBOM outputs — the handoff between parts is deliberate programme sequencing.
+
+---
+
+## 5.32 Hybrid Policy in M&A and Divestiture
+
+Estate changes alter timeline overlays overnight. Chapter 2 introduced M&A cryptographic due diligence; timeline policy must respond:
+
+**Acquisition:** Inherited systems bring inherited `hlm_phase` values or absence thereof. Acquired classical-only estate without CBOM requires **100-day assessment** before merging into parent timeline overlay. Apex acquired a subsystem integrator with no PQC programme — parent overlay tagged acquired assets "assessment required" rather than inheriting false H3 claims from parent marketing.
+
+**Divestiture:** Carve-out entities need standalone hybrid policy and timeline annex if they operate independent infrastructure. GlobalSync divested a regional subsidiary — cryptography policy forked with **12-month convergence clause** back to group baseline for shared platform components.
+
+**Merger of equals:** Dual timeline policies merge through architecture board — not through whichever CISO presented first to the board.
+
+---
+
+## 5.33 Document Control and Policy Versioning
+
+Hybrid and timeline policies require **version control** equivalent to production code:
+
+- Policy version, approval date, and approver identity on every page
+- Change log referencing triggering event (NIST publication, examination finding, M&A)
+- Superseded version retention for audit trail — minimum seven years for regulated entities
+- Distribution list: steering committee, internal audit, procurement, PKI, OT security, legal
+
+Meridian stored cryptography policy in the same GRC platform as DORA ICT risk policies — examiners received single-portal access. Version 3.1 (2026) added HLM CBOM attributes after internal audit walkthrough; version history demonstrated **responsive governance**, not ad hoc reaction.
+
+GlobalSync published customer-facing cryptography statements with semantic versioning — tenants subscribed to change notifications when hybrid TLS status advanced from H1 to H2 on public API tiers.
+
+---
+
+## 5.34 Chapter Summary
 
 - NIST IR 8547 (IPD) provides deprecation (post-2030) and disallowance (post-2035) anchors for quantum-vulnerable PKC — not enterprise migration schedules.
 - CNSA 2.0 imposes more aggressive milestones for NSS and defence industrial base workloads.
@@ -725,6 +846,11 @@ Apex segregated NSS exceptions — waiver authority elevated to programme sponso
 - Hybrid policy must specify approved constructions, phase assignment, classical sunset, and exception governance.
 - Multinational enterprises use one programme with jurisdiction annotations — not parallel policies.
 - DORA and EU frameworks require credible timeline evidence linked to risk assessment — not algorithm expertise.
+- Five-year phase models communicate programme intent without false per-system date precision.
+- Timeline policy credibility depends on CBOM maturity — ranges before baseline, commitments after.
+- M&A and divestiture require timeline overlay reassessment within 100 days of estate change.
+
+**Closing note:** Hybrid policy without sunset criteria is permanent complexity. Timeline anchors without CBOM backing is policy theatre. The Hybrid Lifecycle Model connects both — transitional cryptography with measurable exits, aligned to external milestones the board and regulators recognise.
 
 **Next:** Chapter 6 addresses deployments where FIPS 204 and 205 do not cleanly fit: firmware signing, embedded systems, and stateful hash-based signatures under SP 800-208.
 

@@ -32,15 +32,15 @@
 | File | ~Words | Notes |
 |------|--------|-------|
 | `part-02-introduction.md` | 1,229 | Standards-as-inputs, PQ-ADAPT L3, reading sequences |
-| `chapter-04-nist-competition-to-fips.md` | 6,837 | FIPS 203–205, vendor rubric, validation matrix |
-| `chapter-05-transition-timelines-hybrid-policy.md` | 6,710 | IR 8547, HLM, hybrid policy, exception lifecycle |
-| `chapter-06-stateful-signatures-firmware.md` | 6,619 | SP 800-208, LMS/XMSS, OT/cloud firmware patterns |
+| `chapter-04-nist-competition-to-fips.md` | 7,937 | FIPS 203–205, key wrapping, agility, standards horizon |
+| `chapter-05-transition-timelines-hybrid-policy.md` | 7,999 | IR 8547, HLM, five-year phases, auditor engagement |
+| `chapter-06-stateful-signatures-firmware.md` | 7,958 | SP 800-208, trust horizons, IR playbooks, training |
 
-**Part II total (chapters + intro):** ~21,395 words (~88% of Part I chapter depth)
+**Part II total (chapters + intro):** ~24,123 words (chapter depth matches Part I)
 
 ## Expansion — Part II (June 2026)
 
-- Expanded chapters to ~6,600–6,850 words each (Part I benchmark ~7,600)
+- Polished chapters to ~8,000 words each (Part I parity)
 
 ## Editorial Revisions — Part II (June 2026)
 

@@ -175,7 +175,7 @@ Meridian Mutual Bank's payment HSM firmware signing chain — the blocking depen
 
 ## 4.5 FIPS 205: SLH-DSA (Stateless Hash-Based Signatures)
 
-SLH-DSA (derived from SPHINCS+) provides digital signatures based on hash functions rather than lattice problems. Its security assumptions differ from ML-DSA — conservative from a mathematical perspective, expensive from a performance perspective.
+SLH-DSA (derived from SPHINCS+) provides digital signatures based on hash functions rather than lattice problems. For enterprise architects, SLH-DSA is the **diversity and conservatism** algorithm — not the default workhorse. Its security assumptions differ from ML-DSA — conservative from a mathematical perspective, expensive from a performance perspective.
 
 ### When enterprises choose SLH-DSA
 
@@ -192,6 +192,19 @@ CNSA 2.0 includes SLH-DSA in the approved suite alongside ML-DSA. NSS planning s
 SLH-DSA signatures are significantly larger than ML-DSA and substantially larger than ECDSA. Signing and verification operations are slower. These characteristics limit SLH-DSA's fit for high-throughput protocols — TLS handshakes, high-volume API authentication, real-time OT messaging — without careful engineering.
 
 SLH-DSA's value proposition is **conservative security assumptions** and **hash-function-based construction** — not operational efficiency. Enterprise policies should specify SLH-DSA for use cases where diversity or conservative assumptions justify performance cost, not as a default replacement for ECDSA in performance-sensitive paths.
+
+### Enterprise SLH-DSA deployment patterns
+
+| Pattern | When appropriate | Caution |
+|---------|------------------|---------|
+| Dual-algorithm signing with ML-DSA | NSS diversity; high-assurance archives | Operational complexity; two signatures |
+| Root-of-trust alternative | Policy mandates hash-based backup for CA | Certificate size; CRL/OCSP load |
+| Long-archive document signing | Legal hold; infrequent verification | Storage cost acceptable |
+| Protocol signing | Rarely | Latency and size usually prohibitive |
+
+Apex deployed SLH-DSA alongside ML-DSA for selected NSS archive signing — documents verified infrequently, stored in high-assurance archives, with verification latency irrelevant. Apex did **not** deploy SLH-DSA for TLS or real-time transaction paths — engineering benchmarks showed order-of-magnitude latency increase versus ML-DSA.
+
+Meridian evaluated SLH-DSA for root CA diversity and rejected production deployment in 2026 — ML-DSA-87 met regulatory requirements with lower operational impact. SLH-DSA remained in policy as an **approved alternative** if lattice assumptions weakened — agility posture, not immediate deployment.
 
 ---
 
@@ -619,17 +632,62 @@ Readers needing that depth should consult FIPS documents, NIST submission packag
 
 ---
 
-## 4.23 Apply in Your Organisation
+## 4.23 Key Wrapping and Application-Layer Cryptography
+
+TLS dominates PQC discourse. Enterprise estates equally depend on **application-layer key establishment** — database field encryption, backup key wrapping, document encryption, messaging middleware, and API payload protection. These paths often use RSA-OAEP or ECDH in libraries rather than protocol-visible TLS.
+
+ML-KEM replaces RSA/ECDH in key wrapping constructions — with schema implications:
+
+| Application pattern | Classical | PQC migration | Typical constraint |
+|--------------------|-----------|---------------|-------------------|
+| Database column encryption | RSA wrap per row/key | ML-KEM encapsulation | Column width; key table size |
+| Backup encryption | RSA public key in config | ML-KEM public key | Config file size limits |
+| Message queue signing+encrypt | Hybrid protocols | ML-DSA + ML-KEM | Message size caps |
+| S/MIME email | RSA/ECDSA | ML-DSA + ML-KEM CMS | Client compatibility |
+| HSM key import | RSA wrap | ML-KEM wrap | HSM firmware support |
+
+Meridian's customer PII KMS — the MPI 4.39 system from Chapter 2 — was an application-layer key wrapping path, not external TLS. Elena's programme prioritised it because **twelve databases inherited keys from that KMS** — a CDG blocking node invisible in network scans.
+
+Discovery programmes that inventory TLS certificates but not application key wrapping produce CBOMs that miss the highest-TRADE systems. Part III CBOM methodology must include application-layer and HSM key ceremony inventories — algorithm policy from this chapter applies equally to those rows.
+
+GlobalSync identified ML-KEM ciphertext expansion in three microservices storing wrapped API keys in configuration databases — schema migration preceded cryptographic library upgrade. The sequencing lesson: **data model migration before crypto library swap**, not parallel blind deployment.
+
+---
+
+## 4.24 Algorithm Agility Requirements in Policy
+
+Algorithm standards are not permanent. Responsible cryptography policies include **agility requirements** — architectural and procedural capability to substitute algorithms without full system redesign. Chapter 10 develops agility patterns; Part II establishes policy language:
+
+- New systems shall consume cryptographic services through **agility interfaces** (KMS, HSM, enterprise crypto library) — not hard-coded algorithm constants in application code
+- Algorithm substitution shall complete within **defined change windows** per system class (e.g. 90 days for IT applications; OT per firmware cycle)
+- Contingency algorithms (FN-DSA, HQC) shall be **activatable** through policy amendment without programme recharter — when FIPS publication and validation mature
+
+Apex embedded agility requirements in NSS and commercial SDLC standards simultaneously — preventing classified programmes from building single-algorithm assumptions into weapons-system software while commercial teams pursued parallel hard-coding.
+
+Meridian's policy required **crypto provider abstraction** in new Java and .NET services — banning direct BouncyCastle algorithm string literals in favour of enterprise crypto service calls. Legacy systems received risk acceptance with sunset dates — not permanent exemption from agility direction.
+
+> **Migration Moment**
+>
+> *"We'll pick the final algorithm when migration starts — no need to standardise now."*
+>
+> Migration started in August 2024 when FIPS published. Enterprises without standards now face inventory normalisation, procurement renegotiation, and pilot rework under regulatory examination timelines — simultaneously. Agility requirements are not optional extras; they are how estates survive the next algorithm transition after PQC.
+
+---
+
+## 4.25 Apply in Your Organisation
 
 1. **Publish an algorithm standards matrix** with default parameter sets (ML-KEM-768, ML-DSA-65) and Category 5 elevation criteria — do not leave selection to individual project teams.
 2. **Normalise CBOM algorithm names** to FIPS terminology — map Kyber/Dilithium/SPHINCS+ legacy labels in discovery output.
 3. **Require FIPS 140-3 validation certificates** in procurement — reject "algorithm implemented" without module validation for regulated workloads.
 4. **Assess size constraints** for ML-DSA in PKI, firmware, and OT before committing to migration sequence — flag Chapter 6 candidates early.
 5. **Monitor FN-DSA and HQC** in policy future-proofing sections — do not block current planning on their publication.
+6. **Inventory application-layer key wrapping** — not only TLS endpoints; highest TRADE systems may live below the protocol layer.
+7. **Embed algorithm agility requirements** in SDLC standards for new development — policy target state, not optional guidance.
+8. **Assign a standards horizon owner** — quarterly review of NIST, IETF, CMVP, and regulatory publications with policy impact memos.
 
 ---
 
-## 4.24 Validation Coverage Matrix Example
+## 4.26 Validation Coverage Matrix Example
 
 Meridian maintained the following Operational-layer matrix — updated quarterly from CMVP listings and vendor correspondence:
 
@@ -645,7 +703,7 @@ The matrix prevented a common failure mode: engineering teams deploying software
 
 ---
 
-## 4.25 Communicating Algorithm Standards to Engineering Teams
+## 4.27 Communicating Algorithm Standards to Engineering Teams
 
 Algorithm policy fails when written for auditors but unreadable by engineers. Effective internal communication:
 
@@ -655,11 +713,41 @@ Algorithm policy fails when written for auditors but unreadable by engineers. Ef
 
 GlobalSync embedded matrix rows in its internal developer portal — API teams selected workload class from dropdown; portal displayed approved algorithms and HLM phase requirements. Meridian embedded requirements in architecture review gates — no production approval without matrix row citation.
 
+### R&D and non-production environments
+
+Laboratories and innovation environments often experiment with pre-standard algorithms — FN-DSA prototypes, hybrid Internet-Drafts, vendor beta branches. Policy should **isolate** R&D cryptography from production:
+
+- Separate PKI hierarchy for lab; no trust path to production
+- CBOM tagging `environment=non_production` mandatory
+- No production data in lab PQC experiments — synthetic data only
+- Promotion to production requires matrix row assignment and validation evidence
+
+Apex maintained a **classified lab enclave** and **commercial sandbox** with separate algorithm policies — preventing NSS experiments from contaminating commercial product FIPS validation boundaries. GlobalSync's developer sandbox allowed Internet-Draft hybrids with automatic **90-day expiry** on experimental configurations.
+
 Priya Nair's Apex team ran quarterly **standards office hours** — engineers brought systems; architects assigned matrix rows. Attendance counted toward architecture governance metrics — reducing shadow algorithm choices in R&D environments.
 
 ---
 
-## 4.26 Chapter Summary
+## 4.28 Standards Maintenance and Horizon Monitoring
+
+Algorithm standards are not static inputs. Programme offices should maintain a **standards horizon watch** — quarterly review of:
+
+- NIST IR 8547 final publication and SP 800-131A revisions
+- FN-DSA and HQC standardisation progress
+- IETF hybrid TLS standards-track advancement to RFC
+- CMVP validation list updates for ML-KEM and ML-DSA modules
+- CNSA 2.0 advisory updates and waiver policy changes
+- EU and UK supervisory guidance interpreting PQC for regulated sectors
+
+GlobalSync assigned a part-time **cryptography standards owner** — responsible for watchlist maintenance and quarterly policy impact memos to the steering committee. The role consumed approximately **0.25 FTE** (*illustrative*) — far less than rework from outdated policy during examination.
+
+Meridian linked standards horizon review to Thomas Bergström's regulatory horizon function (Chapter 3) — single meeting, dual output: regulatory impact memo and cryptography policy amendment recommendations.
+
+When IR 8547 finalises with changed dates or definitions, enterprises with documented horizon monitoring demonstrate **governance adaptability** — supervisors prefer monitored programmes over static policies that silently become incorrect.
+
+---
+
+## 4.29 Chapter Summary
 
 - FIPS 203 (ML-KEM), 204 (ML-DSA), and 205 (SLH-DSA) are final standards — the enterprise deployment baseline as of August 2024.
 - The standards-as-inputs principle: reference FIPS in policy; implement migration through programme frameworks — not by reproducing standards in internal documents.
@@ -668,6 +756,10 @@ Priya Nair's Apex team ran quarterly **standards office hours** — engineers br
 - Algorithm selection interacts with protocol sizes, PKI chains, infrastructure capacity, and validation availability — selection is not purely cryptographic.
 - CNSA 2.0 creates dual-track requirements for defence industrial base enterprises; commercial and NSS workloads need separate matrix rows.
 - International alignment (ISO, ETSI, IETF) references NIST selections for normative deployment formats.
+- Application-layer key wrapping and KMS paths require equal policy attention to TLS endpoints.
+- Standards horizon monitoring keeps policy aligned with IR 8547 finalisation and validation market maturity.
+
+**Closing note:** Chapter 4 equips architects to answer *which algorithms* and *which parameter sets* — under real validation and size constraints. Chapter 5 equips them to answer *when* and *under what hybrid rules*. Chapter 6 equips them to answer *where defaults fail*. Part III answers *where in the estate* those answers apply.
 
 **Next:** Chapter 5 translates NIST IR 8547, CNSA 2.0, and allied national timelines into enterprise hybrid policy and the Hybrid Lifecycle Model.
 
