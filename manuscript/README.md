@@ -1,7 +1,8 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
 **Status:** Full manuscript editorial review complete (June 2026); Chapters 1–22 + Appendices A–E  
-**Architecture approved:** June 2026
+**Architecture approved:** June 2026  
+**Table of contents:** [`TABLE_OF_CONTENTS.md`](TABLE_OF_CONTENTS.md) — complete section-level listing (684 sections)
 
 ## Structure
 
@@ -11,9 +12,9 @@
 | II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Editorial revision complete |
 | III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Editorial revision complete |
 | IV — Architecting for Transition | `part-04-architecture/` | Intro + 10–14 | Editorial revision complete |
-| V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Draft complete |
-| VI — Sector Playbooks and Proof | `part-06-sector/` | Intro + 19–22 | Draft complete |
-| Appendices | `appendices/` | A–E | Draft complete |
+| V — Running the Migration Programme | `part-05-programme/` | Intro + 15–18 | Editorial revision complete |
+| VI — Sector Playbooks and Proof | `part-06-sector/` | Intro + 19–22 | Editorial revision complete |
+| Appendices | `appendices/` | A–E | Editorial revision complete |
 
 ## Part I Files
 
@@ -116,6 +117,14 @@ Expert technical review against Parts I–VI standards:
 - British English; IR 8547 IPD qualification in Appendix A conventions
 
 **Consolidated delivery branch:** `cursor/appendices-22e5` contains Parts I–VI (editorial revisions) + Appendices A–E — use PR #6 as single complete-manuscript merge target.
+
+## Editorial Revisions — Table of Contents and Navigation (June 2026)
+
+- Added [`TABLE_OF_CONTENTS.md`](TABLE_OF_CONTENTS.md) — full section-level TOC (684 numbered sections, all 22 chapters + appendices)
+- Ch 1: added missing §1.14 *The Cost of Synchronization Failure*
+- Ch 8: reordered §8.58 References before §8.59 Chapter Summary
+- Part II intro: clarified PQ-ADAPT L2→3 policy foundation (Level 3 completion in Part IV)
+- Standardised `*Proceed to*` navigation chain across all chapters and part boundaries
 
 ## Editorial Revisions — Full Manuscript (June 2026)
 

@@ -1025,7 +1025,18 @@ Meridian linked CDG blocking nodes to **business capability map** — payment ca
 
 ---
 
-## 8.58 Chapter Summary
+## 8.58 References and Further Reading
+
+- CycloneDX. CBOM linkage to dependency concepts — [CycloneDX CBOM](https://cyclonedx.org/capabilities/cbom/)
+- National Institute of Standards and Technology. (2024). *SP 1800-38B* — migration planning and asset dependency themes.
+- Internet Engineering Task Force. Post-quantum PKI architecture (drafts) — trust anchor evolution.
+- Basescu, C., et al. (2024). Deployment considerations for secure post-quantum cryptography in practice. *USENIX Security Symposium*.
+- Supply chain levels for software artifacts (SLSA) — informative for code-signing CDG patterns.
+- IBM Research. (2023). Cryptographic dependency typing for enterprise migration planning (industry reference).
+
+---
+
+## 8.59 Chapter Summary
 
 - CDG extends CBOM from inventory to consequence — *what breaks if we change this*.
 - Node types (key, cert, anchor, HSM, firmware, policy) and edge types (`trusts`, `signs`, `terminates`, `verifies`, `inherits`) form the modelling vocabulary.
@@ -1040,15 +1051,4 @@ Meridian linked CDG blocking nodes to **business capability map** — payment ca
 
 ---
 
-## 8.59 References and Further Reading
-
-- CycloneDX. CBOM linkage to dependency concepts — [CycloneDX CBOM](https://cyclonedx.org/capabilities/cbom/)
-- National Institute of Standards and Technology. (2024). *SP 1800-38B* — migration planning and asset dependency themes.
-- Internet Engineering Task Force. Post-quantum PKI architecture (drafts) — trust anchor evolution.
-- Basescu, C., et al. (2024). Deployment considerations for secure post-quantum cryptography in practice. *USENIX Security Symposium*.
-- Supply chain levels for software artifacts (SLSA) — informative for code-signing CDG patterns.
-- IBM Research. (2023). Cryptographic dependency typing for enterprise migration planning (industry reference).
-
----
-
-*Next: [Chapter 9 — Risk Tiering and Migration Wave Planning](chapter-09-risk-tiering-wave-planning.md)*
+*Proceed to Chapter 9: Risk Tiering and Migration Wave Planning.*

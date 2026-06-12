@@ -777,3 +777,7 @@ When IR 8547 finalises with changed dates or definitions, enterprises with docum
 - National Institute of Standards and Technology. (2024). *Cryptographic module validation program (CMVP)*. https://csrc.nist.gov/projects/cmvp
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - Internet Engineering Task Force. CFRG and TLS working group post-quantum specifications (standards-track documents at time of deployment).
+
+---
+
+*Proceed to Chapter 5: Transition Timelines and Hybrid Policy.*

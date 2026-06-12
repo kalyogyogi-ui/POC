@@ -848,3 +848,7 @@ Northfield Energy's OT programme added **vendor validation flow-down** as assura
 - National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
 - National Institute of Standards and Technology. (2024). *Cryptographic Module Validation Program (CMVP)*. https://csrc.nist.gov/projects/cmvp
 - National Institute of Standards and Technology. (2020). NIST SP 800-171: Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations. https://doi.org/10.6028/NIST.SP.800-171
+
+---
+
+*End of Part V. Proceed to Part VI: Sector Playbooks and Proof.*

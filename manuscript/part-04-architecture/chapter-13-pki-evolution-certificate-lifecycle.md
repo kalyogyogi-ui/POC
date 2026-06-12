@@ -803,3 +803,7 @@ Internal audit walkthrough before production ML-DSA issuance identified missing 
 - Aas, J., et al. (2019). RFC 8555: Automatic Certificate Management Environment (ACME). *IETF*.
 - CycloneDX. (2024). *Authoritative Guide to CBOM*. OWASP Foundation.
 - Thomas, S., et al. (2024). Post-quantum certificate size and chain validation considerations. *IETF Internet-Draft* (illustrative industry discussion).
+
+---
+
+*Proceed to Chapter 14: Key Management, HSMs, and Cloud Cryptography.*

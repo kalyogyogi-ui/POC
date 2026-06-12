@@ -895,3 +895,7 @@ James Whitfield's team **does not conflate** enterprise VPN key migration with P
 - Confidential Computing Consortium. (2024). *Technical Whitepaper: Confidential Computing*. https://confidentialcomputing.io/
 - CycloneDX. (2024). *Authoritative Guide to CBOM*. OWASP Foundation.
 - Merkle, R. C. (1989). A certified digital signature. *CRYPTO '89*. (Foundational hash-signature context for stateful schemes.)
+
+---
+
+*End of Part IV. Proceed to Part V: Running the Migration Programme.*

@@ -905,3 +905,7 @@ Marcus Chen's team operated a **partner test environment** mirroring production 
 - OpenSSL Software Foundation. (2025–2026). OpenSSL 3.5 release notes and provider documentation. https://www.openssl.org/
 - CycloneDX. (2024). *Authoritative Guide to CBOM*. OWASP Foundation.
 - European Union. (2022). Regulation (EU) 2022/2554 on digital operational resilience for the financial sector (DORA).
+
+---
+
+*Proceed to Chapter 13: PKI Evolution and Certificate Lifecycle.*

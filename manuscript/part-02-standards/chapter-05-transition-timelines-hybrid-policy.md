@@ -867,3 +867,7 @@ GlobalSync published customer-facing cryptography statements with semantic versi
 - National Security Memorandum 10 (2022). The White House.
 - National Cyber Security Centre. (2024). *Quantum-safe cryptography: Migration planning guidance*. UK Government.
 - Australian Signals Directorate. (2024). *Post-quantum cryptography guidance*. Australian Government.
+
+---
+
+*Proceed to Chapter 6: Stateful Signatures, Firmware, and Special Cases.*

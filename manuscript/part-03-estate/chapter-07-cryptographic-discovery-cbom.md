@@ -951,3 +951,7 @@ Meridian transitioned from Phase 1 tranche mentality to **continuous mode** at b
 - National Institute of Standards and Technology. (2023). *Hardware security modules for key management* (informative for HSM CBOM fields).
 - European Union Agency for Cybersecurity. (2024). Post-quantum cryptography — current state and quantum mitigation efforts.
 - Payment Card Industry Security Standards Council. (2024). PCI DSS cryptographic requirements (informative mapping).
+
+---
+
+*Proceed to Chapter 8: The Cryptographic Dependency Graph.*

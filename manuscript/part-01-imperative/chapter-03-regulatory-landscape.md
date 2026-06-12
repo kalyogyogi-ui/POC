@@ -675,3 +675,7 @@ Meridian assigned regulatory horizon monitoring to Thomas Bergström's team with
 - PCI Security Standards Council. (2022). *Payment Card Industry Data Security Standard v4.0*. https://www.pcisecuritystandards.org/
 - Regulation (EU) 2016/679 of the European Parliament and of the Council on the protection of natural persons with regard to the processing of personal data (GDPR). *Official Journal of the European Union*, L 119.
 - Regulation (EU) 2022/2554 of the European Parliament and of the Council on digital operational resilience for the financial sector (DORA). *Official Journal of the European Union*, L 333.
+
+---
+
+*End of Part I. Proceed to Part II: Standards as Inputs.*

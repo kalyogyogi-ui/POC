@@ -460,7 +460,7 @@ Enterprises under board or regulatory pressure to demonstrate PQC progress face 
 
 Honest measurement requires defining metrics before migration begins and resisting the substitution of activity for outcome. The board reporting framework in Section 1.9 is designed to prevent this substitution. If the metric can be achieved without changing the quantum-vulnerable state of the estate, it is the wrong metric.
 
-### The cost of synchronization failure
+## 1.14 The Cost of Synchronization Failure
 
 Quantifying synchronization failure is difficult because the counterfactual — what happens when an enterprise treats PQC as a project rather than a programme — manifests as delayed production deployment, not as a single incident. The costs are nonetheless real and accumulate across several categories.
 
@@ -511,3 +511,7 @@ These costs are not arguments for panic. They are arguments for programme struct
 - National Institute of Standards and Technology. (2024). NIST IR 8547 (Initial Public Draft): Transition to post-quantum cryptography standards. https://doi.org/10.6028/NIST.IR.8547.ipd
 - National Security Memorandum 10 on Promoting United States Leadership in Quantum Computing While Mitigating Risks to Vulnerable Cryptographic Systems (2022). The White House.
 - World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*. https://www.weforum.org/publications/quantum-security/
+
+---
+
+*Proceed to Chapter 2: Threat Models That Drive Priorities.*

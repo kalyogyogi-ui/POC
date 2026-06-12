@@ -860,3 +860,7 @@ Apex classified reference architectures **unclassified** for corporate IT; NSS v
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - OWASP Foundation. (2024). *Cryptographic Storage Cheat Sheet* (application-layer guidance). https://cheatsheetseries.owasp.org/
 - CycloneDX. (2024). *Authoritative Guide to CBOM*. OWASP Foundation.
+
+---
+
+*Proceed to Chapter 12: Protocol Transition — TLS, IPsec, SSH, and Messaging.*

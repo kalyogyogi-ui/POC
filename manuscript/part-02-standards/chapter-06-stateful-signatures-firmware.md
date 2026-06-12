@@ -835,3 +835,7 @@ Apex classified retention requirements for NSS separately — classified environ
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - PCI Security Standards Council. (2022). *Payment Card Industry Data Security Standard v4.0*. https://www.pcisecuritystandards.org/
 - Transportation Security Administration. (2021–2024). Security directives for pipeline cybersecurity (series). U.S. Department of Homeland Security.
+
+---
+
+*End of Part II. Proceed to Part III: Knowing Your Cryptographic Estate.*

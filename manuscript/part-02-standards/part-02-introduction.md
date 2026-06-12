@@ -20,13 +20,13 @@ Part II comprises three chapters with a deliberate progression from algorithm li
 
 **Chapter 6 — Stateful Signatures, Firmware, and Special Cases** addresses deployments FIPS 204 and 205 do not cleanly cover: firmware signing, long-lived embedded systems, and stateful hash-based signatures under SP 800-208. OT and defence readers should not skip this chapter.
 
-Together, these chapters complete the **Capability** foundation of standards literacy within the ARCS Framework and enable **PQ-ADAPT Level 3 (*Architected*)**.
+Together, these chapters establish **standards literacy as inputs to architecture decisions** — the policy and timeline foundation that Parts III and IV convert into inventory, dependency analysis, and deployable patterns. Part II advances enterprises from PQ-ADAPT Level 2 (*Inventoried*) toward Level 3 (*Architected*): policy artefacts here; agility requirements and hybrid deployment patterns complete Level 3 in Part IV (Chapters 10–11).
 
 ---
 
-## PQ-ADAPT Level 3 Exit Artefacts
+## PQ-ADAPT Level 2→3 Artefacts (Policy Foundation)
 
-Part II completion should produce the following artefacts in the enterprise programme — the evidence that standards literacy has converted to governed architecture:
+Part II completion should produce the following artefacts in the enterprise programme — the evidence that standards literacy has converted to governed policy before architecture execution:
 
 | Artefact | Governance layer | Chapter source |
 |----------|-----------------|----------------|

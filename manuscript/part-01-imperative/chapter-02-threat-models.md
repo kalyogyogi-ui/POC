@@ -658,3 +658,7 @@ Threat analysis must be documented to exist for regulatory and audit purposes. R
 - National Security Agency. (2022–2023). *Commercial National Security Algorithm Suite 2.0*. Cybersecurity Advisories.
 - National Security Memorandum 10 (2022). The White House.
 - World Economic Forum. (2024). *Quantum security: Preparing for the post-quantum era*. https://www.weforum.org/publications/quantum-security/
+
+---
+
+*Proceed to Chapter 3: The Regulatory and Policy Landscape.*
