@@ -1,6 +1,6 @@
 # Manuscript: Post-Quantum Cryptography — Enterprise Migration Handbook
 
-**Status:** Part II editorial revision complete; Part III next (June 2026)  
+**Status:** Part III draft complete (June 2026); polish toward ~8,000 words/chapter optional  
 **Architecture approved:** June 2026
 
 ## Structure
@@ -9,7 +9,7 @@
 |------|-----------|----------|--------|
 | I — The Migration Imperative | `part-01-imperative/` | Intro + 1–3 | Editorial revision complete |
 | II — Standards as Inputs | `part-02-standards/` | Intro + 4–6 | Editorial revision complete |
-| III — Knowing Your Cryptographic Estate | `part-03-estate/` | 7–9 | Planned |
+| III — Knowing Your Cryptographic Estate | `part-03-estate/` | Intro + 7–9 | Draft complete |
 | IV — Architecting for Transition | `part-04-architecture/` | 10–14 | Planned |
 | V — Running the Migration Programme | `part-05-programme/` | 15–18 | Planned |
 | VI — Sector Playbooks and Proof | `part-06-sector/` | 19–22 | Planned |
@@ -37,6 +37,17 @@
 | `chapter-06-stateful-signatures-firmware.md` | 7,958 | SP 800-208, trust horizons, IR playbooks, training |
 
 **Part II total (chapters + intro):** ~24,123 words (chapter depth matches Part I)
+
+## Part III Files
+
+| File | ~Words | Notes |
+|------|--------|-------|
+| `part-03-introduction.md` | 871 | Register phase, exit artefacts, teaching orgs |
+| `chapter-07-cryptographic-discovery-cbom.md` | 6,536 | CBOM, discovery methods, PQ-ADAPT L2, case studies |
+| `chapter-08-cryptographic-dependency-graph.md` | 5,313 | CDG spec, blocking nodes, PKI roll-up |
+| `chapter-09-risk-tiering-wave-planning.md` | 5,876 | Full TRADE engine, MPI, wave planning, board package |
+
+**Part III total (chapters + intro):** ~18,596 words
 
 ## Expansion — Part II (June 2026)
 
